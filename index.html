@@ -1,12 +1,1403 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI Design System Generator</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.13) 0%, rgba(133, 51, 255, 0.13) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background-color: var(--surface);
+            border-right: 1px solid rgba(102, 102, 102, 0.2);
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            z-index: 50;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 16px 24px;
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .tab {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background-color: var(--primary-400);
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            padding: 24px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .control-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .control-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .control-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .color-value {
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .select, .input {
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .select {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .textarea {
+            width: 100%;
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+        }
+
+        /* UI Controls */
+        .radius-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .radius-btn {
+            padding: 12px;
+            background-color: var(--surface-bg);
+            color: var(--text-secondary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .radius-btn.active {
+            background-color: var(--primary-400);
+            color: white;
+            border-color: var(--primary-400);
+        }
+
+        .shadow-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .shadow-btn {
+            padding: 12px;
+            background-color: var(--surface-bg);
+            color: var(--text-secondary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: capitalize;
+            transition: all 0.2s;
+        }
+
+        .shadow-btn.active {
+            background-color: var(--primary-400);
+            color: white;
+            border-color: var(--primary-400);
+        }
+
+        .slider-container {
+            margin-top: 8px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-400);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Theme Toggle */
+        .theme-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .theme-btn {
+            flex: 1;
+            padding: 12px;
+            background-color: var(--surface-bg);
+            color: var(--text-secondary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .theme-btn.active {
+            background-color: var(--primary-400);
+            color: white;
+        }
+
+        /* Export Button */
+        .export-section {
+            padding: 24px;
+            border-top: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .export-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-400);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .export-btn:hover {
+            background-color: var(--accent-600);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            flex: 1;
+            padding: 48px;
+            overflow-y: auto;
+        }
+
+        .preview-header {
+            margin-bottom: 48px;
+        }
+
+        .preview-title {
+            font-size: 48px;
+            font-weight: 100;
+            margin-bottom: 12px;
+        }
+
+        .preview-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* Preview Sections */
+        .preview-section {
+            margin-bottom: 48px;
+        }
+
+        .section-heading {
+            font-size: 32px;
+            font-weight: 200;
+            margin-bottom: 24px;
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .color-group-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .swatch-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+        }
+
+        .swatch-info {
+            flex: 1;
+        }
+
+        .swatch-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .swatch-hex {
+            font-size: 12px;
+            font-family: 'Monaco', monospace;
+            color: var(--text-muted);
+        }
+
+        /* Typography Preview */
+        .typography-samples {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .type-sample {
+            margin-bottom: 8px;
+        }
+
+        .type-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-400);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: var(--surface);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.4);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            padding: 24px;
+            background-color: var(--surface);
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Form Elements */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+        }
+
+        /* Table */
+        .table-container {
+            background-color: var(--surface);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 24px;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .table-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .table-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background-color: var(--surface-bg);
+            padding: 12px 24px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .table td {
+            padding: 16px 24px;
+            border-top: 1px solid rgba(102, 102, 102, 0.13);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px;
+            }
+
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px;
+                background-color: var(--surface);
+                position: sticky;
+                top: 0;
+                z-index: 40;
+            }
+
+            .menu-btn {
+                padding: 8px;
+                background: none;
+                border: none;
+                color: var(--text-primary);
+                cursor: pointer;
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-header {
+                display: none;
+            }
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--surface-bg);
+            color: var(--text-secondary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .reset-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title" id="brandNameDisplay">Claude UI</h2>
+                <p class="sidebar-subtitle">Design System Editor</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="colors">Colors</button>
+                <button class="tab" data-tab="typography">Typography</button>
+                <button class="tab" data-tab="ui">UI</button>
+                <button class="tab" data-tab="settings">Settings</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Colors Tab -->
+                <div class="tab-panel active" data-panel="colors">
+                    <div class="section">
+                        <h3 class="section-title">Primary Blues</h3>
+                        <div class="control-row">
+                            <label class="control-label">Blue 400</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="primary400" value="#3B85FF">
+                                <span class="color-value" id="primary400Value">#3B85FF</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Blue 600</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="primary600" value="#0066BB">
+                                <span class="color-value" id="primary600Value">#0066BB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Accent Purples</h3>
+                        <div class="control-row">
+                            <label class="control-label">Purple 400</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="accent400" value="#8533FF">
+                                <span class="color-value" id="accent400Value">#8533FF</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Purple 600</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="accent600" value="#6600CC">
+                                <span class="color-value" id="accent600Value">#6600CC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Surface Colors</h3>
+                        <div class="control-row">
+                            <label class="control-label">Background</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="surfaceBg" value="#0A0A0A">
+                                <span class="color-value" id="surfaceBgValue">#0A0A0A</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Surface</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="surface" value="#141414">
+                                <span class="color-value" id="surfaceValue">#141414</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Text Colors</h3>
+                        <div class="control-row">
+                            <label class="control-label">Primary</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="textPrimary" value="#FFFFFF">
+                                <span class="color-value" id="textPrimaryValue">#FFFFFF</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Secondary</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="textSecondary" value="#A0A0A0">
+                                <span class="color-value" id="textSecondaryValue">#A0A0A0</span>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Muted</label>
+                            <div class="control-input">
+                                <input type="color" class="color-picker" id="textMuted" value="#666666">
+                                <span class="color-value" id="textMutedValue">#666666</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typography Tab -->
+                <div class="tab-panel" data-panel="typography">
+                    <div class="section">
+                        <h3 class="section-title">Base Font Family</h3>
+                        <select class="select" id="fontFamily">
+                            <option value="sans">Sans-serif</option>
+                            <option value="serif">Serif</option>
+                            <option value="mono">Monospace</option>
+                        </select>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Font Weights</h3>
+                        <div class="control-row">
+                            <label class="control-label">Thin</label>
+                            <input type="number" class="input" id="weightThin" value="100" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Extra Light</label>
+                            <input type="number" class="input" id="weightExtraLight" value="200" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Light</label>
+                            <input type="number" class="input" id="weightLight" value="300" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Normal</label>
+                            <input type="number" class="input" id="weightNormal" value="400" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Medium</label>
+                            <input type="number" class="input" id="weightMedium" value="500" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Semibold</label>
+                            <input type="number" class="input" id="weightSemibold" value="600" min="100" max="900" step="100">
+                        </div>
+                        <div class="control-row">
+                            <label class="control-label">Bold</label>
+                            <input type="number" class="input" id="weightBold" value="700" min="100" max="900" step="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI Tab -->
+                <div class="tab-panel" data-panel="ui">
+                    <div class="section">
+                        <h3 class="section-title">Border Radius</h3>
+                        <div class="radius-grid">
+                            <button class="radius-btn" data-radius="none">none</button>
+                            <button class="radius-btn" data-radius="sm">sm</button>
+                            <button class="radius-btn active" data-radius="md">md</button>
+                            <button class="radius-btn" data-radius="lg">lg</button>
+                            <button class="radius-btn" data-radius="xl">xl</button>
+                            <button class="radius-btn" data-radius="full">full</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Spacing Scale</h3>
+                        <input type="range" class="slider" id="spacing" min="0.5" max="2" step="0.25" value="1">
+                        <div class="slider-labels">
+                            <span>0.5rem</span>
+                            <span id="spacingValue">1rem</span>
+                            <span>2rem</span>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Shadow Intensity</h3>
+                        <div class="shadow-grid">
+                            <button class="shadow-btn" data-shadow="none">none</button>
+                            <button class="shadow-btn" data-shadow="small">small</button>
+                            <button class="shadow-btn active" data-shadow="medium">medium</button>
+                            <button class="shadow-btn" data-shadow="large">large</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-panel" data-panel="settings">
+                    <div class="section">
+                        <h3 class="section-title">Brand Settings</h3>
+                        <input type="text" class="select" id="brandName" placeholder="Brand Name" value="Claude UI">
+                        <br><br>
+                        <textarea class="textarea" id="brandDescription" rows="3" placeholder="Brand Description">A professional dark design system with blue and purple accents</textarea>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title">Theme</h3>
+                        <div class="theme-buttons">
+                            <button class="theme-btn active" data-theme="dark">🌙 Dark</button>
+                            <button class="theme-btn" data-theme="light">☀️ Light</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <button class="reset-btn" id="resetBtn">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-section">
+                <button class="export-btn" id="exportBtn">📥 Export for Claude</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="mobile-header">
+                <h1 id="brandNameMobile">Claude UI</h1>
+                <button class="menu-btn" id="menuBtn">☰</button>
+            </div>
+
+            <div class="preview-header">
+                <h1 class="preview-title" id="brandNamePreview">Claude UI</h1>
+                <p class="preview-description" id="brandDescPreview">A professional dark design system with blue and purple accents</p>
+            </div>
+
+            <!-- Colors Preview -->
+            <section class="preview-section">
+                <h2 class="section-heading">Colors</h2>
+                <div class="color-grid">
+                    <div>
+                        <h3 class="color-group-title">Primary Blues</h3>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchPrimary400"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Blue 400</div>
+                                <div class="swatch-hex" id="hexPrimary400">#3B85FF</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchPrimary600"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Blue 600</div>
+                                <div class="swatch-hex" id="hexPrimary600">#0066BB</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="color-group-title">Accent Purples</h3>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchAccent400"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Purple 400</div>
+                                <div class="swatch-hex" id="hexAccent400">#8533FF</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchAccent600"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Purple 600</div>
+                                <div class="swatch-hex" id="hexAccent600">#6600CC</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="color-group-title">Surface Colors</h3>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchSurfaceBg" style="border: 1px solid rgba(255,255,255,0.1)"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Background</div>
+                                <div class="swatch-hex" id="hexSurfaceBg">#0A0A0A</div>
+                            </div>
+                        </div>
+                        <div class="color-swatch">
+                            <div class="swatch-box" id="swatchSurface"></div>
+                            <div class="swatch-info">
+                                <div class="swatch-name">Surface</div>
+                                <div class="swatch-hex" id="hexSurface">#141414</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typography Preview -->
+            <section class="preview-section">
+                <h2 class="section-heading">Typography</h2>
+                <div class="typography-samples">
+                    <div>
+                        <div class="type-sample" id="sample1" style="font-size: 72px;">Thin Display Text</div>
+                        <div class="type-label">6xl / Thin (100)</div>
+                    </div>
+                    <div>
+                        <div class="type-sample" id="sample2" style="font-size: 48px;">Extra Light Heading</div>
+                        <div class="type-label">4xl / Extra Light (200)</div>
+                    </div>
+                    <div>
+                        <div class="type-sample" id="sample3" style="font-size: 32px;">Light Title</div>
+                        <div class="type-label">2xl / Light (300)</div>
+                    </div>
+                    <div>
+                        <div class="type-sample" id="sample4" style="font-size: 16px;">Body text in light weight for readability</div>
+                        <div class="type-label">lg / Light (300)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Components Preview -->
+            <section class="preview-section">
+                <h2 class="section-heading">Components</h2>
+
+                <h3 style="font-size: 18px; font-weight: 300; margin-bottom: 16px;">Buttons</h3>
+                <div class="button-grid" style="margin-bottom: 32px;">
+                    <button class="btn btn-primary" id="btnPrimary">Primary Button</button>
+                    <button class="btn btn-secondary" id="btnSecondary">Secondary Button</button>
+                    <button class="btn btn-outline" id="btnOutline">Outline Button</button>
+                </div>
+
+                <h3 style="font-size: 18px; font-weight: 300; margin-bottom: 16px;">Cards</h3>
+                <div class="card-grid" style="margin-bottom: 32px;">
+                    <div class="card" id="card1">
+                        <h4 class="card-title">Standard Card</h4>
+                        <p class="card-text">This is a standard card component with subtle borders and surface coloring.</p>
+                    </div>
+                    <div class="card" id="card2" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                        <h4 class="card-title">Elevated Card</h4>
+                        <p class="card-text">This card has elevation with shadow for more visual hierarchy.</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 18px; font-weight: 300; margin-bottom: 16px;">Form Elements</h3>
+                <div class="form-grid">
+                    <div>
+                        <h4 style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Text Inputs</h4>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" placeholder="Enter password">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Preview -->
+            <section class="preview-section">
+                <h2 class="section-heading">Tables</h2>
+                <div class="table-container" id="tableContainer">
+                    <div class="table-header">
+                        <h3 class="table-title">User Management</h3>
+                        <p class="table-subtitle">Manage your team members and their permissions</p>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>EMAIL</th>
+                                <th>ROLE</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td style="color: var(--text-secondary);">sarah@company.com</td>
+                                <td><span class="badge" id="badge1">Administrator</span></td>
+                                <td><span class="badge" id="badge2">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Michael Chen</td>
+                                <td style="color: var(--text-secondary);">m.chen@company.com</td>
+                                <td><span class="badge" id="badge3">Developer</span></td>
+                                <td><span class="badge" id="badge4">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Emily Davis</td>
+                                <td style="color: var(--text-secondary);">emily.d@company.com</td>
+                                <td><span class="badge" id="badge5">Designer</span></td>
+                                <td><span class="badge" id="badge6" style="background-color: rgba(102,102,102,0.4); color: #fff;">Inactive</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Default configuration
+        const DEFAULT_CONFIG = {
+            colors: {
+                primary400: '#3B85FF',
+                primary600: '#0066BB',
+                accent400: '#8533FF',
+                accent600: '#6600CC',
+                surfaceBg: '#0A0A0A',
+                surface: '#141414',
+                textPrimary: '#FFFFFF',
+                textSecondary: '#A0A0A0',
+                textMuted: '#666666'
+            },
+            typography: {
+                fontFamily: 'sans',
+                weights: {
+                    thin: 100,
+                    extraLight: 200,
+                    light: 300,
+                    normal: 400,
+                    medium: 500,
+                    semibold: 600,
+                    bold: 700
+                }
+            },
+            ui: {
+                borderRadius: 'md',
+                spacing: 1,
+                shadowIntensity: 'medium'
+            },
+            theme: 'dark',
+            brandName: 'Claude UI',
+            brandDescription: 'A professional dark design system with blue and purple accents'
+        };
+
+        // Border radius values
+        const BORDER_RADIUS = {
+            none: '0',
+            sm: '0.25rem',
+            md: '0.5rem',
+            lg: '0.75rem',
+            xl: '1rem',
+            full: '9999px'
+        };
+
+        // Shadow values
+        const SHADOWS = {
+            none: 'none',
+            small: '0 1px 2px 0 rgba(0, 0, 0, 0.3)',
+            medium: '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
+            large: '0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.5)'
+        };
+
+        // Font families
+        const FONT_FAMILIES = {
+            sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif',
+            serif: 'Georgia, serif',
+            mono: 'Monaco, monospace'
+        };
+
+        // Load or initialize config
+        let config = JSON.parse(localStorage.getItem('ui-design-system')) || DEFAULT_CONFIG;
+
+        // Initialize app
+        function init() {
+            loadConfig();
+            setupEventListeners();
+            applyConfig();
+        }
+
+        // Load config into UI
+        function loadConfig() {
+            // Colors
+            document.getElementById('primary400').value = config.colors.primary400;
+            document.getElementById('primary600').value = config.colors.primary600;
+            document.getElementById('accent400').value = config.colors.accent400;
+            document.getElementById('accent600').value = config.colors.accent600;
+            document.getElementById('surfaceBg').value = config.colors.surfaceBg;
+            document.getElementById('surface').value = config.colors.surface;
+            document.getElementById('textPrimary').value = config.colors.textPrimary;
+            document.getElementById('textSecondary').value = config.colors.textSecondary;
+            document.getElementById('textMuted').value = config.colors.textMuted;
+
+            // Typography
+            document.getElementById('fontFamily').value = config.typography.fontFamily;
+            document.getElementById('weightThin').value = config.typography.weights.thin;
+            document.getElementById('weightExtraLight').value = config.typography.weights.extraLight;
+            document.getElementById('weightLight').value = config.typography.weights.light;
+            document.getElementById('weightNormal').value = config.typography.weights.normal;
+            document.getElementById('weightMedium').value = config.typography.weights.medium;
+            document.getElementById('weightSemibold').value = config.typography.weights.semibold;
+            document.getElementById('weightBold').value = config.typography.weights.bold;
+
+            // UI
+            document.getElementById('spacing').value = config.ui.spacing;
+            document.getElementById('spacingValue').textContent = config.ui.spacing + 'rem';
+
+            // Settings
+            document.getElementById('brandName').value = config.brandName;
+            document.getElementById('brandDescription').value = config.brandDescription;
+
+            // Set active buttons
+            document.querySelectorAll('.radius-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.radius === config.ui.borderRadius);
+            });
+
+            document.querySelectorAll('.shadow-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.shadow === config.ui.shadowIntensity);
+            });
+
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === config.theme);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.dataset.tab;
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.querySelector(`[data-panel="${tabName}"]`).classList.add('active');
+                });
+            });
+
+            // Color pickers
+            ['primary400', 'primary600', 'accent400', 'accent600', 'surfaceBg', 'surface', 'textPrimary', 'textSecondary', 'textMuted'].forEach(id => {
+                const picker = document.getElementById(id);
+                picker.addEventListener('input', (e) => {
+                    const key = id.replace(/([A-Z])/g, (match, letter) => letter.toLowerCase());
+                    config.colors[id] = e.target.value;
+                    saveAndApply();
+                });
+            });
+
+            // Font family
+            document.getElementById('fontFamily').addEventListener('change', (e) => {
+                config.typography.fontFamily = e.target.value;
+                saveAndApply();
+            });
+
+            // Font weights
+            ['thin', 'extraLight', 'light', 'normal', 'medium', 'semibold', 'bold'].forEach(weight => {
+                const input = document.getElementById('weight' + weight.charAt(0).toUpperCase() + weight.slice(1));
+                input.addEventListener('input', (e) => {
+                    config.typography.weights[weight] = parseInt(e.target.value);
+                    saveAndApply();
+                });
+            });
+
+            // Border radius
+            document.querySelectorAll('.radius-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.radius-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    config.ui.borderRadius = btn.dataset.radius;
+                    saveAndApply();
+                });
+            });
+
+            // Spacing
+            document.getElementById('spacing').addEventListener('input', (e) => {
+                config.ui.spacing = parseFloat(e.target.value);
+                document.getElementById('spacingValue').textContent = config.ui.spacing + 'rem';
+                saveAndApply();
+            });
+
+            // Shadow
+            document.querySelectorAll('.shadow-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.shadow-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    config.ui.shadowIntensity = btn.dataset.shadow;
+                    saveAndApply();
+                });
+            });
+
+            // Brand name
+            document.getElementById('brandName').addEventListener('input', (e) => {
+                config.brandName = e.target.value;
+                saveAndApply();
+            });
+
+            // Brand description
+            document.getElementById('brandDescription').addEventListener('input', (e) => {
+                config.brandDescription = e.target.value;
+                saveAndApply();
+            });
+
+            // Theme
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    config.theme = btn.dataset.theme;
+                    saveAndApply();
+                });
+            });
+
+            // Reset
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                if (confirm('Reset to default configuration?')) {
+                    config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+                    loadConfig();
+                    saveAndApply();
+                }
+            });
+
+            // Export
+            document.getElementById('exportBtn').addEventListener('click', exportToMarkdown);
+
+            // Mobile menu
+            document.getElementById('menuBtn').addEventListener('click', () => {
+                document.getElementById('sidebar').classList.toggle('open');
+            });
+        }
+
+        // Apply configuration
+        function applyConfig() {
+            // Apply CSS variables
+            const root = document.documentElement;
+            root.style.setProperty('--primary-400', config.colors.primary400);
+            root.style.setProperty('--primary-600', config.colors.primary600);
+            root.style.setProperty('--accent-400', config.colors.accent400);
+            root.style.setProperty('--accent-600', config.colors.accent600);
+            root.style.setProperty('--surface-bg', config.colors.surfaceBg);
+            root.style.setProperty('--surface', config.colors.surface);
+            root.style.setProperty('--text-primary', config.colors.textPrimary);
+            root.style.setProperty('--text-secondary', config.colors.textSecondary);
+            root.style.setProperty('--text-muted', config.colors.textMuted);
+
+            // Update color value displays
+            document.getElementById('primary400Value').textContent = config.colors.primary400;
+            document.getElementById('primary600Value').textContent = config.colors.primary600;
+            document.getElementById('accent400Value').textContent = config.colors.accent400;
+            document.getElementById('accent600Value').textContent = config.colors.accent600;
+            document.getElementById('surfaceBgValue').textContent = config.colors.surfaceBg;
+            document.getElementById('surfaceValue').textContent = config.colors.surface;
+            document.getElementById('textPrimaryValue').textContent = config.colors.textPrimary;
+            document.getElementById('textSecondaryValue').textContent = config.colors.textSecondary;
+            document.getElementById('textMutedValue').textContent = config.colors.textMuted;
+
+            // Update color swatches
+            document.getElementById('swatchPrimary400').style.backgroundColor = config.colors.primary400;
+            document.getElementById('swatchPrimary600').style.backgroundColor = config.colors.primary600;
+            document.getElementById('swatchAccent400').style.backgroundColor = config.colors.accent400;
+            document.getElementById('swatchAccent600').style.backgroundColor = config.colors.accent600;
+            document.getElementById('swatchSurfaceBg').style.backgroundColor = config.colors.surfaceBg;
+            document.getElementById('swatchSurface').style.backgroundColor = config.colors.surface;
+
+            document.getElementById('hexPrimary400').textContent = config.colors.primary400;
+            document.getElementById('hexPrimary600').textContent = config.colors.primary600;
+            document.getElementById('hexAccent400').textContent = config.colors.accent400;
+            document.getElementById('hexAccent600').textContent = config.colors.accent600;
+            document.getElementById('hexSurfaceBg').textContent = config.colors.surfaceBg;
+            document.getElementById('hexSurface').textContent = config.colors.surface;
+
+            // Apply font family
+            const fontFamily = FONT_FAMILIES[config.typography.fontFamily];
+            document.body.style.fontFamily = fontFamily;
+
+            // Apply font weights to typography samples
+            document.getElementById('sample1').style.fontWeight = config.typography.weights.thin;
+            document.getElementById('sample2').style.fontWeight = config.typography.weights.extraLight;
+            document.getElementById('sample3').style.fontWeight = config.typography.weights.light;
+            document.getElementById('sample4').style.fontWeight = config.typography.weights.light;
+
+            // Apply border radius
+            const radius = BORDER_RADIUS[config.ui.borderRadius];
+            document.querySelectorAll('.radius-btn, .shadow-btn, .theme-btn, .color-picker, .select, .input, .textarea, .btn, .card, .form-input, .table-container, .badge').forEach(el => {
+                el.style.borderRadius = radius;
+            });
+
+            // Apply shadows
+            const shadow = SHADOWS[config.ui.shadowIntensity];
+            document.getElementById('card2').style.boxShadow = shadow;
+            document.querySelector('.export-btn').style.boxShadow = shadow;
+
+            // Update brand name
+            document.getElementById('brandNameDisplay').textContent = config.brandName;
+            document.getElementById('brandNameMobile').textContent = config.brandName;
+            document.getElementById('brandNamePreview').textContent = config.brandName;
+            document.getElementById('brandDescPreview').textContent = config.brandDescription;
+
+            // Update button styles
+            document.getElementById('btnPrimary').style.borderRadius = radius;
+            document.getElementById('btnSecondary').style.borderRadius = radius;
+            document.getElementById('btnOutline').style.borderRadius = radius;
+
+            // Update badge styles
+            document.querySelectorAll('.badge').forEach((badge, i) => {
+                badge.style.borderRadius = BORDER_RADIUS.full;
+                if (i === 0 || i === 2 || i === 4) {
+                    badge.style.backgroundColor = config.colors.accent400;
+                    badge.style.color = '#fff';
+                } else if (i !== 5) {
+                    badge.style.backgroundColor = config.colors.primary400;
+                    badge.style.color = '#fff';
+                }
+            });
+        }
+
+        // Save and apply
+        function saveAndApply() {
+            localStorage.setItem('ui-design-system', JSON.stringify(config));
+            applyConfig();
+        }
+
+        // Export to Markdown
+        function exportToMarkdown() {
+            const md = `# ${config.brandName} Design System
+
+${config.brandDescription}
+
+## Color Palette
+
+### Primary Colors
+- **Primary 400**: \`${config.colors.primary400}\` - Main brand color, used for primary actions
+- **Primary 600**: \`${config.colors.primary600}\` - Darker shade for hover states
+
+### Accent Colors
+- **Accent 400**: \`${config.colors.accent400}\` - Secondary accent, used for highlights
+- **Accent 600**: \`${config.colors.accent600}\` - Darker accent for emphasis
+
+### Surface Colors
+- **Background**: \`${config.colors.surfaceBg}\` - Main background color
+- **Surface**: \`${config.colors.surface}\` - Card and component backgrounds
+
+### Text Colors
+- **Primary Text**: \`${config.colors.textPrimary}\` - Main text color
+- **Secondary Text**: \`${config.colors.textSecondary}\` - Subdued text
+- **Muted Text**: \`${config.colors.textMuted}\` - Placeholder and disabled text
+
+## Typography
+
+### Font Families
+- **Sans-serif**: ${FONT_FAMILIES.sans}
+- **Serif**: ${FONT_FAMILIES.serif}
+- **Monospace**: ${FONT_FAMILIES.mono}
+
+### Active Font Family
+${config.typography.fontFamily}
+
+### Font Weights
+- **Thin**: ${config.typography.weights.thin}
+- **Extra Light**: ${config.typography.weights.extraLight}
+- **Light**: ${config.typography.weights.light}
+- **Normal**: ${config.typography.weights.normal}
+- **Medium**: ${config.typography.weights.medium}
+- **Semibold**: ${config.typography.weights.semibold}
+- **Bold**: ${config.typography.weights.bold}
+
+## UI Configuration
+
+### Border Radius
+Active style: **${config.ui.borderRadius}** (${BORDER_RADIUS[config.ui.borderRadius]})
+
+### Spacing Scale
+Base spacing: **${config.ui.spacing}rem**
+
+### Shadow Intensity
+**${config.ui.shadowIntensity}**
+
+## CSS Variables
+
+\`\`\`css
+:root {
+  --primary-400: ${config.colors.primary400};
+  --primary-600: ${config.colors.primary600};
+  --accent-400: ${config.colors.accent400};
+  --accent-600: ${config.colors.accent600};
+  --surface-bg: ${config.colors.surfaceBg};
+  --surface: ${config.colors.surface};
+  --text-primary: ${config.colors.textPrimary};
+  --text-secondary: ${config.colors.textSecondary};
+  --text-muted: ${config.colors.textMuted};
+  --border-radius: ${BORDER_RADIUS[config.ui.borderRadius]};
+  --spacing: ${config.ui.spacing}rem;
+}
+\`\`\`
+
+## Design Vibe
+
+${config.brandDescription}
+
+**Theme**: ${config.theme === 'dark' ? 'Dark mode optimized' : 'Light mode optimized'}
+**Visual Style**: ${config.ui.borderRadius === 'none' || config.ui.borderRadius === 'sm' ? 'Sharp, modern' : 'Rounded, friendly'}
+
+---
+
+*Generated by UI Design System Generator*
+*Session: ${new Date().toISOString()}*
+`;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(md).then(() => {
+                const btn = document.getElementById('exportBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied to Clipboard!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
 </html>
