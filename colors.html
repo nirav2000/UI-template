@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Colors & Palette Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors & Palette - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 480px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .color-section {
+            margin-bottom: 32px;
+        }
+
+        .color-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .color-group {
+            display: grid;
+            gap: 12px;
+        }
+
+        .color-control {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .color-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker:hover {
+            border-color: var(--primary-400);
+        }
+
+        .color-text-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            width: 90px;
+            transition: all 0.2s;
+        }
+
+        .color-text-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            background: var(--surface);
+        }
+
+        .opacity-control {
+            display: grid;
+            gap: 8px;
+        }
+
+        .opacity-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right,
+                rgba(59, 133, 255, 0) 0%,
+                rgba(59, 133, 255, 1) 100%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .opacity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .opacity-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .opacity-value {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        /* Color Swatches */
+        .swatches-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .swatch-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .swatch-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .swatch-colors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 12px;
+        }
+
+        .swatch {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swatch:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-400);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .swatch-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            font-size: 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .swatch:hover .swatch-info {
+            opacity: 1;
+        }
+
+        .swatch-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .swatch-hex {
+            font-family: 'Courier New', monospace;
+            color: var(--text-secondary);
+        }
+
+        /* Gradient Preview */
+        .gradient-preview {
+            height: 200px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-info {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Color Combinations */
+        .combinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .combination-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .combination-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .combination-bg {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .combination-info {
+            background: var(--surface-elevated);
+            padding: 12px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .combination-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        /* Contrast Ratios */
+        .contrast-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contrast-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 12px;
+            background: var(--surface-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .contrast-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .contrast-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contrast-ratio {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .contrast-status {
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .contrast-status.pass {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success-400);
+        }
+
+        .contrast-status.fail {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger-400);
+        }
+
+        .contrast-status.aaa {
+            background: rgba(59, 133, 255, 0.2);
+            color: var(--primary-400);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+
+            .header-btn {
+                flex: 1;
+            }
+
+            .main-container {
+                padding: 16px;
+                gap: 16px;
+            }
+
+            .swatches-grid {
+                gap: 12px;
+            }
+
+            .swatch-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .combinations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                right: 16px;
+                left: 16px;
+            }
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Colors & Palette</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn" onclick="resetColors()">Reset</button>
+                <button class="header-btn primary" onclick="exportColors()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <!-- Primary Colors -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">🎨</span>
+                    <span>Primary Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-300" class="color-picker" value="#6BA3FF">
+                            <input type="text" class="color-text-input" id="primary-300-text" value="#6BA3FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-400" class="color-picker" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="primary-400-text" value="#3B85FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-600" class="color-picker" value="#0066BB">
+                            <input type="text" class="color-text-input" id="primary-600-text" value="#0066BB">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-800" class="color-picker" value="#004488">
+                            <input type="text" class="color-text-input" id="primary-800-text" value="#004488">
+                        </div>
+                    </div>
+                    <div class="opacity-control">
+                        <label class="color-label">Opacity</label>
+                        <input type="range" id="primary-opacity" class="opacity-slider" min="0" max="100" value="100">
+                        <div class="opacity-value"><span id="primary-opacity-value">100</span>%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Accent/Secondary Colors -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">✨</span>
+                    <span>Accent Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accent-300" class="color-picker" value="#A865FF">
+                            <input type="text" class="color-text-input" id="accent-300-text" value="#A865FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accent-400" class="color-picker" value="#8533FF">
+                            <input type="text" class="color-text-input" id="accent-400-text" value="#8533FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accent-600" class="color-picker" value="#6600CC">
+                            <input type="text" class="color-text-input" id="accent-600-text" value="#6600CC">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accent-800" class="color-picker" value="#4D0099">
+                            <input type="text" class="color-text-input" id="accent-800-text" value="#4D0099">
+                        </div>
+                    </div>
+                    <div class="opacity-control">
+                        <label class="color-label">Opacity</label>
+                        <input type="range" id="accent-opacity" class="opacity-slider" min="0" max="100" value="100">
+                        <div class="opacity-value"><span id="accent-opacity-value">100</span>%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Semantic Colors: Success -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">✅</span>
+                    <span>Success Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="success-300" class="color-picker" value="#34D399">
+                            <input type="text" class="color-text-input" id="success-300-text" value="#34D399">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="success-400" class="color-picker" value="#10B981">
+                            <input type="text" class="color-text-input" id="success-400-text" value="#10B981">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="success-600" class="color-picker" value="#059669">
+                            <input type="text" class="color-text-input" id="success-600-text" value="#059669">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="success-800" class="color-picker" value="#047857">
+                            <input type="text" class="color-text-input" id="success-800-text" value="#047857">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Semantic Colors: Warning -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">⚠️</span>
+                    <span>Warning Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="warning-300" class="color-picker" value="#FCD34D">
+                            <input type="text" class="color-text-input" id="warning-300-text" value="#FCD34D">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="warning-400" class="color-picker" value="#F59E0B">
+                            <input type="text" class="color-text-input" id="warning-400-text" value="#F59E0B">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="warning-600" class="color-picker" value="#D97706">
+                            <input type="text" class="color-text-input" id="warning-600-text" value="#D97706">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="warning-800" class="color-picker" value="#92400E">
+                            <input type="text" class="color-text-input" id="warning-800-text" value="#92400E">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Semantic Colors: Danger -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">🚨</span>
+                    <span>Danger Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="danger-300" class="color-picker" value="#FCA5A5">
+                            <input type="text" class="color-text-input" id="danger-300-text" value="#FCA5A5">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="danger-400" class="color-picker" value="#EF4444">
+                            <input type="text" class="color-text-input" id="danger-400-text" value="#EF4444">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="danger-600" class="color-picker" value="#DC2626">
+                            <input type="text" class="color-text-input" id="danger-600-text" value="#DC2626">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="danger-800" class="color-picker" value="#991B1B">
+                            <input type="text" class="color-text-input" id="danger-800-text" value="#991B1B">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Semantic Colors: Info -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">ℹ️</span>
+                    <span>Info Colors</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Light (300)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="info-300" class="color-picker" value="#67E8F9">
+                            <input type="text" class="color-text-input" id="info-300-text" value="#67E8F9">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Base (400)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="info-400" class="color-picker" value="#06B6D4">
+                            <input type="text" class="color-text-input" id="info-400-text" value="#06B6D4">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Dark (600)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="info-600" class="color-picker" value="#0891B2">
+                            <input type="text" class="color-text-input" id="info-600-text" value="#0891B2">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Darker (800)</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="info-800" class="color-picker" value="#155E75">
+                            <input type="text" class="color-text-input" id="info-800-text" value="#155E75">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Neutral/Grayscale Colors -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">⚪</span>
+                    <span>Neutral & Grayscale</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bg" class="color-picker" value="#0A0A0A">
+                            <input type="text" class="color-text-input" id="bg-text" value="#0A0A0A">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Surface</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="surface" class="color-picker" value="#141414">
+                            <input type="text" class="color-text-input" id="surface-text" value="#141414">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Card Surface</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="card" class="color-picker" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="card-text" value="#1E1E1E">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Text Primary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="text-primary" class="color-picker" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="text-primary-text" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Text Secondary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="text-secondary" class="color-picker" value="#A0A0A0">
+                            <input type="text" class="color-text-input" id="text-secondary-text" value="#A0A0A0">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Text Tertiary</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="text-tertiary" class="color-picker" value="#666666">
+                            <input type="text" class="color-text-input" id="text-tertiary-text" value="#666666">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Border</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="border" class="color-picker" value="#333333">
+                            <input type="text" class="color-text-input" id="border-text" value="#333333">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Disabled</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="disabled" class="color-picker" value="#4D4D4D">
+                            <input type="text" class="color-text-input" id="disabled-text" value="#4D4D4D">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Gradient Controls -->
+            <div class="color-section">
+                <div class="section-header">
+                    <span class="section-icon">🌈</span>
+                    <span>Gradient</span>
+                </div>
+                <div class="color-group">
+                    <div class="color-control">
+                        <label class="color-label">Start Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="gradient-start" class="color-picker" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="gradient-start-text" value="#3B85FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">End Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="gradient-end" class="color-picker" value="#8533FF">
+                            <input type="text" class="color-text-input" id="gradient-end-text" value="#8533FF">
+                        </div>
+                    </div>
+                    <div class="color-control">
+                        <label class="color-label">Direction</label>
+                        <select id="gradient-direction" class="select-input">
+                            <option value="to right">To Right</option>
+                            <option value="to left">To Left</option>
+                            <option value="to bottom">To Bottom</option>
+                            <option value="to top">To Top</option>
+                            <option value="135deg" selected>135deg (Diagonal)</option>
+                            <option value="45deg">45deg</option>
+                            <option value="90deg">90deg</option>
+                            <option value="180deg">180deg</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <!-- Color Swatches -->
+            <div class="preview-card">
+                <h2 class="preview-header">Color Swatches</h2>
+                <div class="swatches-grid">
+                    <div class="swatch-row">
+                        <div class="swatch-label">Primary</div>
+                        <div class="swatch-colors" id="primary-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Accent</div>
+                        <div class="swatch-colors" id="accent-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Success</div>
+                        <div class="swatch-colors" id="success-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Warning</div>
+                        <div class="swatch-colors" id="warning-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Danger</div>
+                        <div class="swatch-colors" id="danger-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Info</div>
+                        <div class="swatch-colors" id="info-swatches"></div>
+                    </div>
+                    <div class="swatch-row">
+                        <div class="swatch-label">Neutral</div>
+                        <div class="swatch-colors" id="neutral-swatches"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gradient Preview -->
+            <div class="preview-card">
+                <h2 class="preview-header">Gradient Preview</h2>
+                <div class="gradient-preview" id="gradient-preview">
+                    <div class="gradient-info">
+                        <div id="gradient-css-display">linear-gradient(135deg, #3B85FF, #8533FF)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Combinations -->
+            <div class="preview-card">
+                <h2 class="preview-header">Color Combinations</h2>
+                <div class="combinations-grid" id="combinations-grid"></div>
+            </div>
+
+            <!-- Contrast Ratios -->
+            <div class="preview-card">
+                <h2 class="preview-header">Accessibility: Contrast Ratios</h2>
+                <div class="contrast-grid" id="contrast-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toast-message">Action completed</span>
+    </div>
+
+    <script>
+        // Initialize
+        let config = {};
+
+        // Color input sync
+        function syncColorInputs(id) {
+            const picker = document.getElementById(id);
+            const text = document.getElementById(id + '-text');
+
+            picker.addEventListener('input', (e) => {
+                text.value = e.target.value.toUpperCase();
+                updatePreview();
+            });
+
+            text.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    picker.value = value;
+                    updatePreview();
+                }
+            });
+        }
+
+        // Initialize all color inputs
+        const colorIds = [
+            'primary-300', 'primary-400', 'primary-600', 'primary-800',
+            'accent-300', 'accent-400', 'accent-600', 'accent-800',
+            'success-300', 'success-400', 'success-600', 'success-800',
+            'warning-300', 'warning-400', 'warning-600', 'warning-800',
+            'danger-300', 'danger-400', 'danger-600', 'danger-800',
+            'info-300', 'info-400', 'info-600', 'info-800',
+            'bg', 'surface', 'card', 'text-primary', 'text-secondary', 'text-tertiary', 'border', 'disabled',
+            'gradient-start', 'gradient-end'
+        ];
+
+        colorIds.forEach(id => syncColorInputs(id));
+
+        // Opacity sliders
+        const opacitySliders = ['primary-opacity', 'accent-opacity'];
+        opacitySliders.forEach(id => {
+            const slider = document.getElementById(id);
+            const value = document.getElementById(id + '-value');
+            slider.addEventListener('input', (e) => {
+                value.textContent = e.target.value;
+                updatePreview();
+            });
+        });
+
+        // Gradient direction
+        document.getElementById('gradient-direction').addEventListener('change', updatePreview);
+
+        // Calculate contrast ratio
+        function getContrastRatio(color1, color2) {
+            const rgb1 = hexToRgb(color1);
+            const rgb2 = hexToRgb(color2);
+
+            const l1 = getRelativeLuminance(rgb1);
+            const l2 = getRelativeLuminance(rgb2);
+
+            const lighter = Math.max(l1, l2);
+            const darker = Math.min(l1, l2);
+
+            return ((lighter + 0.05) / (darker + 0.05)).toFixed(2);
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function getRelativeLuminance(rgb) {
+            const rsRGB = rgb.r / 255;
+            const gsRGB = rgb.g / 255;
+            const bsRGB = rgb.b / 255;
+
+            const r = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+            const g = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+            const b = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+
+        function getContrastStatus(ratio) {
+            if (ratio >= 7) return { label: 'AAA', class: 'aaa' };
+            if (ratio >= 4.5) return { label: 'AA', class: 'pass' };
+            return { label: 'Fail', class: 'fail' };
+        }
+
+        // Update preview
+        function updatePreview() {
+            updateSwatches();
+            updateGradient();
+            updateCombinations();
+            updateContrastRatios();
+        }
+
+        function updateSwatches() {
+            const colorGroups = {
+                primary: ['300', '400', '600', '800'],
+                accent: ['300', '400', '600', '800'],
+                success: ['300', '400', '600', '800'],
+                warning: ['300', '400', '600', '800'],
+                danger: ['300', '400', '600', '800'],
+                info: ['300', '400', '600', '800']
+            };
+
+            Object.keys(colorGroups).forEach(group => {
+                const container = document.getElementById(`${group}-swatches`);
+                container.innerHTML = '';
+
+                colorGroups[group].forEach(variant => {
+                    const id = `${group}-${variant}`;
+                    const color = document.getElementById(id).value;
+
+                    const swatch = document.createElement('div');
+                    swatch.className = 'swatch';
+                    swatch.style.backgroundColor = color;
+                    swatch.innerHTML = `
+                        <div class="swatch-info">
+                            <div class="swatch-name">${variant}</div>
+                            <div class="swatch-hex">${color.toUpperCase()}</div>
+                        </div>
+                    `;
+                    swatch.onclick = () => copyToClipboard(color);
+                    container.appendChild(swatch);
+                });
+            });
+
+            // Neutral colors
+            const neutralContainer = document.getElementById('neutral-swatches');
+            neutralContainer.innerHTML = '';
+            const neutralIds = ['bg', 'surface', 'card', 'text-primary', 'text-secondary', 'text-tertiary', 'border', 'disabled'];
+            neutralIds.forEach(id => {
+                const color = document.getElementById(id).value;
+                const swatch = document.createElement('div');
+                swatch.className = 'swatch';
+                swatch.style.backgroundColor = color;
+                swatch.innerHTML = `
+                    <div class="swatch-info">
+                        <div class="swatch-name">${id}</div>
+                        <div class="swatch-hex">${color.toUpperCase()}</div>
+                    </div>
+                `;
+                swatch.onclick = () => copyToClipboard(color);
+                neutralContainer.appendChild(swatch);
+            });
+        }
+
+        function updateGradient() {
+            const startColor = document.getElementById('gradient-start').value;
+            const endColor = document.getElementById('gradient-end').value;
+            const direction = document.getElementById('gradient-direction').value;
+
+            const gradient = `linear-gradient(${direction}, ${startColor}, ${endColor})`;
+            const preview = document.getElementById('gradient-preview');
+            preview.style.background = gradient;
+
+            document.getElementById('gradient-css-display').textContent = gradient;
+        }
+
+        function updateCombinations() {
+            const container = document.getElementById('combinations-grid');
+            container.innerHTML = '';
+
+            const combinations = [
+                { bg: 'primary-400', text: 'text-primary', label: 'Primary + White' },
+                { bg: 'primary-600', text: 'text-primary', label: 'Primary Dark + White' },
+                { bg: 'accent-400', text: 'text-primary', label: 'Accent + White' },
+                { bg: 'success-400', text: 'text-primary', label: 'Success + White' },
+                { bg: 'warning-400', text: 'surface', label: 'Warning + Dark' },
+                { bg: 'danger-400', text: 'text-primary', label: 'Danger + White' },
+                { bg: 'info-400', text: 'text-primary', label: 'Info + White' },
+                { bg: 'surface', text: 'text-primary', label: 'Surface + White' },
+                { bg: 'card', text: 'text-secondary', label: 'Card + Secondary' }
+            ];
+
+            combinations.forEach(combo => {
+                const bgColor = document.getElementById(combo.bg).value;
+                const textColor = document.getElementById(combo.text).value;
+                const ratio = getContrastRatio(bgColor, textColor);
+                const status = getContrastStatus(ratio);
+
+                const card = document.createElement('div');
+                card.className = 'combination-card';
+                card.innerHTML = `
+                    <div class="combination-bg" style="background-color: ${bgColor}; color: ${textColor};">
+                        Sample Text
+                    </div>
+                    <div class="combination-info">
+                        <div class="combination-label">${combo.label}</div>
+                        <div>Contrast: ${ratio}:1 (${status.label})</div>
+                    </div>
+                `;
+                card.onclick = () => {
+                    copyToClipboard(`background: ${bgColor}; color: ${textColor};`);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        function updateContrastRatios() {
+            const container = document.getElementById('contrast-grid');
+            container.innerHTML = '';
+
+            const checks = [
+                { fg: 'text-primary', bg: 'surface', label: 'Primary Text on Surface' },
+                { fg: 'text-secondary', bg: 'surface', label: 'Secondary Text on Surface' },
+                { fg: 'text-tertiary', bg: 'surface', label: 'Tertiary Text on Surface' },
+                { fg: 'text-primary', bg: 'card', label: 'Primary Text on Card' },
+                { fg: 'text-primary', bg: 'primary-400', label: 'White on Primary' },
+                { fg: 'text-primary', bg: 'accent-400', label: 'White on Accent' },
+                { fg: 'text-primary', bg: 'success-400', label: 'White on Success' },
+                { fg: 'text-primary', bg: 'danger-400', label: 'White on Danger' }
+            ];
+
+            checks.forEach(check => {
+                const fgColor = document.getElementById(check.fg).value;
+                const bgColor = document.getElementById(check.bg).value;
+                const ratio = getContrastRatio(fgColor, bgColor);
+                const status = getContrastStatus(ratio);
+
+                const row = document.createElement('div');
+                row.className = 'contrast-row';
+                row.innerHTML = `
+                    <div class="contrast-label">${check.label}</div>
+                    <div class="contrast-badge">
+                        <div class="contrast-ratio">${ratio}:1</div>
+                        <div class="contrast-status ${status.class}">${status.label}</div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // Export colors
+        function exportColors() {
+            const colors = {};
+            colorIds.forEach(id => {
+                colors[id] = document.getElementById(id).value;
+            });
+
+            colors['primary-opacity'] = document.getElementById('primary-opacity').value;
+            colors['accent-opacity'] = document.getElementById('accent-opacity').value;
+            colors['gradient-direction'] = document.getElementById('gradient-direction').value;
+
+            const css = generateCSS(colors);
+            copyToClipboard(css);
+            showToast('CSS variables copied to clipboard!');
+        }
+
+        function generateCSS(colors) {
+            let css = ':root {\n';
+
+            // Primary colors
+            css += `  /* Primary Colors */\n`;
+            css += `  --primary-300: ${colors['primary-300']};\n`;
+            css += `  --primary-400: ${colors['primary-400']};\n`;
+            css += `  --primary-600: ${colors['primary-600']};\n`;
+            css += `  --primary-800: ${colors['primary-800']};\n`;
+            css += `  --primary-opacity: ${colors['primary-opacity']}%;\n\n`;
+
+            // Accent colors
+            css += `  /* Accent Colors */\n`;
+            css += `  --accent-300: ${colors['accent-300']};\n`;
+            css += `  --accent-400: ${colors['accent-400']};\n`;
+            css += `  --accent-600: ${colors['accent-600']};\n`;
+            css += `  --accent-800: ${colors['accent-800']};\n`;
+            css += `  --accent-opacity: ${colors['accent-opacity']}%;\n\n`;
+
+            // Semantic colors
+            css += `  /* Semantic Colors */\n`;
+            ['success', 'warning', 'danger', 'info'].forEach(type => {
+                css += `  --${type}-300: ${colors[type + '-300']};\n`;
+                css += `  --${type}-400: ${colors[type + '-400']};\n`;
+                css += `  --${type}-600: ${colors[type + '-600']};\n`;
+                css += `  --${type}-800: ${colors[type + '-800']};\n`;
+            });
+            css += '\n';
+
+            // Neutral colors
+            css += `  /* Neutral & Grayscale */\n`;
+            css += `  --background: ${colors['bg']};\n`;
+            css += `  --surface: ${colors['surface']};\n`;
+            css += `  --card-surface: ${colors['card']};\n`;
+            css += `  --text-primary: ${colors['text-primary']};\n`;
+            css += `  --text-secondary: ${colors['text-secondary']};\n`;
+            css += `  --text-tertiary: ${colors['text-tertiary']};\n`;
+            css += `  --border: ${colors['border']};\n`;
+            css += `  --disabled: ${colors['disabled']};\n\n`;
+
+            // Gradient
+            css += `  /* Gradient */\n`;
+            css += `  --gradient: linear-gradient(${colors['gradient-direction']}, ${colors['gradient-start']}, ${colors['gradient-end']});\n`;
+
+            css += '}\n';
+
+            return css;
+        }
+
+        // Save configuration
+        function saveConfig() {
+            const config = {};
+            colorIds.forEach(id => {
+                config[id] = document.getElementById(id).value;
+            });
+            config['primary-opacity'] = document.getElementById('primary-opacity').value;
+            config['accent-opacity'] = document.getElementById('accent-opacity').value;
+            config['gradient-direction'] = document.getElementById('gradient-direction').value;
+
+            localStorage.setItem('uiDesignSystem_colors', JSON.stringify(config));
+            showToast('Configuration saved successfully!');
+        }
+
+        // Load configuration
+        function loadConfig() {
+            const saved = localStorage.getItem('uiDesignSystem_colors');
+            if (!saved) {
+                showToast('No saved configuration found', 'warning');
+                return;
+            }
+
+            const config = JSON.parse(saved);
+            colorIds.forEach(id => {
+                if (config[id]) {
+                    document.getElementById(id).value = config[id];
+                    document.getElementById(id + '-text').value = config[id].toUpperCase();
+                }
+            });
+
+            if (config['primary-opacity']) {
+                document.getElementById('primary-opacity').value = config['primary-opacity'];
+                document.getElementById('primary-opacity-value').textContent = config['primary-opacity'];
+            }
+
+            if (config['accent-opacity']) {
+                document.getElementById('accent-opacity').value = config['accent-opacity'];
+                document.getElementById('accent-opacity-value').textContent = config['accent-opacity'];
+            }
+
+            if (config['gradient-direction']) {
+                document.getElementById('gradient-direction').value = config['gradient-direction'];
+            }
+
+            updatePreview();
+            showToast('Configuration loaded successfully!');
+        }
+
+        // Reset to defaults
+        function resetColors() {
+            if (!confirm('Reset all colors to default values?')) return;
+
+            const defaults = {
+                'primary-300': '#6BA3FF',
+                'primary-400': '#3B85FF',
+                'primary-600': '#0066BB',
+                'primary-800': '#004488',
+                'accent-300': '#A865FF',
+                'accent-400': '#8533FF',
+                'accent-600': '#6600CC',
+                'accent-800': '#4D0099',
+                'success-300': '#34D399',
+                'success-400': '#10B981',
+                'success-600': '#059669',
+                'success-800': '#047857',
+                'warning-300': '#FCD34D',
+                'warning-400': '#F59E0B',
+                'warning-600': '#D97706',
+                'warning-800': '#92400E',
+                'danger-300': '#FCA5A5',
+                'danger-400': '#EF4444',
+                'danger-600': '#DC2626',
+                'danger-800': '#991B1B',
+                'info-300': '#67E8F9',
+                'info-400': '#06B6D4',
+                'info-600': '#0891B2',
+                'info-800': '#155E75',
+                'bg': '#0A0A0A',
+                'surface': '#141414',
+                'card': '#1E1E1E',
+                'text-primary': '#FFFFFF',
+                'text-secondary': '#A0A0A0',
+                'text-tertiary': '#666666',
+                'border': '#333333',
+                'disabled': '#4D4D4D',
+                'gradient-start': '#3B85FF',
+                'gradient-end': '#8533FF'
+            };
+
+            colorIds.forEach(id => {
+                if (defaults[id]) {
+                    document.getElementById(id).value = defaults[id];
+                    document.getElementById(id + '-text').value = defaults[id].toUpperCase();
+                }
+            });
+
+            document.getElementById('primary-opacity').value = 100;
+            document.getElementById('primary-opacity-value').textContent = 100;
+            document.getElementById('accent-opacity').value = 100;
+            document.getElementById('accent-opacity-value').textContent = 100;
+            document.getElementById('gradient-direction').value = '135deg';
+
+            updatePreview();
+            showToast('Colors reset to defaults!');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+            messageEl.textContent = message;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                    exportColors();
+                }
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updatePreview();
+            console.log('🎨 Colors & Palette Module Loaded');
+            console.log('Shortcuts: Ctrl+S (Save), Ctrl+E (Export), ESC (Back)');
+        });
+
+        // Auto-save on change (optional)
+        let autoSaveTimeout;
+        function autoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                saveConfig();
+            }, 2000);
+        }
+
+        // Add auto-save listeners (optional - uncomment to enable)
+        // colorIds.forEach(id => {
+        //     document.getElementById(id).addEventListener('input', autoSave);
+        // });
+    </script>
+</body>
+</html>

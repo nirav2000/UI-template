@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v2.1.0 - In-Situ Editing Edition -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Design System Generator v2.1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF; --primary-600: #0066BB;
+            --accent-400: #8533FF; --accent-600: #6600CC;
+            --surface-bg: #0A0A0A; --surface: #141414;
+            --text-primary: #FFFFFF; --text-secondary: #A0A0A0; --text-muted: #666666;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background-color: var(--surface);
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left, .nav-center, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .version-badge {
+            background-color: var(--accent-400);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .icon-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .icon-btn.active {
+            background-color: var(--primary-400);
+            color: white;
+        }
+
+        .version-select {
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 57px);
+        }
+
+        .editor-panel, .preview-panel {
+            width: 100%;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .editor-panel.active, .preview-panel.active {
+            display: block;
+        }
+
+        .editor-panel {
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.05) 0%, rgba(133, 51, 255, 0.05) 100%);
+            padding: 24px;
+        }
+
+        .preview-panel {
+            padding: 48px 24px;
+        }
+
+        /* Editor Grid */
+        .editor-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .editor-section {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.15);
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-400);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Presets */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .preset-card {
+            background-color: var(--surface-bg);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-card:hover {
+            border-color: var(--primary-400);
+            transform: translateY(-2px);
+        }
+
+        .preset-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .preset-colors {
+            display: flex;
+            gap: 4px;
+            height: 24px;
+        }
+
+        .preset-color {
+            flex: 1;
+            border-radius: 4px;
+        }
+
+        /* Controls */
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+
+        .control-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .control-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .control-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-picker {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .color-value {
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            min-width: 70px;
+        }
+
+        .input, .select, .textarea {
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .select {
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .textarea {
+            resize: vertical;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-400);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Editable Elements */
+        .editable {
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .editable:hover {
+            outline: 2px solid var(--accent-400);
+            outline-offset: 2px;
+        }
+
+        .editable:hover::after {
+            content: '✎ Click to edit here';
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background-color: var(--accent-400);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Preview Styles */
+        .preview-header {
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        .preview-title {
+            font-size: 64px;
+            font-weight: 100;
+            margin-bottom: 16px;
+        }
+
+        .preview-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        .preview-section {
+            max-width: 1200px;
+            margin: 0 auto 64px;
+        }
+
+        .section-heading {
+            font-size: 32px;
+            font-weight: 200;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: var(--surface);
+            border-radius: 12px;
+        }
+
+        .swatch-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .swatch-info {
+            flex: 1;
+        }
+
+        .swatch-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .swatch-hex {
+            font-size: 12px;
+            font-family: 'Monaco', monospace;
+            color: var(--text-muted);
+        }
+
+        /* Buttons */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-400);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-600);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.4);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            padding: 32px;
+            background-color: var(--surface);
+            border-radius: 12px;
+            border: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Table */
+        .table-container {
+            background-color: var(--surface);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background-color: var(--surface-bg);
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table td {
+            padding: 20px;
+            border-top: 1px solid rgba(102, 102, 102, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background-color: var(--surface);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 32px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            width: 32px;
+            height: 32px;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* Version List */
+        .version-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .version-item {
+            background-color: var(--surface-bg);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .version-item:hover {
+            border-color: var(--primary-400);
+        }
+
+        .version-item.current {
+            border-color: var(--accent-400);
+            background-color: rgba(133, 51, 255, 0.1);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .version-number {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .version-timestamp {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .version-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .version-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .version-btn-load {
+            background-color: var(--primary-400);
+            color: white;
+        }
+
+        .version-btn-load:hover {
+            background-color: var(--primary-600);
+        }
+
+        .version-btn-delete {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #ff6b6b;
+        }
+
+        .version-btn-delete:hover {
+            background-color: rgba(255, 0, 0, 0.3);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--surface);
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            border: 1px solid var(--primary-400);
+        }
+
+        .toast.active {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* In-Situ Popup Editor */
+        .insitu-editor {
+            position: fixed;
+            background-color: var(--surface);
+            border: 2px solid var(--primary-400);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            z-index: 500;
+            display: none;
+            min-width: 320px;
+            max-width: 400px;
+        }
+
+        .insitu-editor.active {
+            display: block;
+            animation: popIn 0.2s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .insitu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(102, 102, 102, 0.2);
+        }
+
+        .insitu-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-400);
+        }
+
+        .insitu-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            width: 24px;
+            height: 24px;
+        }
+
+        .insitu-close:hover {
+            color: var(--text-primary);
+        }
+
+        .insitu-control {
+            margin-bottom: 16px;
+        }
+
+        .insitu-label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .insitu-input, .insitu-select, .insitu-textarea {
+            width: 100%;
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(102, 102, 102, 0.2);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .insitu-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .insitu-color-input {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .insitu-color-picker {
+            width: 60px;
+            height: 40px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .insitu-color-value {
+            flex: 1;
+            font-family: 'Monaco', monospace;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .preview-title {
+                font-size: 36px;
+            }
+
+            .icon-btn span {
+                display: none;
+            }
+
+            .insitu-editor {
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%);
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-left">
+            <span class="brand-title" id="navBrandName">Claude UI</span>
+            <span class="version-badge">v2.1</span>
+        </div>
+        <div class="nav-center">
+            <button class="icon-btn active" id="btnShowPreview">
+                👁️ <span>Preview</span>
+            </button>
+            <button class="icon-btn" id="btnShowEditor">
+                ✏️ <span>Editor</span>
+            </button>
+        </div>
+        <div class="nav-right">
+            <select class="version-select" id="versionSelect">
+                <option value="">Current Version</option>
+            </select>
+            <button class="icon-btn" id="btnSaveVersion" title="Save Version">💾</button>
+            <button class="icon-btn" id="btnVersionHistory" title="Version History">🕐</button>
+            <button class="icon-btn" id="btnExport" title="Export">📥</button>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <div class="editor-panel" id="editorPanel">
+            <div class="editor-grid">
+                <!-- Color Presets -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">🎨</div>
+                        <h2 class="section-title">Color Presets</h2>
+                    </div>
+                    <div class="preset-grid" id="presetsContainer"></div>
+                </div>
+
+                <!-- Primary Colors -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">🔵</div>
+                        <h2 class="section-title">Primary Colors</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Primary 400</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="primary400" value="#3B85FF">
+                            <span class="color-value" id="primary400Value">#3B85FF</span>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Primary 600</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="primary600" value="#0066BB">
+                            <span class="color-value" id="primary600Value">#0066BB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accent Colors -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">🟣</div>
+                        <h2 class="section-title">Accent Colors</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Accent 400</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="accent400" value="#8533FF">
+                            <span class="color-value" id="accent400Value">#8533FF</span>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Accent 600</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="accent600" value="#6600CC">
+                            <span class="color-value" id="accent600Value">#6600CC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surface & Text -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">⚫</div>
+                        <h2 class="section-title">Surface & Text</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Background</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="surfaceBg" value="#0A0A0A">
+                            <span class="color-value" id="surfaceBgValue">#0A0A0A</span>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Surface</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="surface" value="#141414">
+                            <span class="color-value" id="surfaceValue">#141414</span>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Text Primary</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="textPrimary" value="#FFFFFF">
+                            <span class="color-value" id="textPrimaryValue">#FFFFFF</span>
+                        </div>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Text Secondary</label>
+                        <div class="control-input">
+                            <input type="color" class="color-picker" id="textSecondary" value="#A0A0A0">
+                            <span class="color-value" id="textSecondaryValue">#A0A0A0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typography -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">Aa</div>
+                        <h2 class="section-title">Typography</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Font Family</label>
+                        <select class="select" id="fontFamily">
+                            <option value="sans">Sans-serif</option>
+                            <option value="serif">Serif</option>
+                            <option value="mono">Monospace</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- UI Settings -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">⚙️</div>
+                        <h2 class="section-title">UI Settings</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Border Radius</label>
+                        <select class="select" id="borderRadius">
+                            <option value="0">None (0px)</option>
+                            <option value="4px">Small (4px)</option>
+                            <option value="8px" selected>Medium (8px)</option>
+                            <option value="12px">Large (12px)</option>
+                            <option value="16px">XL (16px)</option>
+                            <option value="999px">Full (999px)</option>
+                        </select>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Spacing</label>
+                        <div style="width: 100%;">
+                            <input type="range" class="slider" id="spacing" min="0.5" max="2" step="0.25" value="1">
+                            <div style="text-align: center; margin-top: 8px; font-size: 12px; color: var(--text-muted);">
+                                <span id="spacingValue">1</span>x
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Settings -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">📄</div>
+                        <h2 class="section-title">Card Settings</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Padding</label>
+                        <input type="number" class="input" id="cardPadding" value="32" min="12" max="64" step="4">
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Shadow</label>
+                        <select class="select" id="cardShadow">
+                            <option value="none">None</option>
+                            <option value="sm">Small</option>
+                            <option value="md" selected>Medium</option>
+                            <option value="lg">Large</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table Settings -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">📊</div>
+                        <h2 class="section-title">Table Settings</h2>
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Cell Padding</label>
+                        <input type="number" class="input" id="tablePadding" value="20" min="8" max="32" step="4">
+                    </div>
+                    <div class="control-row">
+                        <label class="control-label">Striped Rows</label>
+                        <input type="checkbox" id="tableStriped">
+                    </div>
+                </div>
+
+                <!-- Brand -->
+                <div class="editor-section">
+                    <div class="section-header">
+                        <div class="section-icon">✨</div>
+                        <h2 class="section-title">Brand</h2>
+                    </div>
+                    <div class="control-row" style="display: block;">
+                        <label class="control-label">Brand Name</label>
+                        <input type="text" class="select" id="brandName" value="Claude UI" style="width: 100%; margin-top: 8px;">
+                    </div>
+                    <div class="control-row" style="display: block;">
+                        <label class="control-label">Description</label>
+                        <textarea class="textarea" id="brandDesc" rows="3" style="width: 100%; margin-top: 8px;">A professional dark design system with blue and purple accents</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-panel active" id="previewPanel">
+            <div class="preview-header">
+                <h1 class="preview-title editable" id="previewTitle" data-edit="brandName">Claude UI</h1>
+                <p class="preview-subtitle editable" id="previewSubtitle" data-edit="brandDesc">A professional dark design system</p>
+            </div>
+
+            <section class="preview-section">
+                <h2 class="section-heading">Color Palette</h2>
+                <div class="color-grid">
+                    <div class="color-swatch editable" data-edit="primary400">
+                        <div class="swatch-box" id="swatchPrimary400"></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Primary 400</div>
+                            <div class="swatch-hex" id="hexPrimary400">#3B85FF</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch editable" data-edit="accent400">
+                        <div class="swatch-box" id="swatchAccent400"></div>
+                        <div class="swatch-info">
+                            <div class="swatch-name">Accent 400</div>
+                            <div class="swatch-hex" id="hexAccent400">#8533FF</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2 class="section-heading">Buttons & Icons</h2>
+                <div class="button-grid">
+                    <button class="btn btn-primary editable" data-edit="primary400">💾 Save</button>
+                    <button class="btn btn-primary editable" data-edit="primary400">📥 Export</button>
+                    <button class="btn btn-secondary">⚙️ Settings</button>
+                    <button class="btn btn-outline">📄 Print</button>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2 class="section-heading">Cards</h2>
+                <div class="card-grid">
+                    <div class="card editable" data-edit="cardPadding" id="card1">
+                        <div class="card-title">Feature Card</div>
+                        <p class="card-text">Click to edit card settings including padding and shadow.</p>
+                    </div>
+                    <div class="card editable" data-edit="cardPadding" id="card2">
+                        <div class="card-title">Customizable</div>
+                        <p class="card-text">All elements are fully customizable in real-time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2 class="section-heading">Data Table</h2>
+                <div class="table-container editable" data-edit="tablePadding">
+                    <table class="table" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td style="color: var(--text-secondary);">sarah@company.com</td>
+                                <td><span class="badge" style="background-color: var(--accent-400); color: white;">Admin</span></td>
+                                <td><span class="badge" style="background-color: var(--primary-400); color: white;">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Michael Chen</td>
+                                <td style="color: var(--text-secondary);">m.chen@company.com</td>
+                                <td><span class="badge" style="background-color: var(--accent-400); color: white;">Developer</span></td>
+                                <td><span class="badge" style="background-color: var(--primary-400); color: white;">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="versionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Version History</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="version-list" id="versionList"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        ✓ <span id="toastMessage">Saved!</span>
+    </div>
+
+    <!-- In-Situ Popup Editor -->
+    <div class="insitu-editor" id="insituEditor">
+        <div class="insitu-header">
+            <div class="insitu-title" id="insituTitle">Edit</div>
+            <button class="insitu-close" id="insituClose">&times;</button>
+        </div>
+        <div id="insituContent"></div>
+    </div>
+
+    <script>
+        const VERSION = '2.1.0';
+
+        const PRESETS = {
+            claude: { name: 'Claude', colors: { primary400: '#3B85FF', primary600: '#0066BB', accent400: '#8533FF', accent600: '#6600CC', surfaceBg: '#0A0A0A', surface: '#141414', textPrimary: '#FFFFFF', textSecondary: '#A0A0A0' }},
+            ocean: { name: 'Ocean', colors: { primary400: '#06B6D4', primary600: '#0891B2', accent400: '#3B82F6', accent600: '#2563EB', surfaceBg: '#0F172A', surface: '#1E293B', textPrimary: '#F1F5F9', textSecondary: '#94A3B8' }},
+            sunset: { name: 'Sunset', colors: { primary400: '#F97316', primary600: '#EA580C', accent400: '#EC4899', accent600: '#DB2777', surfaceBg: '#18181B', surface: '#27272A', textPrimary: '#FAFAFA', textSecondary: '#A1A1AA' }},
+            forest: { name: 'Forest', colors: { primary400: '#10B981', primary600: '#059669', accent400: '#84CC16', accent600: '#65A30D', surfaceBg: '#0C1410', surface: '#1C2821', textPrimary: '#F0FDF4', textSecondary: '#86EFAC' }},
+            royal: { name: 'Royal', colors: { primary400: '#A855F7', primary600: '#9333EA', accent400: '#EC4899', accent600: '#DB2777', surfaceBg: '#1E1B23', surface: '#2D2433', textPrimary: '#FAF5FF', textSecondary: '#C4B5FD' }},
+            midnight: { name: 'Midnight', colors: { primary400: '#60A5FA', primary600: '#3B82F6', accent400: '#818CF8', accent600: '#6366F1', surfaceBg: '#020617', surface: '#0F172A', textPrimary: '#F8FAFC', textSecondary: '#94A3B8' }}
+        };
+
+        const DEFAULT_CONFIG = {
+            version: VERSION,
+            timestamp: Date.now(),
+            brandName: 'Claude UI',
+            brandDesc: 'A professional dark design system with blue and purple accents',
+            colors: PRESETS.claude.colors,
+            typography: { fontFamily: 'sans' },
+            ui: { borderRadius: '8px', spacing: 1 },
+            card: { padding: 32, shadow: 'md' },
+            table: { padding: 20, striped: false }
+        };
+
+        let config = JSON.parse(localStorage.getItem('ui-design-system-v2')) || DEFAULT_CONFIG;
+        let versions = JSON.parse(localStorage.getItem('ui-design-versions')) || [];
+        let currentVersionId = null;
+
+        function init() {
+            loadConfig();
+            setupEventListeners();
+            applyConfig();
+            loadPresets();
+            loadVersions();
+            showToast('UI Design System v2.0 loaded!');
+        }
+
+        function loadConfig() {
+            Object.keys(config.colors).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) input.value = config.colors[key];
+            });
+
+            document.getElementById('fontFamily').value = config.typography.fontFamily;
+            document.getElementById('borderRadius').value = config.ui.borderRadius;
+            document.getElementById('spacing').value = config.ui.spacing;
+            document.getElementById('spacingValue').textContent = config.ui.spacing;
+            document.getElementById('cardPadding').value = config.card.padding;
+            document.getElementById('cardShadow').value = config.card.shadow;
+            document.getElementById('tablePadding').value = config.table.padding;
+            document.getElementById('tableStriped').checked = config.table.striped;
+            document.getElementById('brandName').value = config.brandName;
+            document.getElementById('brandDesc').value = config.brandDesc;
+        }
+
+        function applyConfig() {
+            const root = document.documentElement;
+            Object.keys(config.colors).forEach(key => {
+                const cssKey = '--' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+                root.style.setProperty(cssKey, config.colors[key]);
+            });
+
+            Object.keys(config.colors).forEach(key => {
+                const hex = config.colors[key];
+                const valueEl = document.getElementById(key + 'Value');
+                const swatchEl = document.getElementById('swatch' + key.charAt(0).toUpperCase() + key.slice(1));
+                const hexEl = document.getElementById('hex' + key.charAt(0).toUpperCase() + key.slice(1));
+
+                if (valueEl) valueEl.textContent = hex;
+                if (swatchEl) swatchEl.style.backgroundColor = hex;
+                if (hexEl) hexEl.textContent = hex;
+            });
+
+            const fontFamilies = {
+                sans: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                serif: 'Georgia, serif',
+                mono: 'Monaco, monospace'
+            };
+            document.body.style.fontFamily = fontFamilies[config.typography.fontFamily];
+
+            const radius = config.ui.borderRadius;
+            document.querySelectorAll('.btn, .card, .table-container, .editor-section, .badge').forEach(el => {
+                el.style.borderRadius = radius;
+            });
+
+            document.querySelectorAll('.card').forEach(el => {
+                el.style.padding = config.card.padding + 'px';
+                const shadows = {
+                    none: 'none',
+                    sm: '0 1px 2px rgba(0,0,0,0.3)',
+                    md: '0 4px 6px rgba(0,0,0,0.3)',
+                    lg: '0 10px 15px rgba(0,0,0,0.5)'
+                };
+                el.style.boxShadow = shadows[config.card.shadow];
+            });
+
+            document.querySelectorAll('.table td, .table th').forEach(el => {
+                el.style.padding = config.table.padding + 'px';
+            });
+
+            if (config.table.striped) {
+                document.querySelectorAll('.table tbody tr:nth-child(even)').forEach(el => {
+                    el.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+                });
+            }
+
+            document.getElementById('navBrandName').textContent = config.brandName;
+            document.getElementById('previewTitle').textContent = config.brandName;
+            document.getElementById('previewSubtitle').textContent = config.brandDesc;
+        }
+
+        function saveAndApply() {
+            Object.keys(config.colors).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) config.colors[key] = input.value;
+            });
+
+            config.typography.fontFamily = document.getElementById('fontFamily').value;
+            config.ui.borderRadius = document.getElementById('borderRadius').value;
+            config.ui.spacing = parseFloat(document.getElementById('spacing').value);
+            config.card.padding = parseInt(document.getElementById('cardPadding').value);
+            config.card.shadow = document.getElementById('cardShadow').value;
+            config.table.padding = parseInt(document.getElementById('tablePadding').value);
+            config.table.striped = document.getElementById('tableStriped').checked;
+            config.brandName = document.getElementById('brandName').value;
+            config.brandDesc = document.getElementById('brandDesc').value;
+            config.timestamp = Date.now();
+
+            localStorage.setItem('ui-design-system-v2', JSON.stringify(config));
+            applyConfig();
+        }
+
+        function loadPresets() {
+            const container = document.getElementById('presetsContainer');
+            container.innerHTML = '';
+
+            Object.keys(PRESETS).forEach(key => {
+                const preset = PRESETS[key];
+                const card = document.createElement('div');
+                card.className = 'preset-card';
+                card.innerHTML = `
+                    <div class="preset-name">${preset.name}</div>
+                    <div class="preset-colors">
+                        <div class="preset-color" style="background-color: ${preset.colors.primary400}"></div>
+                        <div class="preset-color" style="background-color: ${preset.colors.accent400}"></div>
+                        <div class="preset-color" style="background-color: ${preset.colors.surface}"></div>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    config.colors = {...preset.colors};
+                    loadConfig();
+                    saveAndApply();
+                    showToast(`Applied ${preset.name} preset!`);
+                });
+                container.appendChild(card);
+            });
+        }
+
+        function saveVersion() {
+            const versionName = prompt('Enter version name:') || `Version ${versions.length + 1}`;
+            const version = {
+                id: Date.now(),
+                name: versionName,
+                timestamp: Date.now(),
+                config: JSON.parse(JSON.stringify(config))
+            };
+            versions.unshift(version);
+            localStorage.setItem('ui-design-versions', JSON.stringify(versions));
+            loadVersions();
+            showToast('Version saved!');
+        }
+
+        function loadVersions() {
+            const select = document.getElementById('versionSelect');
+            select.innerHTML = '<option value="">Current Version</option>';
+            versions.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v.id;
+                option.textContent = `${v.name} - ${new Date(v.timestamp).toLocaleString()}`;
+                select.appendChild(option);
+            });
+        }
+
+        function loadVersion(versionId) {
+            const version = versions.find(v => v.id === parseInt(versionId));
+            if (version) {
+                config = JSON.parse(JSON.stringify(version.config));
+                currentVersionId = versionId;
+                loadConfig();
+                applyConfig();
+                showToast(`Loaded: ${version.name}`);
+            }
+        }
+
+        function deleteVersion(versionId) {
+            if (confirm('Delete this version?')) {
+                versions = versions.filter(v => v.id !== versionId);
+                localStorage.setItem('ui-design-versions', JSON.stringify(versions));
+                loadVersions();
+                showToast('Version deleted');
+            }
+        }
+
+        function showVersionHistory() {
+            const modal = document.getElementById('versionModal');
+            const list = document.getElementById('versionList');
+            list.innerHTML = '';
+
+            if (versions.length === 0) {
+                list.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 32px;">No saved versions yet</div>';
+            } else {
+                versions.forEach(v => {
+                    const item = document.createElement('div');
+                    item.className = 'version-item';
+                    if (currentVersionId === v.id) item.classList.add('current');
+                    item.innerHTML = `
+                        <div class="version-header">
+                            <span class="version-number">${v.name}</span>
+                            <span class="version-timestamp">${new Date(v.timestamp).toLocaleString()}</span>
+                        </div>
+                        <div class="version-actions">
+                            <button class="version-btn version-btn-load" onclick="loadVersion(${v.id}); document.getElementById('versionModal').classList.remove('active');">Load</button>
+                            <button class="version-btn version-btn-delete" onclick="deleteVersion(${v.id}); showVersionHistory();">Delete</button>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+
+            modal.classList.add('active');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 3000);
+        }
+
+        function exportMarkdown() {
+            const md = `# ${config.brandName} Design System
+
+${config.brandDesc}
+
+## Colors
+Primary: ${config.colors.primary400}, ${config.colors.primary600}
+Accent: ${config.colors.accent400}, ${config.colors.accent600}
+
+## UI Config
+Border Radius: ${config.ui.borderRadius}
+Spacing: ${config.ui.spacing}x
+Card Padding: ${config.card.padding}px
+
+*Generated by UI Design System Generator v${VERSION}*`;
+            navigator.clipboard.writeText(md);
+            showToast('Copied to clipboard!');
+        }
+
+        function setupEventListeners() {
+            document.getElementById('btnShowPreview').addEventListener('click', () => {
+                document.getElementById('previewPanel').classList.add('active');
+                document.getElementById('editorPanel').classList.remove('active');
+                document.getElementById('btnShowPreview').classList.add('active');
+                document.getElementById('btnShowEditor').classList.remove('active');
+            });
+
+            document.getElementById('btnShowEditor').addEventListener('click', () => {
+                document.getElementById('editorPanel').classList.add('active');
+                document.getElementById('previewPanel').classList.remove('active');
+                document.getElementById('btnShowEditor').classList.add('active');
+                document.getElementById('btnShowPreview').classList.remove('active');
+            });
+
+            document.getElementById('btnSaveVersion').addEventListener('click', saveVersion);
+            document.getElementById('btnVersionHistory').addEventListener('click', showVersionHistory);
+            document.getElementById('versionSelect').addEventListener('change', (e) => {
+                if (e.target.value) loadVersion(e.target.value);
+                else {
+                    config = JSON.parse(localStorage.getItem('ui-design-system-v2')) || DEFAULT_CONFIG;
+                    currentVersionId = null;
+                    loadConfig();
+                    applyConfig();
+                }
+            });
+
+            document.getElementById('btnExport').addEventListener('click', exportMarkdown);
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('versionModal').classList.remove('active');
+            });
+
+            document.getElementById('versionModal').addEventListener('click', (e) => {
+                if (e.target.id === 'versionModal') e.target.classList.remove('active');
+            });
+
+            Object.keys(config.colors).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) input.addEventListener('input', saveAndApply);
+            });
+
+            ['fontFamily', 'borderRadius', 'spacing', 'cardPadding', 'cardShadow', 'tablePadding', 'tableStriped', 'brandName', 'brandDesc'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('input', saveAndApply);
+                    el.addEventListener('change', saveAndApply);
+                }
+            });
+
+            document.getElementById('spacing').addEventListener('input', (e) => {
+                document.getElementById('spacingValue').textContent = e.target.value;
+            });
+
+            document.querySelectorAll('.editable').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const editTarget = el.dataset.edit;
+                    if (editTarget) {
+                        showInsituEditor(editTarget, e.clientX, e.clientY);
+                    }
+                });
+            });
+
+            document.getElementById('insituClose').addEventListener('click', closeInsituEditor);
+            document.addEventListener('click', (e) => {
+                const editor = document.getElementById('insituEditor');
+                if (editor.classList.contains('active') && !editor.contains(e.target) && !e.target.classList.contains('editable')) {
+                    closeInsituEditor();
+                }
+            });
+        }
+
+        function showInsituEditor(field, x, y) {
+            const editor = document.getElementById('insituEditor');
+            const content = document.getElementById('insituContent');
+            const title = document.getElementById('insituTitle');
+
+            // Position the editor near the click
+            editor.style.left = Math.min(x + 10, window.innerWidth - 420) + 'px';
+            editor.style.top = Math.min(y + 10, window.innerHeight - 300) + 'px';
+
+            // Build content based on field type
+            content.innerHTML = '';
+
+            const fieldConfigs = {
+                brandName: {
+                    title: 'Brand Name',
+                    controls: [{type: 'text', id: 'brandName', label: 'Brand Name', value: config.brandName}]
+                },
+                brandDesc: {
+                    title: 'Description',
+                    controls: [{type: 'textarea', id: 'brandDesc', label: 'Description', value: config.brandDesc}]
+                },
+                primary400: {
+                    title: 'Primary Color',
+                    controls: [{type: 'color', id: 'primary400', label: 'Primary 400', value: config.colors.primary400}]
+                },
+                primary600: {
+                    title: 'Primary Color',
+                    controls: [{type: 'color', id: 'primary600', label: 'Primary 600', value: config.colors.primary600}]
+                },
+                accent400: {
+                    title: 'Accent Color',
+                    controls: [{type: 'color', id: 'accent400', label: 'Accent 400', value: config.colors.accent400}]
+                },
+                accent600: {
+                    title: 'Accent Color',
+                    controls: [{type: 'color', id: 'accent600', label: 'Accent 600', value: config.colors.accent600}]
+                },
+                cardPadding: {
+                    title: 'Card Settings',
+                    controls: [
+                        {type: 'number', id: 'cardPadding', label: 'Padding', value: config.card.padding, min: 12, max: 64, step: 4},
+                        {type: 'select', id: 'cardShadow', label: 'Shadow', value: config.card.shadow, options: [
+                            {value: 'none', label: 'None'},
+                            {value: 'sm', label: 'Small'},
+                            {value: 'md', label: 'Medium'},
+                            {value: 'lg', label: 'Large'}
+                        ]}
+                    ]
+                },
+                tablePadding: {
+                    title: 'Table Settings',
+                    controls: [
+                        {type: 'number', id: 'tablePadding', label: 'Cell Padding', value: config.table.padding, min: 8, max: 32, step: 4},
+                        {type: 'checkbox', id: 'tableStriped', label: 'Striped Rows', value: config.table.striped}
+                    ]
+                }
+            };
+
+            const fieldConfig = fieldConfigs[field];
+            if (!fieldConfig) return;
+
+            title.textContent = fieldConfig.title;
+
+            fieldConfig.controls.forEach(control => {
+                const controlDiv = document.createElement('div');
+                controlDiv.className = 'insitu-control';
+
+                const label = document.createElement('label');
+                label.className = 'insitu-label';
+                label.textContent = control.label;
+                controlDiv.appendChild(label);
+
+                if (control.type === 'color') {
+                    const colorDiv = document.createElement('div');
+                    colorDiv.className = 'insitu-color-input';
+
+                    const picker = document.createElement('input');
+                    picker.type = 'color';
+                    picker.className = 'insitu-color-picker';
+                    picker.id = 'insitu_' + control.id;
+                    picker.value = control.value;
+                    picker.addEventListener('input', (e) => {
+                        document.getElementById(control.id).value = e.target.value;
+                        saveAndApply();
+                        valueSpan.textContent = e.target.value;
+                    });
+
+                    const valueSpan = document.createElement('span');
+                    valueSpan.className = 'insitu-color-value';
+                    valueSpan.textContent = control.value;
+
+                    colorDiv.appendChild(picker);
+                    colorDiv.appendChild(valueSpan);
+                    controlDiv.appendChild(colorDiv);
+                } else if (control.type === 'textarea') {
+                    const textarea = document.createElement('textarea');
+                    textarea.className = 'insitu-textarea';
+                    textarea.id = 'insitu_' + control.id;
+                    textarea.value = control.value;
+                    textarea.addEventListener('input', (e) => {
+                        document.getElementById(control.id).value = e.target.value;
+                        saveAndApply();
+                    });
+                    controlDiv.appendChild(textarea);
+                } else if (control.type === 'select') {
+                    const select = document.createElement('select');
+                    select.className = 'insitu-select';
+                    select.id = 'insitu_' + control.id;
+                    control.options.forEach(opt => {
+                        const option = document.createElement('option');
+                        option.value = opt.value;
+                        option.textContent = opt.label;
+                        if (opt.value === control.value) option.selected = true;
+                        select.appendChild(option);
+                    });
+                    select.addEventListener('change', (e) => {
+                        document.getElementById(control.id).value = e.target.value;
+                        saveAndApply();
+                    });
+                    controlDiv.appendChild(select);
+                } else if (control.type === 'checkbox') {
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = 'insitu_' + control.id;
+                    checkbox.checked = control.value;
+                    checkbox.addEventListener('change', (e) => {
+                        document.getElementById(control.id).checked = e.target.checked;
+                        saveAndApply();
+                    });
+                    controlDiv.appendChild(checkbox);
+                } else if (control.type === 'number') {
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.className = 'insitu-input';
+                    input.id = 'insitu_' + control.id;
+                    input.value = control.value;
+                    if (control.min !== undefined) input.min = control.min;
+                    if (control.max !== undefined) input.max = control.max;
+                    if (control.step !== undefined) input.step = control.step;
+                    input.addEventListener('input', (e) => {
+                        document.getElementById(control.id).value = e.target.value;
+                        saveAndApply();
+                    });
+                    controlDiv.appendChild(input);
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'insitu-input';
+                    input.id = 'insitu_' + control.id;
+                    input.value = control.value;
+                    input.addEventListener('input', (e) => {
+                        document.getElementById(control.id).value = e.target.value;
+                        saveAndApply();
+                    });
+                    controlDiv.appendChild(input);
+                }
+
+                content.appendChild(controlDiv);
+            });
+
+            editor.classList.add('active');
+        }
+
+        function closeInsituEditor() {
+            document.getElementById('insituEditor').classList.remove('active');
+        }
+
+        init();
+    </script>
+</body>
+</html>
