@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Input Fields Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Fields - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .input-section {
+            margin-bottom: 32px;
+        }
+
+        .input-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 16px;
+        }
+
+        .control-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-field {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-with-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .unit-label {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker:hover {
+            border-color: var(--primary-400);
+        }
+
+        .color-text-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            width: 90px;
+            transition: all 0.2s;
+        }
+
+        .color-text-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            background: var(--surface);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .button-grid.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .button-grid.four-col {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .toggle-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Input Preview Styles */
+        .input-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .input-demo {
+            display: grid;
+            gap: 16px;
+        }
+
+        .demo-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field-label {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .field-label.required::after {
+            content: ' *';
+            color: var(--danger-400);
+        }
+
+        .field-label.floating {
+            position: absolute;
+            pointer-events: none;
+            transition: all 0.2s;
+            top: 14px;
+            left: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix,
+        .input-suffix {
+            position: absolute;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .input-prefix {
+            left: 14px;
+        }
+
+        .input-suffix {
+            right: 14px;
+        }
+
+        .preview-input,
+        .preview-textarea {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .preview-input::placeholder,
+        .preview-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .preview-input:focus,
+        .preview-textarea:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.15);
+        }
+
+        .preview-input.has-prefix {
+            padding-left: 40px;
+        }
+
+        .preview-input.has-suffix {
+            padding-right: 40px;
+        }
+
+        .preview-input.error {
+            border-color: var(--danger-400);
+        }
+
+        .preview-input.error:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+
+        .preview-input.success {
+            border-color: var(--success-400);
+        }
+
+        .preview-input.success:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        .preview-input:disabled,
+        .preview-textarea:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .helper-text.error {
+            color: var(--danger-400);
+        }
+
+        .helper-text.success {
+            color: var(--success-400);
+        }
+
+        .preview-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .preview-textarea.resize-none {
+            resize: none;
+        }
+
+        .preview-textarea.resize-horizontal {
+            resize: horizontal;
+        }
+
+        .preview-textarea.resize-both {
+            resize: both;
+        }
+
+        /* Input Sizes */
+        .input-sm {
+            padding: 8px 12px;
+            font-size: 13px;
+            border-radius: 6px;
+        }
+
+        .input-md {
+            padding: 12px 14px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .input-lg {
+            padding: 14px 16px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+
+        /* Form Layout Examples */
+        .form-row {
+            display: grid;
+            gap: 16px;
+        }
+
+        .form-row.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .form-row.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .label-inline {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .label-left {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: start;
+            gap: 16px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+
+            .header-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .main-container {
+                padding: 16px;
+                gap: 16px;
+            }
+
+            .preview-card {
+                padding: 20px;
+            }
+
+            .form-row.two-col,
+            .form-row.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .label-inline,
+            .label-left {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                right: 16px;
+                left: 16px;
+            }
+
+            .button-grid.three-col,
+            .button-grid.four-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Input Fields</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn" onclick="resetInputs()">Reset</button>
+                <button class="header-btn primary" onclick="exportInputs()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <!-- Background Colors -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">🎨</span>
+                    <span>Background Colors</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Default Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bg-default" class="color-picker" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="bg-default-text" value="#1E1E1E">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Focus Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bg-focus" class="color-picker" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="bg-focus-text" value="#1E1E1E">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Disabled Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bg-disabled" class="color-picker" value="#141414">
+                            <input type="text" class="color-text-input" id="bg-disabled-text" value="#141414">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Border Settings -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">⬜</span>
+                    <span>Border Settings</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="border-color" class="color-picker" value="#333333">
+                            <input type="text" class="color-text-input" id="border-color-text" value="#333333">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-width" class="input-field" value="1" min="0" max="5">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Radius</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-radius" class="input-field" value="8" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Style</label>
+                        <select id="border-style" class="select-input">
+                            <option value="solid">Solid</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="dotted">Dotted</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Focus State -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">🎯</span>
+                    <span>Focus State</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Focus Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="focus-border-color" class="color-picker" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="focus-border-color-text" value="#3B85FF">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Focus Ring Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="focus-ring-color" class="color-picker" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="focus-ring-color-text" value="#3B85FF">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Focus Ring Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="focus-ring-width" class="input-field" value="3" min="0" max="10">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Focus Ring Opacity</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="focus-ring-opacity" class="input-field" value="0.15" min="0" max="1" step="0.05">
+                            <span class="unit-label"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Spacing & Sizing -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">📏</span>
+                    <span>Spacing & Sizing</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="padding-v" class="input-field" value="12" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="padding-h" class="input-field" value="14" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="font-size" class="input-field" value="14" min="10" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Input Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="input-height" class="input-field" value="auto" min="0" max="100">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Typography -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">Aa</span>
+                    <span>Typography</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="text-color" class="color-picker" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="text-color-text" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Placeholder Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="placeholder-color" class="color-picker" value="#666666">
+                            <input type="text" class="color-text-input" id="placeholder-color-text" value="#666666">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Validation States -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">✓</span>
+                    <span>Validation States</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Error Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="error-color" class="color-picker" value="#EF4444">
+                            <input type="text" class="color-text-input" id="error-color-text" value="#EF4444">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Success Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="success-color" class="color-picker" value="#10B981">
+                            <input type="text" class="color-text-input" id="success-color-text" value="#10B981">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Disabled State -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">🚫</span>
+                    <span>Disabled State</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Disabled Opacity</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="disabled-opacity" class="input-field" value="0.5" min="0.1" max="1" step="0.1">
+                            <span class="unit-label"></span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Disabled Cursor</label>
+                        <select id="disabled-cursor" class="select-input">
+                            <option value="not-allowed">Not Allowed</option>
+                            <option value="default">Default</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Label Settings -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">🏷️</span>
+                    <span>Label Settings</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Label Position</label>
+                        <div class="button-grid four-col">
+                            <button class="toggle-btn active" data-group="label-position" data-value="top">Top</button>
+                            <button class="toggle-btn" data-group="label-position" data-value="left">Left</button>
+                            <button class="toggle-btn" data-group="label-position" data-value="inline">Inline</button>
+                            <button class="toggle-btn" data-group="label-position" data-value="floating">Float</button>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Label Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="label-font-size" class="input-field" value="14" min="10" max="20">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Label Font Weight</label>
+                        <select id="label-font-weight" class="select-input">
+                            <option value="400">400 - Regular</option>
+                            <option value="500" selected>500 - Medium</option>
+                            <option value="600">600 - Semibold</option>
+                            <option value="700">700 - Bold</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Label Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="label-color" class="color-picker" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="label-color-text" value="#FFFFFF">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Label Spacing</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="label-spacing" class="input-field" value="8" min="0" max="32">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Icon Settings -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">⭐</span>
+                    <span>Icon/Prefix/Suffix</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Icon Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="icon-color" class="color-picker" value="#A0A0A0">
+                            <input type="text" class="color-text-input" id="icon-color-text" value="#A0A0A0">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Icon Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="icon-size" class="input-field" value="16" min="12" max="32">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Helper Text -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">💬</span>
+                    <span>Helper Text</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Helper Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="helper-color" class="color-picker" value="#A0A0A0">
+                            <input type="text" class="color-text-input" id="helper-color-text" value="#A0A0A0">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Helper Text Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="helper-size" class="input-field" value="12" min="10" max="16">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Textarea Settings -->
+            <div class="input-section">
+                <div class="section-header">
+                    <span class="section-icon">📄</span>
+                    <span>Textarea Settings</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Default Rows</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="textarea-rows" class="input-field" value="4" min="2" max="10">
+                            <span class="unit-label"></span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Min Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="textarea-min-height" class="input-field" value="100" min="50" max="300">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Max Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="textarea-max-height" class="input-field" value="400" min="100" max="800">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Resize Option</label>
+                        <select id="textarea-resize" class="select-input">
+                            <option value="vertical" selected>Vertical</option>
+                            <option value="horizontal">Horizontal</option>
+                            <option value="both">Both</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <!-- Input Types -->
+            <div class="preview-card">
+                <h2 class="preview-header">Input Types</h2>
+                <div class="input-grid" id="input-types">
+                    <!-- Will be generated -->
+                </div>
+            </div>
+
+            <!-- Input States -->
+            <div class="preview-card">
+                <h2 class="preview-header">Input States</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Default State</div>
+                        <div class="form-field">
+                            <label class="field-label">Email Address</label>
+                            <input type="email" class="preview-input" id="state-default" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Focus State (Click to focus)</div>
+                        <div class="form-field">
+                            <label class="field-label">Password</label>
+                            <input type="password" class="preview-input" id="state-focus" placeholder="Enter password">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Error State</div>
+                        <div class="form-field">
+                            <label class="field-label">Username</label>
+                            <input type="text" class="preview-input error" id="state-error" value="invalid@user" placeholder="Enter username">
+                            <div class="helper-text error">This username is already taken</div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Success State</div>
+                        <div class="form-field">
+                            <label class="field-label">Email</label>
+                            <input type="email" class="preview-input success" id="state-success" value="valid@email.com" placeholder="Enter email">
+                            <div class="helper-text success">Email is available</div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Disabled State</div>
+                        <div class="form-field">
+                            <label class="field-label">Disabled Input</label>
+                            <input type="text" class="preview-input" id="state-disabled" value="Cannot edit" disabled>
+                            <div class="helper-text">This field is disabled</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Label Positions -->
+            <div class="preview-card">
+                <h2 class="preview-header">Label Positions</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Top Label</div>
+                        <div class="form-field">
+                            <label class="field-label">Full Name</label>
+                            <input type="text" class="preview-input" placeholder="John Doe">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Left Label</div>
+                        <div class="label-left">
+                            <label class="field-label">Email Address</label>
+                            <input type="email" class="preview-input" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Inline Label</div>
+                        <div class="label-inline">
+                            <label class="field-label">Age</label>
+                            <input type="number" class="preview-input" placeholder="25">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inputs with Icons -->
+            <div class="preview-card">
+                <h2 class="preview-header">Inputs with Icons/Prefix/Suffix</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Prefix Icon</div>
+                        <div class="form-field">
+                            <label class="field-label">Search</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix" id="prefix-icon-1">🔍</span>
+                                <input type="search" class="preview-input has-prefix" id="input-with-prefix" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Suffix Icon</div>
+                        <div class="form-field">
+                            <label class="field-label">Website</label>
+                            <div class="input-wrapper">
+                                <input type="url" class="preview-input has-suffix" id="input-with-suffix" placeholder="https://example.com">
+                                <span class="input-suffix" id="suffix-icon-1">🔗</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Email with Icon</div>
+                        <div class="form-field">
+                            <label class="field-label">Email</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix" id="prefix-icon-2">✉️</span>
+                                <input type="email" class="preview-input has-prefix" id="input-with-email-icon" placeholder="your@email.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Password with Toggle</div>
+                        <div class="form-field">
+                            <label class="field-label">Password</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix" id="prefix-icon-3">🔒</span>
+                                <input type="password" class="preview-input has-prefix has-suffix" id="input-with-both" placeholder="Enter password">
+                                <span class="input-suffix" id="suffix-icon-2">👁️</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Sizes -->
+            <div class="preview-card">
+                <h2 class="preview-header">Input Sizes</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Small</div>
+                        <div class="form-field">
+                            <label class="field-label">Small Input</label>
+                            <input type="text" class="preview-input input-sm" id="size-sm" placeholder="Small size">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Medium (Default)</div>
+                        <div class="form-field">
+                            <label class="field-label">Medium Input</label>
+                            <input type="text" class="preview-input input-md" id="size-md" placeholder="Medium size">
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Large</div>
+                        <div class="form-field">
+                            <label class="field-label">Large Input</label>
+                            <input type="text" class="preview-input input-lg" id="size-lg" placeholder="Large size">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Textarea Examples -->
+            <div class="preview-card">
+                <h2 class="preview-header">Textarea Examples</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Default Textarea</div>
+                        <div class="form-field">
+                            <label class="field-label">Description</label>
+                            <textarea class="preview-textarea" id="textarea-default" placeholder="Enter description..."></textarea>
+                            <div class="helper-text">Maximum 500 characters</div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Textarea with Content</div>
+                        <div class="form-field">
+                            <label class="field-label required">Message</label>
+                            <textarea class="preview-textarea" id="textarea-content">This is a sample message with some content already filled in. You can resize this textarea vertically to see the resize behavior in action.</textarea>
+                            <div class="helper-text">Required field</div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">No Resize Textarea</div>
+                        <div class="form-field">
+                            <label class="field-label">Fixed Size</label>
+                            <textarea class="preview-textarea resize-none" id="textarea-no-resize" placeholder="This textarea cannot be resized"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Layout Examples -->
+            <div class="preview-card">
+                <h2 class="preview-header">Form Layout Examples</h2>
+                <div class="input-grid">
+                    <div class="input-demo">
+                        <div class="demo-label">Two Column Layout</div>
+                        <div class="form-row two-col">
+                            <div class="form-field">
+                                <label class="field-label">First Name</label>
+                                <input type="text" class="preview-input" placeholder="John">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Last Name</label>
+                                <input type="text" class="preview-input" placeholder="Doe">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Three Column Layout</div>
+                        <div class="form-row three-col">
+                            <div class="form-field">
+                                <label class="field-label">City</label>
+                                <input type="text" class="preview-input" placeholder="New York">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">State</label>
+                                <input type="text" class="preview-input" placeholder="NY">
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">ZIP</label>
+                                <input type="text" class="preview-input" placeholder="10001">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-demo">
+                        <div class="demo-label">Full Form Example</div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label class="field-label required">Email</label>
+                                <input type="email" class="preview-input" placeholder="your@email.com">
+                                <div class="helper-text">We'll never share your email</div>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label required">Password</label>
+                                <input type="password" class="preview-input" placeholder="********">
+                                <div class="helper-text">At least 8 characters</div>
+                            </div>
+                            <div class="form-field">
+                                <label class="field-label">Phone Number</label>
+                                <input type="tel" class="preview-input" placeholder="+1 (555) 123-4567">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toast-message">Action completed</span>
+    </div>
+
+    <script>
+        // Configuration object
+        let config = {
+            labelPosition: 'top'
+        };
+
+        // Initialize all color inputs
+        function syncColorInputs(id) {
+            const picker = document.getElementById(id);
+            const text = document.getElementById(id + '-text');
+
+            picker.addEventListener('input', (e) => {
+                text.value = e.target.value.toUpperCase();
+                updatePreview();
+            });
+
+            text.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    picker.value = value;
+                    updatePreview();
+                }
+            });
+        }
+
+        // Initialize color inputs
+        [
+            'bg-default', 'bg-focus', 'bg-disabled',
+            'border-color', 'focus-border-color', 'focus-ring-color',
+            'text-color', 'placeholder-color',
+            'error-color', 'success-color',
+            'label-color', 'icon-color', 'helper-color'
+        ].forEach(id => syncColorInputs(id));
+
+        // Initialize all inputs
+        function initializeInputs() {
+            const inputs = document.querySelectorAll('.input-field, .select-input');
+            inputs.forEach(input => {
+                input.addEventListener('change', updatePreview);
+                input.addEventListener('input', updatePreview);
+            });
+
+            // Toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const group = this.dataset.group;
+                    const value = this.dataset.value;
+
+                    document.querySelectorAll(`.toggle-btn[data-group="${group}"]`).forEach(b => {
+                        b.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    config[group] = value;
+                    updatePreview();
+                });
+            });
+        }
+
+        // Apply input styles
+        function applyInputStyles(input, state = 'default') {
+            const bgDefault = document.getElementById('bg-default').value;
+            const bgFocus = document.getElementById('bg-focus').value;
+            const bgDisabled = document.getElementById('bg-disabled').value;
+            const borderColor = document.getElementById('border-color').value;
+            const borderWidth = document.getElementById('border-width').value;
+            const borderRadius = document.getElementById('border-radius').value;
+            const borderStyle = document.getElementById('border-style').value;
+            const focusBorderColor = document.getElementById('focus-border-color').value;
+            const focusRingColor = document.getElementById('focus-ring-color').value;
+            const focusRingWidth = document.getElementById('focus-ring-width').value;
+            const focusRingOpacity = document.getElementById('focus-ring-opacity').value;
+            const paddingV = document.getElementById('padding-v').value;
+            const paddingH = document.getElementById('padding-h').value;
+            const fontSize = document.getElementById('font-size').value;
+            const textColor = document.getElementById('text-color').value;
+            const placeholderColor = document.getElementById('placeholder-color').value;
+            const errorColor = document.getElementById('error-color').value;
+            const successColor = document.getElementById('success-color').value;
+            const disabledOpacity = document.getElementById('disabled-opacity').value;
+            const disabledCursor = document.getElementById('disabled-cursor').value;
+
+            // Base styles
+            input.style.backgroundColor = bgDefault;
+            input.style.border = `${borderWidth}px ${borderStyle} ${borderColor}`;
+            input.style.borderRadius = `${borderRadius}px`;
+            input.style.padding = `${paddingV}px ${paddingH}px`;
+            input.style.fontSize = `${fontSize}px`;
+            input.style.color = textColor;
+            input.style.transition = 'all 0.2s ease';
+
+            // State-specific styles
+            if (state === 'error') {
+                input.style.borderColor = errorColor;
+            } else if (state === 'success') {
+                input.style.borderColor = successColor;
+            }
+
+            // Disabled state
+            if (input.disabled) {
+                input.style.backgroundColor = bgDisabled;
+                input.style.opacity = disabledOpacity;
+                input.style.cursor = disabledCursor;
+            }
+
+            // Focus event handlers
+            input.onfocus = function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = bgFocus;
+                    if (!this.classList.contains('error') && !this.classList.contains('success')) {
+                        this.style.borderColor = focusBorderColor;
+                        this.style.boxShadow = `0 0 0 ${focusRingWidth}px rgba(${hexToRgb(focusRingColor)}, ${focusRingOpacity})`;
+                    } else if (this.classList.contains('error')) {
+                        this.style.boxShadow = `0 0 0 ${focusRingWidth}px rgba(${hexToRgb(errorColor)}, ${focusRingOpacity})`;
+                    } else if (this.classList.contains('success')) {
+                        this.style.boxShadow = `0 0 0 ${focusRingWidth}px rgba(${hexToRgb(successColor)}, ${focusRingOpacity})`;
+                    }
+                }
+            };
+
+            input.onblur = function() {
+                if (!this.disabled) {
+                    this.style.backgroundColor = bgDefault;
+                    if (!this.classList.contains('error') && !this.classList.contains('success')) {
+                        this.style.borderColor = borderColor;
+                    }
+                    this.style.boxShadow = 'none';
+                }
+            };
+
+            // Placeholder color (via CSS custom property)
+            input.style.setProperty('--placeholder-color', placeholderColor);
+        }
+
+        // Apply label styles
+        function applyLabelStyles(label) {
+            const labelFontSize = document.getElementById('label-font-size').value;
+            const labelFontWeight = document.getElementById('label-font-weight').value;
+            const labelColor = document.getElementById('label-color').value;
+
+            label.style.fontSize = `${labelFontSize}px`;
+            label.style.fontWeight = labelFontWeight;
+            label.style.color = labelColor;
+        }
+
+        // Apply icon styles
+        function applyIconStyles(icon) {
+            const iconColor = document.getElementById('icon-color').value;
+            const iconSize = document.getElementById('icon-size').value;
+
+            icon.style.color = iconColor;
+            icon.style.fontSize = `${iconSize}px`;
+        }
+
+        // Apply helper text styles
+        function applyHelperStyles(helper) {
+            const helperColor = document.getElementById('helper-color').value;
+            const helperSize = document.getElementById('helper-size').value;
+
+            if (!helper.classList.contains('error') && !helper.classList.contains('success')) {
+                helper.style.color = helperColor;
+            }
+            helper.style.fontSize = `${helperSize}px`;
+        }
+
+        // Helper function to convert hex to RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ?
+                `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` :
+                '59, 133, 255';
+        }
+
+        // Update preview
+        function updatePreview() {
+            updateInputTypes();
+            updateInputStates();
+            updateInputsWithIcons();
+            updateInputSizes();
+            updateTextareas();
+
+            // Update all labels
+            document.querySelectorAll('.field-label').forEach(label => {
+                applyLabelStyles(label);
+            });
+
+            // Update all icons
+            document.querySelectorAll('.input-prefix, .input-suffix').forEach(icon => {
+                applyIconStyles(icon);
+            });
+
+            // Update all helper texts
+            document.querySelectorAll('.helper-text').forEach(helper => {
+                applyHelperStyles(helper);
+            });
+
+            // Update placeholder color globally
+            updatePlaceholderColor();
+        }
+
+        // Update placeholder color
+        function updatePlaceholderColor() {
+            const placeholderColor = document.getElementById('placeholder-color').value;
+            const styleId = 'dynamic-placeholder-style';
+            let style = document.getElementById(styleId);
+
+            if (!style) {
+                style = document.createElement('style');
+                style.id = styleId;
+                document.head.appendChild(style);
+            }
+
+            style.textContent = `
+                .preview-input::placeholder,
+                .preview-textarea::placeholder {
+                    color: ${placeholderColor} !important;
+                }
+            `;
+        }
+
+        // Update input types
+        function updateInputTypes() {
+            const container = document.getElementById('input-types');
+            container.innerHTML = '';
+
+            const types = [
+                { type: 'text', label: 'Text Input', placeholder: 'Enter text' },
+                { type: 'email', label: 'Email Input', placeholder: 'email@example.com' },
+                { type: 'password', label: 'Password Input', placeholder: '********' },
+                { type: 'number', label: 'Number Input', placeholder: '123' },
+                { type: 'tel', label: 'Telephone Input', placeholder: '+1 (555) 123-4567' },
+                { type: 'url', label: 'URL Input', placeholder: 'https://example.com' },
+                { type: 'search', label: 'Search Input', placeholder: 'Search...' },
+                { type: 'date', label: 'Date Input', placeholder: '' },
+                { type: 'time', label: 'Time Input', placeholder: '' }
+            ];
+
+            types.forEach(inputType => {
+                const demo = document.createElement('div');
+                demo.className = 'input-demo';
+
+                const demoLabel = document.createElement('div');
+                demoLabel.className = 'demo-label';
+                demoLabel.textContent = inputType.label;
+
+                const formField = document.createElement('div');
+                formField.className = 'form-field';
+
+                const label = document.createElement('label');
+                label.className = 'field-label';
+                label.textContent = inputType.label;
+                applyLabelStyles(label);
+
+                const input = document.createElement('input');
+                input.type = inputType.type;
+                input.className = 'preview-input';
+                input.placeholder = inputType.placeholder;
+                applyInputStyles(input);
+
+                formField.appendChild(label);
+                formField.appendChild(input);
+                demo.appendChild(demoLabel);
+                demo.appendChild(formField);
+                container.appendChild(demo);
+            });
+        }
+
+        // Update input states
+        function updateInputStates() {
+            const stateDefault = document.getElementById('state-default');
+            const stateFocus = document.getElementById('state-focus');
+            const stateError = document.getElementById('state-error');
+            const stateSuccess = document.getElementById('state-success');
+            const stateDisabled = document.getElementById('state-disabled');
+
+            if (stateDefault) applyInputStyles(stateDefault);
+            if (stateFocus) applyInputStyles(stateFocus);
+            if (stateError) applyInputStyles(stateError, 'error');
+            if (stateSuccess) applyInputStyles(stateSuccess, 'success');
+            if (stateDisabled) applyInputStyles(stateDisabled);
+        }
+
+        // Update inputs with icons
+        function updateInputsWithIcons() {
+            const inputs = [
+                'input-with-prefix',
+                'input-with-suffix',
+                'input-with-email-icon',
+                'input-with-both'
+            ];
+
+            inputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    applyInputStyles(input);
+                }
+            });
+        }
+
+        // Update input sizes
+        function updateInputSizes() {
+            const sizeSm = document.getElementById('size-sm');
+            const sizeMd = document.getElementById('size-md');
+            const sizeLg = document.getElementById('size-lg');
+
+            if (sizeSm) applyInputStyles(sizeSm);
+            if (sizeMd) applyInputStyles(sizeMd);
+            if (sizeLg) applyInputStyles(sizeLg);
+        }
+
+        // Update textareas
+        function updateTextareas() {
+            const textareaDefault = document.getElementById('textarea-default');
+            const textareaContent = document.getElementById('textarea-content');
+            const textareaNoResize = document.getElementById('textarea-no-resize');
+
+            const textareaMinHeight = document.getElementById('textarea-min-height').value;
+            const textareaMaxHeight = document.getElementById('textarea-max-height').value;
+            const textareaResize = document.getElementById('textarea-resize').value;
+
+            [textareaDefault, textareaContent, textareaNoResize].forEach(textarea => {
+                if (textarea) {
+                    applyInputStyles(textarea);
+                    textarea.style.minHeight = `${textareaMinHeight}px`;
+                    textarea.style.maxHeight = `${textareaMaxHeight}px`;
+
+                    // Apply resize based on class
+                    if (textarea === textareaNoResize) {
+                        textarea.style.resize = 'none';
+                    } else {
+                        textarea.style.resize = textareaResize;
+                    }
+                }
+            });
+        }
+
+        // Export inputs CSS
+        function exportInputs() {
+            const css = generateCSS();
+            copyToClipboard(css);
+            showToast('Input CSS copied to clipboard!');
+        }
+
+        // Generate CSS
+        function generateCSS() {
+            const bgDefault = document.getElementById('bg-default').value;
+            const bgFocus = document.getElementById('bg-focus').value;
+            const bgDisabled = document.getElementById('bg-disabled').value;
+            const borderColor = document.getElementById('border-color').value;
+            const borderWidth = document.getElementById('border-width').value;
+            const borderRadius = document.getElementById('border-radius').value;
+            const borderStyle = document.getElementById('border-style').value;
+            const focusBorderColor = document.getElementById('focus-border-color').value;
+            const focusRingColor = document.getElementById('focus-ring-color').value;
+            const focusRingWidth = document.getElementById('focus-ring-width').value;
+            const focusRingOpacity = document.getElementById('focus-ring-opacity').value;
+            const paddingV = document.getElementById('padding-v').value;
+            const paddingH = document.getElementById('padding-h').value;
+            const fontSize = document.getElementById('font-size').value;
+            const textColor = document.getElementById('text-color').value;
+            const placeholderColor = document.getElementById('placeholder-color').value;
+            const errorColor = document.getElementById('error-color').value;
+            const successColor = document.getElementById('success-color').value;
+            const disabledOpacity = document.getElementById('disabled-opacity').value;
+            const labelFontSize = document.getElementById('label-font-size').value;
+            const labelFontWeight = document.getElementById('label-font-weight').value;
+            const labelColor = document.getElementById('label-color').value;
+            const helperColor = document.getElementById('helper-color').value;
+            const helperSize = document.getElementById('helper-size').value;
+            const textareaMinHeight = document.getElementById('textarea-min-height').value;
+
+            let css = ':root {\n';
+            css += `  /* Input Variables */\n`;
+            css += `  --input-bg: ${bgDefault};\n`;
+            css += `  --input-bg-focus: ${bgFocus};\n`;
+            css += `  --input-bg-disabled: ${bgDisabled};\n`;
+            css += `  --input-border-color: ${borderColor};\n`;
+            css += `  --input-border-width: ${borderWidth}px;\n`;
+            css += `  --input-border-radius: ${borderRadius}px;\n`;
+            css += `  --input-border-style: ${borderStyle};\n`;
+            css += `  --input-focus-border: ${focusBorderColor};\n`;
+            css += `  --input-focus-ring: ${focusRingColor};\n`;
+            css += `  --input-focus-ring-width: ${focusRingWidth}px;\n`;
+            css += `  --input-focus-ring-opacity: ${focusRingOpacity};\n`;
+            css += `  --input-padding-v: ${paddingV}px;\n`;
+            css += `  --input-padding-h: ${paddingH}px;\n`;
+            css += `  --input-font-size: ${fontSize}px;\n`;
+            css += `  --input-text-color: ${textColor};\n`;
+            css += `  --input-placeholder-color: ${placeholderColor};\n`;
+            css += `  --input-error-color: ${errorColor};\n`;
+            css += `  --input-success-color: ${successColor};\n`;
+            css += `  --input-disabled-opacity: ${disabledOpacity};\n`;
+            css += `  --label-font-size: ${labelFontSize}px;\n`;
+            css += `  --label-font-weight: ${labelFontWeight};\n`;
+            css += `  --label-color: ${labelColor};\n`;
+            css += `  --helper-color: ${helperColor};\n`;
+            css += `  --helper-size: ${helperSize}px;\n`;
+            css += `  --textarea-min-height: ${textareaMinHeight}px;\n`;
+            css += `}\n\n`;
+
+            css += '/* Base Input Styles */\n';
+            css += '.input {\n';
+            css += '  background-color: var(--input-bg);\n';
+            css += '  border: var(--input-border-width) var(--input-border-style) var(--input-border-color);\n';
+            css += '  border-radius: var(--input-border-radius);\n';
+            css += '  padding: var(--input-padding-v) var(--input-padding-h);\n';
+            css += '  font-size: var(--input-font-size);\n';
+            css += '  color: var(--input-text-color);\n';
+            css += '  font-family: inherit;\n';
+            css += '  transition: all 0.2s ease;\n';
+            css += '  width: 100%;\n';
+            css += '}\n\n';
+
+            css += '.input::placeholder {\n';
+            css += '  color: var(--input-placeholder-color);\n';
+            css += '}\n\n';
+
+            css += '.input:focus {\n';
+            css += '  outline: none;\n';
+            css += '  background-color: var(--input-bg-focus);\n';
+            css += '  border-color: var(--input-focus-border);\n';
+            css += `  box-shadow: 0 0 0 var(--input-focus-ring-width) rgba(${hexToRgb(focusRingColor)}, var(--input-focus-ring-opacity));\n`;
+            css += '}\n\n';
+
+            css += '.input:disabled {\n';
+            css += '  background-color: var(--input-bg-disabled);\n';
+            css += '  opacity: var(--input-disabled-opacity);\n';
+            css += '  cursor: not-allowed;\n';
+            css += '}\n\n';
+
+            css += '/* Input States */\n';
+            css += '.input.error {\n';
+            css += '  border-color: var(--input-error-color);\n';
+            css += '}\n\n';
+
+            css += '.input.error:focus {\n';
+            css += `  box-shadow: 0 0 0 var(--input-focus-ring-width) rgba(${hexToRgb(errorColor)}, var(--input-focus-ring-opacity));\n`;
+            css += '}\n\n';
+
+            css += '.input.success {\n';
+            css += '  border-color: var(--input-success-color);\n';
+            css += '}\n\n';
+
+            css += '.input.success:focus {\n';
+            css += `  box-shadow: 0 0 0 var(--input-focus-ring-width) rgba(${hexToRgb(successColor)}, var(--input-focus-ring-opacity));\n`;
+            css += '}\n\n';
+
+            css += '/* Label Styles */\n';
+            css += '.label {\n';
+            css += '  font-size: var(--label-font-size);\n';
+            css += '  font-weight: var(--label-font-weight);\n';
+            css += '  color: var(--label-color);\n';
+            css += '}\n\n';
+
+            css += '/* Helper Text */\n';
+            css += '.helper-text {\n';
+            css += '  font-size: var(--helper-size);\n';
+            css += '  color: var(--helper-color);\n';
+            css += '}\n\n';
+
+            css += '.helper-text.error {\n';
+            css += '  color: var(--input-error-color);\n';
+            css += '}\n\n';
+
+            css += '.helper-text.success {\n';
+            css += '  color: var(--input-success-color);\n';
+            css += '}\n\n';
+
+            css += '/* Textarea */\n';
+            css += 'textarea.input {\n';
+            css += '  min-height: var(--textarea-min-height);\n';
+            css += '  resize: vertical;\n';
+            css += '}\n';
+
+            return css;
+        }
+
+        // Save configuration
+        function saveConfig() {
+            const config = {
+                bgDefault: document.getElementById('bg-default').value,
+                bgFocus: document.getElementById('bg-focus').value,
+                bgDisabled: document.getElementById('bg-disabled').value,
+                borderColor: document.getElementById('border-color').value,
+                borderWidth: document.getElementById('border-width').value,
+                borderRadius: document.getElementById('border-radius').value,
+                borderStyle: document.getElementById('border-style').value,
+                focusBorderColor: document.getElementById('focus-border-color').value,
+                focusRingColor: document.getElementById('focus-ring-color').value,
+                focusRingWidth: document.getElementById('focus-ring-width').value,
+                focusRingOpacity: document.getElementById('focus-ring-opacity').value,
+                paddingV: document.getElementById('padding-v').value,
+                paddingH: document.getElementById('padding-h').value,
+                fontSize: document.getElementById('font-size').value,
+                inputHeight: document.getElementById('input-height').value,
+                textColor: document.getElementById('text-color').value,
+                placeholderColor: document.getElementById('placeholder-color').value,
+                errorColor: document.getElementById('error-color').value,
+                successColor: document.getElementById('success-color').value,
+                disabledOpacity: document.getElementById('disabled-opacity').value,
+                disabledCursor: document.getElementById('disabled-cursor').value,
+                labelPosition: document.querySelector('.toggle-btn[data-group="label-position"].active').dataset.value,
+                labelFontSize: document.getElementById('label-font-size').value,
+                labelFontWeight: document.getElementById('label-font-weight').value,
+                labelColor: document.getElementById('label-color').value,
+                labelSpacing: document.getElementById('label-spacing').value,
+                iconColor: document.getElementById('icon-color').value,
+                iconSize: document.getElementById('icon-size').value,
+                helperColor: document.getElementById('helper-color').value,
+                helperSize: document.getElementById('helper-size').value,
+                textareaRows: document.getElementById('textarea-rows').value,
+                textareaMinHeight: document.getElementById('textarea-min-height').value,
+                textareaMaxHeight: document.getElementById('textarea-max-height').value,
+                textareaResize: document.getElementById('textarea-resize').value
+            };
+
+            localStorage.setItem('uiDesignSystem_inputs', JSON.stringify(config));
+            showToast('Configuration saved successfully!');
+        }
+
+        // Load configuration
+        function loadConfig() {
+            const saved = localStorage.getItem('uiDesignSystem_inputs');
+            if (!saved) {
+                showToast('No saved configuration found');
+                return;
+            }
+
+            const config = JSON.parse(saved);
+
+            // Load all values
+            Object.keys(config).forEach(key => {
+                const element = document.getElementById(key.replace(/([A-Z])/g, '-$1').toLowerCase());
+                if (element) {
+                    element.value = config[key];
+                    // Sync color text inputs
+                    const textInput = document.getElementById(element.id + '-text');
+                    if (textInput) {
+                        textInput.value = config[key];
+                    }
+                }
+            });
+
+            // Load toggle buttons
+            if (config.labelPosition) {
+                document.querySelectorAll('.toggle-btn[data-group="label-position"]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.value === config.labelPosition);
+                });
+            }
+
+            updatePreview();
+            showToast('Configuration loaded successfully!');
+        }
+
+        // Reset to defaults
+        function resetInputs() {
+            if (!confirm('Reset all input settings to default values?')) return;
+
+            // Reset all color inputs
+            const colorDefaults = {
+                'bg-default': '#1E1E1E',
+                'bg-focus': '#1E1E1E',
+                'bg-disabled': '#141414',
+                'border-color': '#333333',
+                'focus-border-color': '#3B85FF',
+                'focus-ring-color': '#3B85FF',
+                'text-color': '#FFFFFF',
+                'placeholder-color': '#666666',
+                'error-color': '#EF4444',
+                'success-color': '#10B981',
+                'label-color': '#FFFFFF',
+                'icon-color': '#A0A0A0',
+                'helper-color': '#A0A0A0'
+            };
+
+            Object.keys(colorDefaults).forEach(id => {
+                document.getElementById(id).value = colorDefaults[id];
+                document.getElementById(id + '-text').value = colorDefaults[id];
+            });
+
+            // Reset other inputs
+            document.getElementById('border-width').value = 1;
+            document.getElementById('border-radius').value = 8;
+            document.getElementById('border-style').value = 'solid';
+            document.getElementById('focus-ring-width').value = 3;
+            document.getElementById('focus-ring-opacity').value = 0.15;
+            document.getElementById('padding-v').value = 12;
+            document.getElementById('padding-h').value = 14;
+            document.getElementById('font-size').value = 14;
+            document.getElementById('input-height').value = 'auto';
+            document.getElementById('disabled-opacity').value = 0.5;
+            document.getElementById('disabled-cursor').value = 'not-allowed';
+            document.getElementById('label-font-size').value = 14;
+            document.getElementById('label-font-weight').value = 500;
+            document.getElementById('label-spacing').value = 8;
+            document.getElementById('icon-size').value = 16;
+            document.getElementById('helper-size').value = 12;
+            document.getElementById('textarea-rows').value = 4;
+            document.getElementById('textarea-min-height').value = 100;
+            document.getElementById('textarea-max-height').value = 400;
+            document.getElementById('textarea-resize').value = 'vertical';
+
+            // Reset toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === 'top') {
+                    btn.classList.add('active');
+                }
+            });
+
+            updatePreview();
+            showToast('Inputs reset to defaults!');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+            messageEl.textContent = message;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                    exportInputs();
+                }
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeInputs();
+            updatePreview();
+            console.log('📝 Input Fields Module Loaded');
+            console.log('Shortcuts: Ctrl+S (Save), Ctrl+E (Export), ESC (Back)');
+        });
+    </script>
+</body>
+</html>

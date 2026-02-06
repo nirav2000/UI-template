@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Cards Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards & Containers - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .card-section {
+            margin-bottom: 32px;
+        }
+
+        .card-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 16px;
+        }
+
+        .control-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-field {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-with-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .unit-label {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker:hover {
+            border-color: var(--primary-400);
+        }
+
+        .color-text-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            flex: 1;
+            transition: all 0.2s;
+        }
+
+        .color-text-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            background: var(--surface);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-card-wrapper {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Card Preview Styles */
+        .preview-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-body {
+            padding: 24px;
+            flex: 1;
+        }
+
+        .card-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            line-height: 1.6;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-image.top {
+            border-radius: inherit;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .card-image.left {
+            height: 100%;
+            width: 40%;
+        }
+
+        .card-image.right {
+            height: 100%;
+            width: 40%;
+        }
+
+        .card-image.background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .card-with-image-horizontal {
+            flex-direction: row;
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: rgba(59, 133, 255, 0.15);
+            color: var(--primary-400);
+            margin-right: 8px;
+        }
+
+        .card-badge.success {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success-400);
+        }
+
+        .card-badge.warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--warning-400);
+        }
+
+        .card-badge.danger {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--danger-400);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .card-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .card-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .card-btn.primary {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        .card-btn.primary:hover {
+            background: var(--primary-600);
+        }
+
+        .cards-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .cards-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cards-grid.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Pricing Card Specific */
+        .pricing-card {
+            text-align: center;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 24px 0;
+        }
+
+        .pricing-currency {
+            font-size: 24px;
+            vertical-align: super;
+        }
+
+        .pricing-period {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            color: var(--success-400);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+
+            .cards-grid.three-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+
+            .header-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .cards-grid.two-col,
+            .cards-grid.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .card-with-image-horizontal {
+                flex-direction: column;
+            }
+
+            .card-image.left,
+            .card-image.right {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Cards & Containers</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="resetToDefaults()">Reset</button>
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn primary" onclick="exportCSS()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <aside class="editor-panel">
+            <!-- Card Properties -->
+            <section class="card-section">
+                <h3 class="section-header">
+                    <span class="section-icon">🎨</span>
+                    Card Properties
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Background Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="cardBgColor" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="cardBgColorText" value="#1E1E1E">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="borderWidth" value="1" min="0" max="10">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="borderColor" value="#333333">
+                            <input type="text" class="color-text-input" id="borderColorText" value="#333333">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Style</label>
+                        <select class="select-input" id="borderStyle">
+                            <option value="solid">Solid</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="dotted">Dotted</option>
+                            <option value="double">Double</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Radius</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="borderRadius" value="12" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Padding</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="cardPadding" value="24" min="0" max="100">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Shadow</label>
+                        <select class="select-input" id="cardShadow">
+                            <option value="none">None</option>
+                            <option value="sm">Small</option>
+                            <option value="md">Medium</option>
+                            <option value="lg">Large</option>
+                            <option value="xl">Extra Large</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Width</label>
+                        <select class="select-input" id="cardWidth">
+                            <option value="300px">Small (300px)</option>
+                            <option value="400px" selected>Medium (400px)</option>
+                            <option value="500px">Large (500px)</option>
+                            <option value="100%">Full Width</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Hover Effects -->
+            <section class="card-section">
+                <h3 class="section-header">
+                    <span class="section-icon">✨</span>
+                    Hover Effects
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Hover Transform (translateY)</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="hoverTransform" value="-4" min="-20" max="0">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Hover Shadow</label>
+                        <select class="select-input" id="hoverShadow">
+                            <option value="none">None</option>
+                            <option value="sm">Small</option>
+                            <option value="md">Medium</option>
+                            <option value="lg" selected>Large</option>
+                            <option value="xl">Extra Large</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Hover Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="hoverBorderColor" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="hoverBorderColorText" value="#3B85FF">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Hover Scale</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="hoverScale" value="1" min="0.9" max="1.1" step="0.01">
+                            <span class="unit-label">x</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Transition Duration</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="transitionDuration" value="0.3" min="0" max="2" step="0.1">
+                            <span class="unit-label">s</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Header/Footer -->
+            <section class="card-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📋</span>
+                    Header & Footer
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Header Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="headerBg" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="headerBgText" value="#1E1E1E">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Border Bottom Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="headerBorderWidth" value="1" min="0" max="10">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="headerBorderColor" value="#333333">
+                            <input type="text" class="color-text-input" id="headerBorderColorText" value="#333333">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Padding</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="headerPadding" value="20" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Footer Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="footerBg" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="footerBgText" value="#1E1E1E">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Footer Border Top Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="footerBorderWidth" value="1" min="0" max="10">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Footer Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="footerBorderColor" value="#333333">
+                            <input type="text" class="color-text-input" id="footerBorderColorText" value="#333333">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Footer Padding</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="footerPadding" value="16" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Content -->
+            <section class="card-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📝</span>
+                    Content
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Title Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="titleFontSize" value="20" min="12" max="48">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Title Font Weight</label>
+                        <select class="select-input" id="titleFontWeight">
+                            <option value="400">Regular (400)</option>
+                            <option value="500">Medium (500)</option>
+                            <option value="600" selected>Semi-Bold (600)</option>
+                            <option value="700">Bold (700)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Title Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="titleColor" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="titleColorText" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Text Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="textFontSize" value="14" min="10" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Text Line Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="textLineHeight" value="1.6" min="1" max="3" step="0.1">
+                            <span class="unit-label">x</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="textColor" value="#A0A0A0">
+                            <input type="text" class="color-text-input" id="textColorText" value="#A0A0A0">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Element Spacing (Gap)</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="elementGap" value="16" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Image -->
+            <section class="card-section">
+                <h3 class="section-header">
+                    <span class="section-icon">🖼️</span>
+                    Image
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Image Position</label>
+                        <select class="select-input" id="imagePosition">
+                            <option value="top" selected>Top</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="background">Background</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Image Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="imageHeight" value="200" min="100" max="500">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Image Border Radius</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="imageBorderRadius" value="0" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Object Fit</label>
+                        <select class="select-input" id="objectFit">
+                            <option value="cover" selected>Cover</option>
+                            <option value="contain">Contain</option>
+                            <option value="fill">Fill</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Preview Panel -->
+        <main class="preview-panel">
+            <!-- Basic Card -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Basic Card</h2>
+                <div class="preview-card" id="basicCard">
+                    <div class="card-body">
+                        <h3 class="card-title">Card Title</h3>
+                        <p class="card-text">This is a basic card component with customizable properties. Adjust the controls on the left to see changes in real-time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card with Header and Footer -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Card with Header & Footer</h2>
+                <div class="preview-card" id="headerFooterCard">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin-bottom: 0;">Card Header</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">This card includes a header and footer section. You can customize the background, border, and padding for each section independently.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span style="color: var(--text-secondary); font-size: 13px;">Card Footer</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cards with Images -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Cards with Images</h2>
+                <div class="cards-grid two-col">
+                    <div class="preview-card" id="imageTopCard">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=400&h=200&fit=crop" alt="Card" class="card-image top">
+                        <div class="card-body">
+                            <h3 class="card-title">Image Top</h3>
+                            <p class="card-text">Card with image positioned at the top.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card card-with-image-horizontal" id="imageLeftCard">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=200&h=300&fit=crop" alt="Card" class="card-image left">
+                        <div class="card-body">
+                            <h3 class="card-title">Image Left</h3>
+                            <p class="card-text">Card with image positioned on the left side.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Elevated Cards with Shadows -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Elevated Cards (Shadows)</h2>
+                <div class="cards-grid three-col">
+                    <div class="preview-card" style="box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                        <div class="card-body">
+                            <h3 class="card-title">Small Shadow</h3>
+                            <p class="card-text">Subtle elevation for minimal depth.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card" style="box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <div class="card-body">
+                            <h3 class="card-title">Medium Shadow</h3>
+                            <p class="card-text">Moderate elevation for standard cards.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card" style="box-shadow: 0 10px 15px rgba(0,0,0,0.2);">
+                        <div class="card-body">
+                            <h3 class="card-title">Large Shadow</h3>
+                            <p class="card-text">Strong elevation for important cards.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Cards -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Interactive Cards (Hover Effects)</h2>
+                <div class="cards-grid two-col">
+                    <div class="preview-card interactive-card">
+                        <div class="card-body">
+                            <h3 class="card-title">Hover to See Effect</h3>
+                            <p class="card-text">This card demonstrates the hover effects you've configured. Try hovering over it to see the transformation.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card interactive-card">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=400&h=150&fit=crop" alt="Card" class="card-image top">
+                        <div class="card-body">
+                            <h3 class="card-title">Interactive with Image</h3>
+                            <p class="card-text">Hover effects work great with images too.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cards with Actions -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Cards with Actions</h2>
+                <div class="cards-grid two-col">
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">Product Card</h3>
+                            <p class="card-text">This product is amazing and you should definitely consider purchasing it. Limited stock available!</p>
+                            <div class="card-actions">
+                                <button class="card-btn primary">Buy Now</button>
+                                <button class="card-btn">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">Article Card</h3>
+                            <p class="card-text">Read this interesting article about modern web design trends and best practices for 2024.</p>
+                            <div class="card-actions">
+                                <button class="card-btn">Read Article</button>
+                                <button class="card-btn">Share</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cards with Badges -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Cards with Badges</h2>
+                <div class="cards-grid two-col">
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <div style="margin-bottom: 12px;">
+                                <span class="card-badge">New</span>
+                                <span class="card-badge success">Featured</span>
+                            </div>
+                            <h3 class="card-title">Premium Feature</h3>
+                            <p class="card-text">This is our newest and most featured product with amazing capabilities.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <div style="margin-bottom: 12px;">
+                                <span class="card-badge warning">Limited</span>
+                                <span class="card-badge danger">Sale</span>
+                            </div>
+                            <h3 class="card-title">Special Offer</h3>
+                            <p class="card-text">Limited time sale on this exclusive item. Don't miss out on this opportunity!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card Sizes -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Card Sizes</h2>
+                <div class="cards-grid three-col">
+                    <div class="preview-card" style="width: 100%; max-width: 300px;">
+                        <div class="card-body">
+                            <h3 class="card-title">Small</h3>
+                            <p class="card-text">Compact card for tight spaces.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card" style="width: 100%; max-width: 400px;">
+                        <div class="card-body">
+                            <h3 class="card-title">Medium</h3>
+                            <p class="card-text">Standard card size for most use cases.</p>
+                        </div>
+                    </div>
+
+                    <div class="preview-card" style="width: 100%; max-width: 500px;">
+                        <div class="card-body">
+                            <h3 class="card-title">Large</h3>
+                            <p class="card-text">Spacious card for detailed content.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Cards -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Pricing Cards</h2>
+                <div class="cards-grid three-col">
+                    <div class="preview-card pricing-card">
+                        <div class="card-body">
+                            <span class="card-badge">Basic</span>
+                            <h3 class="card-title">Starter</h3>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">$</span>9
+                                <span class="pricing-period">/mo</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><span class="feature-icon">✓</span> 5 Projects</li>
+                                <li><span class="feature-icon">✓</span> 10GB Storage</li>
+                                <li><span class="feature-icon">✓</span> Basic Support</li>
+                            </ul>
+                            <button class="card-btn" style="width: 100%;">Choose Plan</button>
+                        </div>
+                    </div>
+
+                    <div class="preview-card pricing-card" style="border-color: var(--primary-400); position: relative;">
+                        <span class="card-badge" style="position: absolute; top: 16px; right: 16px;">Popular</span>
+                        <div class="card-body">
+                            <h3 class="card-title">Professional</h3>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">$</span>29
+                                <span class="pricing-period">/mo</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><span class="feature-icon">✓</span> Unlimited Projects</li>
+                                <li><span class="feature-icon">✓</span> 100GB Storage</li>
+                                <li><span class="feature-icon">✓</span> Priority Support</li>
+                                <li><span class="feature-icon">✓</span> Advanced Analytics</li>
+                            </ul>
+                            <button class="card-btn primary" style="width: 100%;">Choose Plan</button>
+                        </div>
+                    </div>
+
+                    <div class="preview-card pricing-card">
+                        <div class="card-body">
+                            <span class="card-badge success">Enterprise</span>
+                            <h3 class="card-title">Business</h3>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">$</span>99
+                                <span class="pricing-period">/mo</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><span class="feature-icon">✓</span> Unlimited Everything</li>
+                                <li><span class="feature-icon">✓</span> 1TB Storage</li>
+                                <li><span class="feature-icon">✓</span> 24/7 Support</li>
+                                <li><span class="feature-icon">✓</span> Custom Integration</li>
+                                <li><span class="feature-icon">✓</span> Dedicated Manager</li>
+                            </ul>
+                            <button class="card-btn" style="width: 100%;">Contact Sales</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Horizontal Card -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Horizontal Card</h2>
+                <div class="preview-card card-with-image-horizontal" style="flex-direction: row;">
+                    <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=300&h=250&fit=crop" alt="Card" class="card-image left">
+                    <div class="card-body">
+                        <h3 class="card-title">Horizontal Layout</h3>
+                        <p class="card-text">This card uses a horizontal layout with the image on the left and content on the right. Perfect for list views and detailed displays.</p>
+                        <div class="card-actions">
+                            <button class="card-btn primary">View Details</button>
+                            <button class="card-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card Grid Layouts -->
+            <section class="preview-card-wrapper">
+                <h2 class="preview-header">Card Grid Layouts</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">
+                    Demonstrating responsive grid layouts with 2 and 3 columns
+                </p>
+
+                <div class="cards-grid two-col" style="margin-bottom: 32px;">
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">2-Column Grid 1</h3>
+                            <p class="card-text">Two column layout is perfect for medium-width content.</p>
+                        </div>
+                    </div>
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">2-Column Grid 2</h3>
+                            <p class="card-text">Responsive and adapts to different screen sizes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards-grid three-col">
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">3-Column Grid 1</h3>
+                            <p class="card-text">Three columns for compact displays.</p>
+                        </div>
+                    </div>
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">3-Column Grid 2</h3>
+                            <p class="card-text">Great for product galleries.</p>
+                        </div>
+                    </div>
+                    <div class="preview-card">
+                        <div class="card-body">
+                            <h3 class="card-title">3-Column Grid 3</h3>
+                            <p class="card-text">Automatically responsive.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Configuration saved!</span>
+    </div>
+
+    <script>
+        // Default Configuration
+        const defaultConfig = {
+            cardBgColor: '#1E1E1E',
+            borderWidth: 1,
+            borderColor: '#333333',
+            borderStyle: 'solid',
+            borderRadius: 12,
+            cardPadding: 24,
+            cardShadow: 'none',
+            cardWidth: '400px',
+            hoverTransform: -4,
+            hoverShadow: 'lg',
+            hoverBorderColor: '#3B85FF',
+            hoverScale: 1,
+            transitionDuration: 0.3,
+            headerBg: '#1E1E1E',
+            headerBorderWidth: 1,
+            headerBorderColor: '#333333',
+            headerPadding: 20,
+            footerBg: '#1E1E1E',
+            footerBorderWidth: 1,
+            footerBorderColor: '#333333',
+            footerPadding: 16,
+            titleFontSize: 20,
+            titleFontWeight: '600',
+            titleColor: '#FFFFFF',
+            textFontSize: 14,
+            textLineHeight: 1.6,
+            textColor: '#A0A0A0',
+            elementGap: 16,
+            imagePosition: 'top',
+            imageHeight: 200,
+            imageBorderRadius: 0,
+            objectFit: 'cover'
+        };
+
+        // Shadow values
+        const shadowValues = {
+            none: 'none',
+            sm: '0 1px 2px rgba(0, 0, 0, 0.1)',
+            md: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            lg: '0 10px 15px rgba(0, 0, 0, 0.2)',
+            xl: '0 20px 25px rgba(0, 0, 0, 0.3)'
+        };
+
+        // Initialize color pickers sync
+        function setupColorSync(pickerId, textId) {
+            const picker = document.getElementById(pickerId);
+            const text = document.getElementById(textId);
+
+            picker.addEventListener('input', (e) => {
+                text.value = e.target.value;
+                updateCards();
+            });
+
+            text.addEventListener('input', (e) => {
+                if (/^#[0-9A-F]{6}$/i.test(e.target.value)) {
+                    picker.value = e.target.value;
+                    updateCards();
+                }
+            });
+        }
+
+        // Setup all color syncs
+        setupColorSync('cardBgColor', 'cardBgColorText');
+        setupColorSync('borderColor', 'borderColorText');
+        setupColorSync('hoverBorderColor', 'hoverBorderColorText');
+        setupColorSync('headerBg', 'headerBgText');
+        setupColorSync('headerBorderColor', 'headerBorderColorText');
+        setupColorSync('footerBg', 'footerBgText');
+        setupColorSync('footerBorderColor', 'footerBorderColorText');
+        setupColorSync('titleColor', 'titleColorText');
+        setupColorSync('textColor', 'textColorText');
+
+        // Add event listeners to all controls
+        document.querySelectorAll('.input-field, .select-input, .color-picker').forEach(element => {
+            element.addEventListener('input', updateCards);
+        });
+
+        function updateCards() {
+            const config = {
+                cardBgColor: document.getElementById('cardBgColor').value,
+                borderWidth: document.getElementById('borderWidth').value,
+                borderColor: document.getElementById('borderColor').value,
+                borderStyle: document.getElementById('borderStyle').value,
+                borderRadius: document.getElementById('borderRadius').value,
+                cardPadding: document.getElementById('cardPadding').value,
+                cardShadow: document.getElementById('cardShadow').value,
+                cardWidth: document.getElementById('cardWidth').value,
+                hoverTransform: document.getElementById('hoverTransform').value,
+                hoverShadow: document.getElementById('hoverShadow').value,
+                hoverBorderColor: document.getElementById('hoverBorderColor').value,
+                hoverScale: document.getElementById('hoverScale').value,
+                transitionDuration: document.getElementById('transitionDuration').value,
+                headerBg: document.getElementById('headerBg').value,
+                headerBorderWidth: document.getElementById('headerBorderWidth').value,
+                headerBorderColor: document.getElementById('headerBorderColor').value,
+                headerPadding: document.getElementById('headerPadding').value,
+                footerBg: document.getElementById('footerBg').value,
+                footerBorderWidth: document.getElementById('footerBorderWidth').value,
+                footerBorderColor: document.getElementById('footerBorderColor').value,
+                footerPadding: document.getElementById('footerPadding').value,
+                titleFontSize: document.getElementById('titleFontSize').value,
+                titleFontWeight: document.getElementById('titleFontWeight').value,
+                titleColor: document.getElementById('titleColor').value,
+                textFontSize: document.getElementById('textFontSize').value,
+                textLineHeight: document.getElementById('textLineHeight').value,
+                textColor: document.getElementById('textColor').value,
+                elementGap: document.getElementById('elementGap').value,
+                imagePosition: document.getElementById('imagePosition').value,
+                imageHeight: document.getElementById('imageHeight').value,
+                imageBorderRadius: document.getElementById('imageBorderRadius').value,
+                objectFit: document.getElementById('objectFit').value
+            };
+
+            // Apply styles to all preview cards
+            const cards = document.querySelectorAll('.preview-card');
+            cards.forEach(card => {
+                card.style.backgroundColor = config.cardBgColor;
+                card.style.border = `${config.borderWidth}px ${config.borderStyle} ${config.borderColor}`;
+                card.style.borderRadius = `${config.borderRadius}px`;
+                card.style.boxShadow = shadowValues[config.cardShadow];
+                card.style.transition = `all ${config.transitionDuration}s cubic-bezier(0.4, 0, 0.2, 1)`;
+
+                // Apply to card body
+                const body = card.querySelector('.card-body');
+                if (body) {
+                    body.style.padding = `${config.cardPadding}px`;
+                }
+            });
+
+            // Apply hover effects to interactive cards
+            const style = document.getElementById('dynamicStyles') || document.createElement('style');
+            style.id = 'dynamicStyles';
+            style.textContent = `
+                .interactive-card:hover {
+                    transform: translateY(${config.hoverTransform}px) scale(${config.hoverScale}) !important;
+                    box-shadow: ${shadowValues[config.hoverShadow]} !important;
+                    border-color: ${config.hoverBorderColor} !important;
+                }
+                .card-title {
+                    font-size: ${config.titleFontSize}px !important;
+                    font-weight: ${config.titleFontWeight} !important;
+                    color: ${config.titleColor} !important;
+                    margin-bottom: ${config.elementGap}px !important;
+                }
+                .card-text {
+                    font-size: ${config.textFontSize}px !important;
+                    line-height: ${config.textLineHeight} !important;
+                    color: ${config.textColor} !important;
+                }
+                .card-image {
+                    height: ${config.imageHeight}px !important;
+                    border-radius: ${config.imageBorderRadius}px !important;
+                    object-fit: ${config.objectFit} !important;
+                }
+            `;
+            if (!document.getElementById('dynamicStyles')) {
+                document.head.appendChild(style);
+            }
+
+            // Apply header/footer styles
+            document.querySelectorAll('.card-header').forEach(header => {
+                header.style.backgroundColor = config.headerBg;
+                header.style.borderBottom = `${config.headerBorderWidth}px solid ${config.headerBorderColor}`;
+                header.style.padding = `${config.headerPadding}px 24px`;
+            });
+
+            document.querySelectorAll('.card-footer').forEach(footer => {
+                footer.style.backgroundColor = config.footerBg;
+                footer.style.borderTop = `${config.footerBorderWidth}px solid ${config.footerBorderColor}`;
+                footer.style.padding = `${config.footerPadding}px 24px`;
+            });
+        }
+
+        function resetToDefaults() {
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = defaultConfig[key];
+                    // Sync color text inputs
+                    const textElement = document.getElementById(key + 'Text');
+                    if (textElement) {
+                        textElement.value = defaultConfig[key];
+                    }
+                }
+            });
+            updateCards();
+            showToast('Reset to default values');
+        }
+
+        function saveConfig() {
+            const config = {};
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    config[key] = element.value;
+                }
+            });
+            localStorage.setItem('cardConfig', JSON.stringify(config));
+            showToast('Configuration saved!');
+        }
+
+        function loadConfig() {
+            const saved = localStorage.getItem('cardConfig');
+            if (saved) {
+                const config = JSON.parse(saved);
+                Object.keys(config).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = config[key];
+                        // Sync color text inputs
+                        const textElement = document.getElementById(key + 'Text');
+                        if (textElement) {
+                            textElement.value = config[key];
+                        }
+                    }
+                });
+                updateCards();
+                showToast('Configuration loaded!');
+            } else {
+                showToast('No saved configuration found');
+            }
+        }
+
+        function exportCSS() {
+            const config = {};
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    config[key] = element.value;
+                }
+            });
+
+            const css = `/* Card Component Styles - Generated by UI Design System v3.0 */
+
+.card {
+    background-color: ${config.cardBgColor};
+    border: ${config.borderWidth}px ${config.borderStyle} ${config.borderColor};
+    border-radius: ${config.borderRadius}px;
+    box-shadow: ${shadowValues[config.cardShadow]};
+    transition: all ${config.transitionDuration}s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: ${config.cardWidth};
+}
+
+.card:hover {
+    transform: translateY(${config.hoverTransform}px) scale(${config.hoverScale});
+    box-shadow: ${shadowValues[config.hoverShadow]};
+    border-color: ${config.hoverBorderColor};
+}
+
+.card-header {
+    background-color: ${config.headerBg};
+    border-bottom: ${config.headerBorderWidth}px solid ${config.headerBorderColor};
+    padding: ${config.headerPadding}px 24px;
+}
+
+.card-body {
+    padding: ${config.cardPadding}px;
+    flex: 1;
+}
+
+.card-footer {
+    background-color: ${config.footerBg};
+    border-top: ${config.footerBorderWidth}px solid ${config.footerBorderColor};
+    padding: ${config.footerPadding}px 24px;
+}
+
+.card-title {
+    font-size: ${config.titleFontSize}px;
+    font-weight: ${config.titleFontWeight};
+    color: ${config.titleColor};
+    margin-bottom: ${config.elementGap}px;
+}
+
+.card-text {
+    font-size: ${config.textFontSize}px;
+    line-height: ${config.textLineHeight};
+    color: ${config.textColor};
+}
+
+.card-image {
+    width: 100%;
+    height: ${config.imageHeight}px;
+    object-fit: ${config.objectFit};
+    border-radius: ${config.imageBorderRadius}px;
+}
+
+.card-image.top {
+    border-radius: ${config.borderRadius}px ${config.borderRadius}px 0 0;
+}
+
+/* Card Grid Layouts */
+.cards-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.cards-grid.two-col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cards-grid.three-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-grid.two-col,
+    .cards-grid.three-col {
+        grid-template-columns: 1fr;
+    }
+}`;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(css).then(() => {
+                showToast('CSS copied to clipboard!');
+            }).catch(() => {
+                // Fallback: show in alert
+                alert('CSS Code:\n\n' + css);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                } else if (e.key === 'e') {
+                    e.preventDefault();
+                    exportCSS();
+                }
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Initialize on load
+        updateCards();
+
+        // Try to load saved config
+        const saved = localStorage.getItem('cardConfig');
+        if (saved) {
+            loadConfig();
+        }
+
+        console.log('🎨 Cards & Containers - UI Design System v3.0');
+        console.log('Keyboard Shortcuts:');
+        console.log('  Ctrl/Cmd + S: Save Configuration');
+        console.log('  Ctrl/Cmd + E: Export CSS');
+        console.log('  Escape: Back to Home');
+    </script>
+</body>
+</html>

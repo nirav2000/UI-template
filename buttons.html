@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Buttons Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttons - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .button-section {
+            margin-bottom: 32px;
+        }
+
+        .button-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 16px;
+        }
+
+        .control-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-field {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-with-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .unit-label {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker:hover {
+            border-color: var(--primary-400);
+        }
+
+        .color-text-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            width: 90px;
+            transition: all 0.2s;
+        }
+
+        .color-text-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            background: var(--surface);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Button Preview Styles */
+        .button-variants-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .variant-row {
+            display: grid;
+            gap: 12px;
+        }
+
+        .variant-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buttons-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .preview-btn {
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .preview-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        /* Button Sizes */
+        .btn-xs {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .btn-md {
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .btn-lg {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+
+        .btn-xl {
+            padding: 16px 32px;
+            font-size: 18px;
+            border-radius: 12px;
+        }
+
+        /* Loading Animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        /* Button Groups */
+        .button-group {
+            display: inline-flex;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .button-group .preview-btn {
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .button-group .preview-btn:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .button-group .preview-btn:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .button-group .preview-btn:not(:last-child) {
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Full Width Button */
+        .btn-full {
+            width: 100%;
+        }
+
+        /* Icon Styles */
+        .btn-icon {
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        .btn-icon-only {
+            aspect-ratio: 1;
+            padding: 10px;
+        }
+
+        /* State Labels */
+        .state-label {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .states-demo {
+            display: grid;
+            gap: 16px;
+        }
+
+        .state-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Collapsible Section */
+        .collapsible-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 12px;
+            background: var(--surface-elevated);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .collapsible-header:hover {
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.open {
+            max-height: 2000px;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+
+            .header-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .main-container {
+                padding: 16px;
+                gap: 16px;
+            }
+
+            .preview-card {
+                padding: 20px;
+            }
+
+            .buttons-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .preview-btn {
+                width: 100%;
+            }
+
+            .toast {
+                right: 16px;
+                left: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Buttons</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn" onclick="resetButtons()">Reset</button>
+                <button class="header-btn primary" onclick="exportButtons()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <!-- Button Variants -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">🎨</span>
+                    <span>Button Variants</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Primary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-color" class="color-picker" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="primary-color-text" value="#3B85FF">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Secondary Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="secondary-color" class="color-picker" value="#6B7280">
+                            <input type="text" class="color-text-input" id="secondary-color-text" value="#6B7280">
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Danger Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="danger-color" class="color-picker" value="#EF4444">
+                            <input type="text" class="color-text-input" id="danger-color-text" value="#EF4444">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Button Sizes -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">📏</span>
+                    <span>Button Sizes</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">XS - Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="size-xs-v" class="input-field" value="6" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="size-xs-h" class="input-field" value="12" min="0" max="100">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">SM - Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="size-sm-v" class="input-field" value="8" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="size-sm-h" class="input-field" value="16" min="0" max="100">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">MD - Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="size-md-v" class="input-field" value="10" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="size-md-h" class="input-field" value="20" min="0" max="100">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">LG - Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="size-lg-v" class="input-field" value="12" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="size-lg-h" class="input-field" value="24" min="0" max="100">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">XL - Padding (V × H)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="input-with-unit">
+                                <input type="number" id="size-xl-v" class="input-field" value="16" min="0" max="50">
+                                <span class="unit-label">px</span>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="size-xl-h" class="input-field" value="32" min="0" max="100">
+                                <span class="unit-label">px</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Typography -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">Aa</span>
+                    <span>Typography</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Font Size (XS/SM/MD)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="font-size-sm" class="input-field" value="14" min="10" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Font Size (LG/XL)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="font-size-lg" class="input-field" value="16" min="12" max="28">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Font Weight</label>
+                        <select id="font-weight" class="select-input">
+                            <option value="400">400 - Regular</option>
+                            <option value="500" selected>500 - Medium</option>
+                            <option value="600">600 - Semibold</option>
+                            <option value="700">700 - Bold</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Border & Radius -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">⬜</span>
+                    <span>Border & Radius</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Border Radius (XS/SM)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-radius-sm" class="input-field" value="6" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Radius (MD)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-radius-md" class="input-field" value="8" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Radius (LG/XL)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-radius-lg" class="input-field" value="10" min="0" max="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Border Width (Outline)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="border-width" class="input-field" value="2" min="1" max="5">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Shadows -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">🌑</span>
+                    <span>Shadows</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Shadow Style</label>
+                        <select id="shadow-style" class="select-input">
+                            <option value="none">None</option>
+                            <option value="sm" selected>Small</option>
+                            <option value="md">Medium</option>
+                            <option value="lg">Large</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Hover Shadow</label>
+                        <select id="hover-shadow" class="select-input">
+                            <option value="none">None</option>
+                            <option value="sm">Small</option>
+                            <option value="md" selected>Medium</option>
+                            <option value="lg">Large</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- States -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">🎭</span>
+                    <span>States & Effects</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Hover Brightness</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="hover-brightness" class="input-field" value="110" min="100" max="150">
+                            <span class="unit-label">%</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Active Scale</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="active-scale" class="input-field" value="0.98" min="0.8" max="1" step="0.01">
+                            <span class="unit-label">x</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Disabled Opacity</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="disabled-opacity" class="input-field" value="0.5" min="0.1" max="1" step="0.1">
+                            <span class="unit-label"></span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Transition Duration</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="transition-duration" class="input-field" value="200" min="0" max="1000" step="50">
+                            <span class="unit-label">ms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Icon Settings -->
+            <div class="button-section">
+                <div class="section-header">
+                    <span class="section-icon">⭐</span>
+                    <span>Icon Settings</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Icon Position</label>
+                        <div class="button-grid">
+                            <button class="toggle-btn active" data-group="icon-position" data-value="left">Left</button>
+                            <button class="toggle-btn" data-group="icon-position" data-value="right">Right</button>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Icon Spacing</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="icon-spacing" class="input-field" value="8" min="0" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <!-- Button Variants -->
+            <div class="preview-card">
+                <h2 class="preview-header">Button Variants</h2>
+                <div class="button-variants-grid" id="button-variants">
+                    <!-- Variants will be generated here -->
+                </div>
+            </div>
+
+            <!-- Button Sizes -->
+            <div class="preview-card">
+                <h2 class="preview-header">Button Sizes</h2>
+                <div class="button-variants-grid" id="button-sizes">
+                    <!-- Sizes will be generated here -->
+                </div>
+            </div>
+
+            <!-- Button States -->
+            <div class="preview-card">
+                <h2 class="preview-header">Button States</h2>
+                <div class="states-demo">
+                    <div class="state-item">
+                        <div class="state-label">Default State</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="state-default">Default</button>
+                        </div>
+                    </div>
+                    <div class="state-item">
+                        <div class="state-label">Hover State (Hover over button)</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="state-hover">Hover Me</button>
+                        </div>
+                    </div>
+                    <div class="state-item">
+                        <div class="state-label">Active State (Click and hold)</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="state-active">Active</button>
+                        </div>
+                    </div>
+                    <div class="state-item">
+                        <div class="state-label">Disabled State</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="state-disabled" disabled>Disabled</button>
+                        </div>
+                    </div>
+                    <div class="state-item">
+                        <div class="state-label">Loading State</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="state-loading">
+                                <span class="loading-spinner"></span>
+                                <span>Loading...</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons with Icons -->
+            <div class="preview-card">
+                <h2 class="preview-header">Buttons with Icons</h2>
+                <div class="button-variants-grid">
+                    <div class="variant-row">
+                        <div class="variant-label">Icon Left</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="icon-left-btn">
+                                <span class="btn-icon">→</span>
+                                <span>Next</span>
+                            </button>
+                            <button class="preview-btn" id="icon-left-btn-2">
+                                <span class="btn-icon">+</span>
+                                <span>Add Item</span>
+                            </button>
+                            <button class="preview-btn" id="icon-left-btn-3">
+                                <span class="btn-icon">✓</span>
+                                <span>Save</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="variant-row">
+                        <div class="variant-label">Icon Right</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn" id="icon-right-btn">
+                                <span>Previous</span>
+                                <span class="btn-icon">←</span>
+                            </button>
+                            <button class="preview-btn" id="icon-right-btn-2">
+                                <span>Download</span>
+                                <span class="btn-icon">↓</span>
+                            </button>
+                            <button class="preview-btn" id="icon-right-btn-3">
+                                <span>External</span>
+                                <span class="btn-icon">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="variant-row">
+                        <div class="variant-label">Icon Only</div>
+                        <div class="buttons-row">
+                            <button class="preview-btn btn-icon-only" id="icon-only-1">
+                                <span class="btn-icon">×</span>
+                            </button>
+                            <button class="preview-btn btn-icon-only" id="icon-only-2">
+                                <span class="btn-icon">⚙</span>
+                            </button>
+                            <button class="preview-btn btn-icon-only" id="icon-only-3">
+                                <span class="btn-icon">♥</span>
+                            </button>
+                            <button class="preview-btn btn-icon-only" id="icon-only-4">
+                                <span class="btn-icon">★</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Groups -->
+            <div class="preview-card">
+                <h2 class="preview-header">Button Groups</h2>
+                <div class="button-variants-grid">
+                    <div class="variant-row">
+                        <div class="variant-label">Horizontal Group</div>
+                        <div class="buttons-row">
+                            <div class="button-group" id="button-group-1">
+                                <!-- Will be populated -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="variant-row">
+                        <div class="variant-label">Icon Group</div>
+                        <div class="buttons-row">
+                            <div class="button-group" id="button-group-2">
+                                <!-- Will be populated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Width Buttons -->
+            <div class="preview-card">
+                <h2 class="preview-header">Full Width Buttons</h2>
+                <div class="button-variants-grid">
+                    <div class="variant-row">
+                        <div class="buttons-row" style="flex-direction: column; width: 100%;">
+                            <button class="preview-btn btn-full" id="full-width-1">Full Width Primary</button>
+                            <button class="preview-btn btn-full" id="full-width-2">Full Width Secondary</button>
+                            <button class="preview-btn btn-full" id="full-width-3">Full Width Outline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toast-message">Action completed</span>
+    </div>
+
+    <script>
+        // Configuration object
+        let config = {
+            iconPosition: 'left'
+        };
+
+        // Initialize all color inputs
+        function syncColorInputs(id) {
+            const picker = document.getElementById(id);
+            const text = document.getElementById(id + '-text');
+
+            picker.addEventListener('input', (e) => {
+                text.value = e.target.value.toUpperCase();
+                updatePreview();
+            });
+
+            text.addEventListener('input', (e) => {
+                const value = e.target.value;
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    picker.value = value;
+                    updatePreview();
+                }
+            });
+        }
+
+        // Initialize color inputs
+        ['primary-color', 'secondary-color', 'danger-color'].forEach(id => syncColorInputs(id));
+
+        // Initialize all number inputs
+        function initializeInputs() {
+            const inputs = document.querySelectorAll('.input-field, .select-input');
+            inputs.forEach(input => {
+                input.addEventListener('change', updatePreview);
+            });
+
+            // Toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const group = this.dataset.group;
+                    const value = this.dataset.value;
+
+                    document.querySelectorAll(`.toggle-btn[data-group="${group}"]`).forEach(b => {
+                        b.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    config[group] = value;
+                    updatePreview();
+                });
+            });
+        }
+
+        // Get shadow CSS
+        function getShadow(type) {
+            const shadows = {
+                'none': 'none',
+                'sm': '0 1px 2px rgba(0, 0, 0, 0.05)',
+                'md': '0 4px 6px rgba(0, 0, 0, 0.1)',
+                'lg': '0 10px 15px rgba(0, 0, 0, 0.2)'
+            };
+            return shadows[type] || shadows.sm;
+        }
+
+        // Apply button styles
+        function applyButtonStyles(button, variant, size) {
+            const primaryColor = document.getElementById('primary-color').value;
+            const secondaryColor = document.getElementById('secondary-color').value;
+            const dangerColor = document.getElementById('danger-color').value;
+
+            const fontWeight = document.getElementById('font-weight').value;
+            const shadowStyle = document.getElementById('shadow-style').value;
+            const hoverShadow = document.getElementById('hover-shadow').value;
+            const transitionDuration = document.getElementById('transition-duration').value;
+            const disabledOpacity = document.getElementById('disabled-opacity').value;
+
+            // Size-specific settings
+            const sizeV = document.getElementById(`size-${size}-v`).value;
+            const sizeH = document.getElementById(`size-${size}-h`).value;
+            let fontSize, borderRadius;
+
+            if (size === 'xs' || size === 'sm') {
+                fontSize = document.getElementById('font-size-sm').value;
+                borderRadius = document.getElementById('border-radius-sm').value;
+            } else if (size === 'lg' || size === 'xl') {
+                fontSize = document.getElementById('font-size-lg').value;
+                borderRadius = document.getElementById('border-radius-lg').value;
+            } else {
+                fontSize = document.getElementById('font-size-sm').value;
+                borderRadius = document.getElementById('border-radius-md').value;
+            }
+
+            // Base styles
+            button.style.padding = `${sizeV}px ${sizeH}px`;
+            button.style.fontSize = `${fontSize}px`;
+            button.style.fontWeight = fontWeight;
+            button.style.borderRadius = `${borderRadius}px`;
+            button.style.transition = `all ${transitionDuration}ms ease`;
+            button.style.boxShadow = getShadow(shadowStyle);
+
+            // Variant-specific styles
+            const borderWidth = document.getElementById('border-width').value;
+
+            switch(variant) {
+                case 'primary':
+                    button.style.backgroundColor = primaryColor;
+                    button.style.color = '#FFFFFF';
+                    button.style.border = 'none';
+                    break;
+                case 'secondary':
+                    button.style.backgroundColor = secondaryColor;
+                    button.style.color = '#FFFFFF';
+                    button.style.border = 'none';
+                    break;
+                case 'outline':
+                    button.style.backgroundColor = 'transparent';
+                    button.style.color = primaryColor;
+                    button.style.border = `${borderWidth}px solid ${primaryColor}`;
+                    break;
+                case 'ghost':
+                    button.style.backgroundColor = 'transparent';
+                    button.style.color = primaryColor;
+                    button.style.border = 'none';
+                    break;
+                case 'link':
+                    button.style.backgroundColor = 'transparent';
+                    button.style.color = primaryColor;
+                    button.style.border = 'none';
+                    button.style.textDecoration = 'underline';
+                    button.style.boxShadow = 'none';
+                    break;
+                case 'danger':
+                    button.style.backgroundColor = dangerColor;
+                    button.style.color = '#FFFFFF';
+                    button.style.border = 'none';
+                    break;
+            }
+
+            // Disabled state
+            if (button.disabled) {
+                button.style.opacity = disabledOpacity;
+            }
+
+            // Hover effects
+            const hoverBrightness = document.getElementById('hover-brightness').value;
+            const activeScale = document.getElementById('active-scale').value;
+
+            button.onmouseenter = function() {
+                if (!this.disabled) {
+                    this.style.filter = `brightness(${hoverBrightness}%)`;
+                    this.style.boxShadow = getShadow(hoverShadow);
+                }
+            };
+
+            button.onmouseleave = function() {
+                if (!this.disabled) {
+                    this.style.filter = 'brightness(100%)';
+                    this.style.boxShadow = getShadow(shadowStyle);
+                    this.style.transform = 'scale(1)';
+                }
+            };
+
+            button.onmousedown = function() {
+                if (!this.disabled) {
+                    this.style.transform = `scale(${activeScale})`;
+                }
+            };
+
+            button.onmouseup = function() {
+                if (!this.disabled) {
+                    this.style.transform = 'scale(1)';
+                }
+            };
+        }
+
+        // Update preview
+        function updatePreview() {
+            updateVariants();
+            updateSizes();
+            updateStates();
+            updateIconButtons();
+            updateButtonGroups();
+            updateFullWidth();
+        }
+
+        // Update variants
+        function updateVariants() {
+            const container = document.getElementById('button-variants');
+            container.innerHTML = '';
+
+            const variants = [
+                { name: 'Primary', value: 'primary' },
+                { name: 'Secondary', value: 'secondary' },
+                { name: 'Outline', value: 'outline' },
+                { name: 'Ghost', value: 'ghost' },
+                { name: 'Link', value: 'link' },
+                { name: 'Danger', value: 'danger' }
+            ];
+
+            variants.forEach(variant => {
+                const row = document.createElement('div');
+                row.className = 'variant-row';
+
+                const label = document.createElement('div');
+                label.className = 'variant-label';
+                label.textContent = variant.name;
+
+                const buttonsRow = document.createElement('div');
+                buttonsRow.className = 'buttons-row';
+
+                const button = document.createElement('button');
+                button.className = 'preview-btn btn-md';
+                button.textContent = variant.name + ' Button';
+                applyButtonStyles(button, variant.value, 'md');
+
+                buttonsRow.appendChild(button);
+                row.appendChild(label);
+                row.appendChild(buttonsRow);
+                container.appendChild(row);
+            });
+        }
+
+        // Update sizes
+        function updateSizes() {
+            const container = document.getElementById('button-sizes');
+            container.innerHTML = '';
+
+            const sizes = [
+                { name: 'Extra Small (XS)', value: 'xs' },
+                { name: 'Small (SM)', value: 'sm' },
+                { name: 'Medium (MD)', value: 'md' },
+                { name: 'Large (LG)', value: 'lg' },
+                { name: 'Extra Large (XL)', value: 'xl' }
+            ];
+
+            sizes.forEach(size => {
+                const row = document.createElement('div');
+                row.className = 'variant-row';
+
+                const label = document.createElement('div');
+                label.className = 'variant-label';
+                label.textContent = size.name;
+
+                const buttonsRow = document.createElement('div');
+                buttonsRow.className = 'buttons-row';
+
+                const button = document.createElement('button');
+                button.className = 'preview-btn';
+                button.textContent = size.name;
+                applyButtonStyles(button, 'primary', size.value);
+
+                buttonsRow.appendChild(button);
+                row.appendChild(label);
+                row.appendChild(buttonsRow);
+                container.appendChild(row);
+            });
+        }
+
+        // Update states
+        function updateStates() {
+            ['default', 'hover', 'active', 'disabled', 'loading'].forEach(state => {
+                const button = document.getElementById('state-' + state);
+                if (button) {
+                    applyButtonStyles(button, 'primary', 'md');
+                }
+            });
+        }
+
+        // Update icon buttons
+        function updateIconButtons() {
+            const iconButtons = [
+                'icon-left-btn', 'icon-left-btn-2', 'icon-left-btn-3',
+                'icon-right-btn', 'icon-right-btn-2', 'icon-right-btn-3',
+                'icon-only-1', 'icon-only-2', 'icon-only-3', 'icon-only-4'
+            ];
+
+            const iconSpacing = document.getElementById('icon-spacing').value;
+
+            iconButtons.forEach(id => {
+                const button = document.getElementById(id);
+                if (button) {
+                    applyButtonStyles(button, 'primary', 'md');
+                    button.style.gap = `${iconSpacing}px`;
+                }
+            });
+        }
+
+        // Update button groups
+        function updateButtonGroups() {
+            // Group 1
+            const group1 = document.getElementById('button-group-1');
+            group1.innerHTML = '';
+            ['Left', 'Center', 'Right'].forEach(text => {
+                const btn = document.createElement('button');
+                btn.className = 'preview-btn btn-md';
+                btn.textContent = text;
+                applyButtonStyles(btn, 'outline', 'md');
+                group1.appendChild(btn);
+            });
+
+            // Group 2
+            const group2 = document.getElementById('button-group-2');
+            group2.innerHTML = '';
+            ['←', '↓', '↑', '→'].forEach(icon => {
+                const btn = document.createElement('button');
+                btn.className = 'preview-btn btn-md btn-icon-only';
+                btn.innerHTML = `<span class="btn-icon">${icon}</span>`;
+                applyButtonStyles(btn, 'outline', 'md');
+                group2.appendChild(btn);
+            });
+        }
+
+        // Update full width
+        function updateFullWidth() {
+            ['full-width-1', 'full-width-2', 'full-width-3'].forEach((id, index) => {
+                const button = document.getElementById(id);
+                if (button) {
+                    const variants = ['primary', 'secondary', 'outline'];
+                    applyButtonStyles(button, variants[index], 'md');
+                }
+            });
+        }
+
+        // Export buttons CSS
+        function exportButtons() {
+            const css = generateCSS();
+            copyToClipboard(css);
+            showToast('Button CSS copied to clipboard!');
+        }
+
+        // Generate CSS
+        function generateCSS() {
+            const primaryColor = document.getElementById('primary-color').value;
+            const secondaryColor = document.getElementById('secondary-color').value;
+            const dangerColor = document.getElementById('danger-color').value;
+            const fontWeight = document.getElementById('font-weight').value;
+            const borderWidth = document.getElementById('border-width').value;
+            const shadowStyle = document.getElementById('shadow-style').value;
+            const transitionDuration = document.getElementById('transition-duration').value;
+            const disabledOpacity = document.getElementById('disabled-opacity').value;
+            const hoverBrightness = document.getElementById('hover-brightness').value;
+
+            let css = ':root {\n';
+            css += `  /* Button Colors */\n`;
+            css += `  --btn-primary: ${primaryColor};\n`;
+            css += `  --btn-secondary: ${secondaryColor};\n`;
+            css += `  --btn-danger: ${dangerColor};\n`;
+            css += `  --btn-font-weight: ${fontWeight};\n`;
+            css += `  --btn-border-width: ${borderWidth}px;\n`;
+            css += `  --btn-shadow: ${getShadow(shadowStyle)};\n`;
+            css += `  --btn-transition: ${transitionDuration}ms;\n`;
+            css += `  --btn-disabled-opacity: ${disabledOpacity};\n`;
+            css += `}\n\n`;
+
+            css += '/* Base Button Styles */\n';
+            css += '.btn {\n';
+            css += '  border: none;\n';
+            css += '  cursor: pointer;\n';
+            css += '  font-family: inherit;\n';
+            css += '  font-weight: var(--btn-font-weight);\n';
+            css += '  transition: all var(--btn-transition) ease;\n';
+            css += '  display: inline-flex;\n';
+            css += '  align-items: center;\n';
+            css += '  justify-content: center;\n';
+            css += '  gap: 8px;\n';
+            css += '}\n\n';
+
+            // Variants
+            css += '/* Button Variants */\n';
+            css += `.btn-primary {\n  background-color: var(--btn-primary);\n  color: white;\n  box-shadow: var(--btn-shadow);\n}\n\n`;
+            css += `.btn-secondary {\n  background-color: var(--btn-secondary);\n  color: white;\n  box-shadow: var(--btn-shadow);\n}\n\n`;
+            css += `.btn-outline {\n  background-color: transparent;\n  color: var(--btn-primary);\n  border: var(--btn-border-width) solid var(--btn-primary);\n}\n\n`;
+            css += `.btn-ghost {\n  background-color: transparent;\n  color: var(--btn-primary);\n}\n\n`;
+            css += `.btn-link {\n  background-color: transparent;\n  color: var(--btn-primary);\n  text-decoration: underline;\n}\n\n`;
+            css += `.btn-danger {\n  background-color: var(--btn-danger);\n  color: white;\n  box-shadow: var(--btn-shadow);\n}\n\n`;
+
+            // Sizes
+            css += '/* Button Sizes */\n';
+            ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+                const v = document.getElementById(`size-${size}-v`).value;
+                const h = document.getElementById(`size-${size}-h`).value;
+                let fontSize, borderRadius;
+
+                if (size === 'xs' || size === 'sm') {
+                    fontSize = document.getElementById('font-size-sm').value;
+                    borderRadius = document.getElementById('border-radius-sm').value;
+                } else if (size === 'lg' || size === 'xl') {
+                    fontSize = document.getElementById('font-size-lg').value;
+                    borderRadius = document.getElementById('border-radius-lg').value;
+                } else {
+                    fontSize = document.getElementById('font-size-sm').value;
+                    borderRadius = document.getElementById('border-radius-md').value;
+                }
+
+                css += `.btn-${size} {\n  padding: ${v}px ${h}px;\n  font-size: ${fontSize}px;\n  border-radius: ${borderRadius}px;\n}\n\n`;
+            });
+
+            // States
+            css += '/* Button States */\n';
+            css += `.btn:hover {\n  filter: brightness(${hoverBrightness}%);\n}\n\n`;
+            css += `.btn:active {\n  transform: scale(${document.getElementById('active-scale').value});\n}\n\n`;
+            css += `.btn:disabled {\n  opacity: var(--btn-disabled-opacity);\n  cursor: not-allowed;\n}\n`;
+
+            return css;
+        }
+
+        // Save configuration
+        function saveConfig() {
+            const config = {
+                primaryColor: document.getElementById('primary-color').value,
+                secondaryColor: document.getElementById('secondary-color').value,
+                dangerColor: document.getElementById('danger-color').value,
+                sizes: {},
+                fontSizeSm: document.getElementById('font-size-sm').value,
+                fontSizeLg: document.getElementById('font-size-lg').value,
+                fontWeight: document.getElementById('font-weight').value,
+                borderRadiusSm: document.getElementById('border-radius-sm').value,
+                borderRadiusMd: document.getElementById('border-radius-md').value,
+                borderRadiusLg: document.getElementById('border-radius-lg').value,
+                borderWidth: document.getElementById('border-width').value,
+                shadowStyle: document.getElementById('shadow-style').value,
+                hoverShadow: document.getElementById('hover-shadow').value,
+                hoverBrightness: document.getElementById('hover-brightness').value,
+                activeScale: document.getElementById('active-scale').value,
+                disabledOpacity: document.getElementById('disabled-opacity').value,
+                transitionDuration: document.getElementById('transition-duration').value,
+                iconSpacing: document.getElementById('icon-spacing').value,
+                iconPosition: document.querySelector('.toggle-btn[data-group="icon-position"].active').dataset.value
+            };
+
+            ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+                config.sizes[size] = {
+                    v: document.getElementById(`size-${size}-v`).value,
+                    h: document.getElementById(`size-${size}-h`).value
+                };
+            });
+
+            localStorage.setItem('uiDesignSystem_buttons', JSON.stringify(config));
+            showToast('Configuration saved successfully!');
+        }
+
+        // Load configuration
+        function loadConfig() {
+            const saved = localStorage.getItem('uiDesignSystem_buttons');
+            if (!saved) {
+                showToast('No saved configuration found');
+                return;
+            }
+
+            const config = JSON.parse(saved);
+
+            if (config.primaryColor) {
+                document.getElementById('primary-color').value = config.primaryColor;
+                document.getElementById('primary-color-text').value = config.primaryColor;
+            }
+            if (config.secondaryColor) {
+                document.getElementById('secondary-color').value = config.secondaryColor;
+                document.getElementById('secondary-color-text').value = config.secondaryColor;
+            }
+            if (config.dangerColor) {
+                document.getElementById('danger-color').value = config.dangerColor;
+                document.getElementById('danger-color-text').value = config.dangerColor;
+            }
+
+            if (config.sizes) {
+                Object.keys(config.sizes).forEach(size => {
+                    document.getElementById(`size-${size}-v`).value = config.sizes[size].v;
+                    document.getElementById(`size-${size}-h`).value = config.sizes[size].h;
+                });
+            }
+
+            if (config.fontSizeSm) document.getElementById('font-size-sm').value = config.fontSizeSm;
+            if (config.fontSizeLg) document.getElementById('font-size-lg').value = config.fontSizeLg;
+            if (config.fontWeight) document.getElementById('font-weight').value = config.fontWeight;
+            if (config.borderRadiusSm) document.getElementById('border-radius-sm').value = config.borderRadiusSm;
+            if (config.borderRadiusMd) document.getElementById('border-radius-md').value = config.borderRadiusMd;
+            if (config.borderRadiusLg) document.getElementById('border-radius-lg').value = config.borderRadiusLg;
+            if (config.borderWidth) document.getElementById('border-width').value = config.borderWidth;
+            if (config.shadowStyle) document.getElementById('shadow-style').value = config.shadowStyle;
+            if (config.hoverShadow) document.getElementById('hover-shadow').value = config.hoverShadow;
+            if (config.hoverBrightness) document.getElementById('hover-brightness').value = config.hoverBrightness;
+            if (config.activeScale) document.getElementById('active-scale').value = config.activeScale;
+            if (config.disabledOpacity) document.getElementById('disabled-opacity').value = config.disabledOpacity;
+            if (config.transitionDuration) document.getElementById('transition-duration').value = config.transitionDuration;
+            if (config.iconSpacing) document.getElementById('icon-spacing').value = config.iconSpacing;
+
+            if (config.iconPosition) {
+                document.querySelectorAll('.toggle-btn[data-group="icon-position"]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.value === config.iconPosition);
+                });
+            }
+
+            updatePreview();
+            showToast('Configuration loaded successfully!');
+        }
+
+        // Reset to defaults
+        function resetButtons() {
+            if (!confirm('Reset all button settings to default values?')) return;
+
+            document.getElementById('primary-color').value = '#3B85FF';
+            document.getElementById('primary-color-text').value = '#3B85FF';
+            document.getElementById('secondary-color').value = '#6B7280';
+            document.getElementById('secondary-color-text').value = '#6B7280';
+            document.getElementById('danger-color').value = '#EF4444';
+            document.getElementById('danger-color-text').value = '#EF4444';
+
+            const defaults = {
+                xs: { v: 6, h: 12 },
+                sm: { v: 8, h: 16 },
+                md: { v: 10, h: 20 },
+                lg: { v: 12, h: 24 },
+                xl: { v: 16, h: 32 }
+            };
+
+            Object.keys(defaults).forEach(size => {
+                document.getElementById(`size-${size}-v`).value = defaults[size].v;
+                document.getElementById(`size-${size}-h`).value = defaults[size].h;
+            });
+
+            document.getElementById('font-size-sm').value = 14;
+            document.getElementById('font-size-lg').value = 16;
+            document.getElementById('font-weight').value = 500;
+            document.getElementById('border-radius-sm').value = 6;
+            document.getElementById('border-radius-md').value = 8;
+            document.getElementById('border-radius-lg').value = 10;
+            document.getElementById('border-width').value = 2;
+            document.getElementById('shadow-style').value = 'sm';
+            document.getElementById('hover-shadow').value = 'md';
+            document.getElementById('hover-brightness').value = 110;
+            document.getElementById('active-scale').value = 0.98;
+            document.getElementById('disabled-opacity').value = 0.5;
+            document.getElementById('transition-duration').value = 200;
+            document.getElementById('icon-spacing').value = 8;
+
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === 'left') {
+                    btn.classList.add('active');
+                }
+            });
+
+            updatePreview();
+            showToast('Buttons reset to defaults!');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+            messageEl.textContent = message;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                    exportButtons();
+                }
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeInputs();
+            updatePreview();
+            console.log('🔘 Buttons Module Loaded');
+            console.log('Shortcuts: Ctrl+S (Save), Ctrl+E (Export), ESC (Back)');
+        });
+    </script>
+</body>
+</html>

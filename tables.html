@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Tables Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables & Data - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .table-section {
+            margin-bottom: 32px;
+        }
+
+        .table-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 16px;
+        }
+
+        .control-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-field {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-with-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .unit-label {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .color-picker:hover {
+            border-color: var(--primary-400);
+        }
+
+        .color-text-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            flex: 1;
+            transition: all 0.2s;
+        }
+
+        .color-text-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            background: var(--surface);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-table-wrapper {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Table Preview Styles */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .preview-table.separate {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .preview-table thead th {
+            font-weight: 600;
+            text-align: left;
+            position: relative;
+        }
+
+        .preview-table thead th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .preview-table thead th.sortable:hover {
+            opacity: 0.8;
+        }
+
+        .preview-table tbody td {
+            border-top: 1px solid var(--border);
+        }
+
+        .preview-table tbody tr.striped:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .preview-table tbody tr.hoverable:hover {
+            background-color: rgba(59, 133, 255, 0.1);
+        }
+
+        .preview-table tbody tr.selected {
+            background-color: rgba(59, 133, 255, 0.15);
+            border-left: 3px solid var(--primary-400);
+        }
+
+        .sort-indicator {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        .sort-indicator.active {
+            opacity: 1;
+        }
+
+        /* Table Footer */
+        .table-footer {
+            padding: 16px;
+            background-color: var(--surface-elevated);
+            border-top: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.success {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success-400);
+        }
+
+        .status-badge.warning {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--warning-400);
+        }
+
+        .status-badge.danger {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--danger-400);
+        }
+
+        .status-badge.info {
+            background-color: rgba(6, 182, 212, 0.15);
+            color: var(--info-400);
+        }
+
+        /* Table Action Buttons */
+        .table-action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            margin-right: 6px;
+        }
+
+        .table-action-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .table-action-btn.danger:hover {
+            border-color: var(--danger-400);
+            color: var(--danger-400);
+        }
+
+        /* Density Presets */
+        .density-preset-btns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Responsive Table Stacking */
+        @media (max-width: 768px) {
+            .preview-table.stack thead {
+                display: none;
+            }
+
+            .preview-table.stack tbody tr {
+                display: block;
+                margin-bottom: 16px;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .preview-table.stack tbody td {
+                display: flex;
+                justify-content: space-between;
+                padding: 12px 16px;
+                border: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .preview-table.stack tbody td:last-child {
+                border-bottom: none;
+            }
+
+            .preview-table.stack tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                margin-right: 16px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+
+            .header-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Tables & Data</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="resetToDefaults()">Reset</button>
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn primary" onclick="exportCSS()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <aside class="editor-panel">
+            <!-- Border Settings -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">🔲</span>
+                    Border Settings
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Border Style</label>
+                        <select class="select-input" id="borderStyle">
+                            <option value="outer">Outer Only</option>
+                            <option value="inner">Inner Only</option>
+                            <option value="both" selected>Both</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="borderColor" value="#333333">
+                            <input type="text" class="color-text-input" id="borderColorText" value="#333333">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Width</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="borderWidth" value="1" min="0" max="5">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Container Border Radius</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="containerRadius" value="8" min="0" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Cell Settings -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📦</span>
+                    Cell Settings
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Cell Padding</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="cellPadding" value="12" min="4" max="32">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Cell Alignment</label>
+                        <select class="select-input" id="cellAlign">
+                            <option value="left" selected>Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Border Collapse</label>
+                        <select class="select-input" id="borderCollapse">
+                            <option value="collapse" selected>Collapse</option>
+                            <option value="separate">Separate</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Header Settings -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📋</span>
+                    Header Settings
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Header Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="headerBg" value="#1E1E1E">
+                            <input type="text" class="color-text-input" id="headerBgText" value="#1E1E1E">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="headerTextColor" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="headerTextColorText" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Font Weight</label>
+                        <select class="select-input" id="headerFontWeight">
+                            <option value="400">Regular (400)</option>
+                            <option value="500">Medium (500)</option>
+                            <option value="600" selected>Semi-Bold (600)</option>
+                            <option value="700">Bold (700)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="headerFontSize" value="14" min="10" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Text Transform</label>
+                        <select class="select-input" id="headerTextTransform">
+                            <option value="none" selected>None</option>
+                            <option value="uppercase">Uppercase</option>
+                            <option value="lowercase">Lowercase</option>
+                            <option value="capitalize">Capitalize</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Header Padding</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="headerPadding" value="16" min="4" max="32">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Row Settings -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📊</span>
+                    Row Settings
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Row Striping</label>
+                        <select class="select-input" id="rowStriping">
+                            <option value="enabled" selected>Enabled</option>
+                            <option value="disabled">Disabled</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Striped Row Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="stripedRowColor" value="#1A1A1A">
+                            <input type="text" class="color-text-input" id="stripedRowColorText" value="#1A1A1A">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Row Hover Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="hoverRowColor" value="#253B5F">
+                            <input type="text" class="color-text-input" id="hoverRowColorText" value="#253B5F">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Selected Row Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="selectedRowColor" value="#2D4A73">
+                            <input type="text" class="color-text-input" id="selectedRowColorText" value="#2D4A73">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Row Text Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="rowTextColor" value="#FFFFFF">
+                            <input type="text" class="color-text-input" id="rowTextColorText" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Row Font Size</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="rowFontSize" value="14" min="10" max="20">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Responsive Behavior -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📱</span>
+                    Responsive Behavior
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Responsive Mode</label>
+                        <select class="select-input" id="responsiveMode">
+                            <option value="scroll" selected>Horizontal Scroll</option>
+                            <option value="stack">Stack (Mobile)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Min Width Before Scrolling</label>
+                        <div class="input-with-unit">
+                            <input type="number" class="input-field" id="minWidth" value="600" min="300" max="1200" step="50">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Sortable Columns -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">🔄</span>
+                    Sortable Columns
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Sort Indicator Style</label>
+                        <select class="select-input" id="sortIndicator">
+                            <option value="arrows" selected>Arrows (↑↓)</option>
+                            <option value="carets">Carets (▲▼)</option>
+                            <option value="unicode">Unicode (⬆⬇)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Sort Indicator Color</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="sortColor" value="#3B85FF">
+                            <input type="text" class="color-text-input" id="sortColorText" value="#3B85FF">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Density Presets -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">📏</span>
+                    Density Presets
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Quick Density</label>
+                        <div class="density-preset-btns">
+                            <button class="toggle-btn" onclick="applyDensity('compact')">Compact</button>
+                            <button class="toggle-btn active" onclick="applyDensity('comfortable')">Comfortable</button>
+                            <button class="toggle-btn" onclick="applyDensity('spacious')">Spacious</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- Table Container -->
+            <section class="table-section">
+                <h3 class="section-header">
+                    <span class="section-icon">🎨</span>
+                    Table Container
+                </h3>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Container Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" class="color-picker" id="containerBg" value="#141414">
+                            <input type="text" class="color-text-input" id="containerBgText" value="#141414">
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label class="control-label">Container Shadow</label>
+                        <select class="select-input" id="containerShadow">
+                            <option value="none" selected>None</option>
+                            <option value="sm">Small</option>
+                            <option value="md">Medium</option>
+                            <option value="lg">Large</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Preview Panel -->
+        <main class="preview-panel">
+            <!-- Basic Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Basic Data Table</h2>
+                <div class="table-container" id="basicTableContainer">
+                    <table class="preview-table" id="basicTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>John Doe</td>
+                                <td>john.doe@example.com</td>
+                                <td>Admin</td>
+                                <td><span class="status-badge success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Jane Smith</td>
+                                <td>jane.smith@example.com</td>
+                                <td>Developer</td>
+                                <td><span class="status-badge success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>Mike Johnson</td>
+                                <td>mike.j@example.com</td>
+                                <td>Designer</td>
+                                <td><span class="status-badge warning">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>004</td>
+                                <td>Sarah Williams</td>
+                                <td>sarah.w@example.com</td>
+                                <td>Manager</td>
+                                <td><span class="status-badge success">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Striped Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Table with Striped Rows</h2>
+                <div class="table-container" id="stripedTableContainer">
+                    <table class="preview-table" id="stripedTable">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="striped">
+                                <td>Laptop Pro 15"</td>
+                                <td>Electronics</td>
+                                <td>$1,299.99</td>
+                                <td>45</td>
+                                <td>234</td>
+                            </tr>
+                            <tr class="striped">
+                                <td>Wireless Mouse</td>
+                                <td>Accessories</td>
+                                <td>$29.99</td>
+                                <td>156</td>
+                                <td>892</td>
+                            </tr>
+                            <tr class="striped">
+                                <td>USB-C Hub</td>
+                                <td>Accessories</td>
+                                <td>$49.99</td>
+                                <td>78</td>
+                                <td>445</td>
+                            </tr>
+                            <tr class="striped">
+                                <td>Mechanical Keyboard</td>
+                                <td>Accessories</td>
+                                <td>$89.99</td>
+                                <td>23</td>
+                                <td>167</td>
+                            </tr>
+                            <tr class="striped">
+                                <td>4K Monitor</td>
+                                <td>Electronics</td>
+                                <td>$399.99</td>
+                                <td>12</td>
+                                <td>89</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Hoverable Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Table with Hover Effects</h2>
+                <div class="table-container" id="hoverTableContainer">
+                    <table class="preview-table" id="hoverTable">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hoverable">
+                                <td>#ORD-1001</td>
+                                <td>Alice Cooper</td>
+                                <td>2024-01-15</td>
+                                <td>$145.50</td>
+                                <td><span class="status-badge success">Delivered</span></td>
+                            </tr>
+                            <tr class="hoverable">
+                                <td>#ORD-1002</td>
+                                <td>Bob Martinez</td>
+                                <td>2024-01-16</td>
+                                <td>$89.99</td>
+                                <td><span class="status-badge warning">Processing</span></td>
+                            </tr>
+                            <tr class="hoverable">
+                                <td>#ORD-1003</td>
+                                <td>Carol Davis</td>
+                                <td>2024-01-17</td>
+                                <td>$234.00</td>
+                                <td><span class="status-badge info">Shipped</span></td>
+                            </tr>
+                            <tr class="hoverable">
+                                <td>#ORD-1004</td>
+                                <td>David Lee</td>
+                                <td>2024-01-18</td>
+                                <td>$67.25</td>
+                                <td><span class="status-badge danger">Cancelled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sortable Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Sortable Table</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px;">
+                    Click on column headers to sort
+                </p>
+                <div class="table-container" id="sortableTableContainer">
+                    <table class="preview-table" id="sortableTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-column="0">Name <span class="sort-indicator">↕</span></th>
+                                <th class="sortable" data-column="1">Department <span class="sort-indicator">↕</span></th>
+                                <th class="sortable" data-column="2">Salary <span class="sort-indicator">↕</span></th>
+                                <th class="sortable" data-column="3">Experience <span class="sort-indicator">↕</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Emily Chen</td>
+                                <td>Engineering</td>
+                                <td>$95,000</td>
+                                <td>5 years</td>
+                            </tr>
+                            <tr>
+                                <td>Alex Turner</td>
+                                <td>Marketing</td>
+                                <td>$72,000</td>
+                                <td>3 years</td>
+                            </tr>
+                            <tr>
+                                <td>Maria Garcia</td>
+                                <td>Sales</td>
+                                <td>$88,000</td>
+                                <td>7 years</td>
+                            </tr>
+                            <tr>
+                                <td>James Wilson</td>
+                                <td>Engineering</td>
+                                <td>$105,000</td>
+                                <td>8 years</td>
+                            </tr>
+                            <tr>
+                                <td>Sophie Brown</td>
+                                <td>Design</td>
+                                <td>$78,000</td>
+                                <td>4 years</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Selected Row Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Table with Selected Rows</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px;">
+                    Click on rows to select/deselect
+                </p>
+                <div class="table-container" id="selectableTableContainer">
+                    <table class="preview-table" id="selectableTable">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Client</th>
+                                <th>Progress</th>
+                                <th>Due Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="selectable-row">
+                                <td>Website Redesign</td>
+                                <td>Acme Corp</td>
+                                <td>75%</td>
+                                <td>2024-02-15</td>
+                            </tr>
+                            <tr class="selectable-row selected">
+                                <td>Mobile App</td>
+                                <td>TechStart Inc</td>
+                                <td>45%</td>
+                                <td>2024-03-01</td>
+                            </tr>
+                            <tr class="selectable-row">
+                                <td>Logo Design</td>
+                                <td>Creative Agency</td>
+                                <td>90%</td>
+                                <td>2024-01-30</td>
+                            </tr>
+                            <tr class="selectable-row">
+                                <td>API Integration</td>
+                                <td>DataFlow Systems</td>
+                                <td>30%</td>
+                                <td>2024-03-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Table with Actions -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Table with Actions Column</h2>
+                <div class="table-container" id="actionsTableContainer">
+                    <table class="preview-table" id="actionsTable">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Emma Wilson</td>
+                                <td>emma.w@example.com</td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="table-action-btn">Edit</button>
+                                    <button class="table-action-btn danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Oliver Taylor</td>
+                                <td>oliver.t@example.com</td>
+                                <td>1 day ago</td>
+                                <td>
+                                    <button class="table-action-btn">Edit</button>
+                                    <button class="table-action-btn danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sophia Anderson</td>
+                                <td>sophia.a@example.com</td>
+                                <td>3 days ago</td>
+                                <td>
+                                    <button class="table-action-btn">Edit</button>
+                                    <button class="table-action-btn danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Density Examples -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Density Examples</h2>
+
+                <h3 style="color: var(--text-secondary); font-size: 16px; margin-bottom: 12px; margin-top: 24px;">Compact</h3>
+                <div class="table-container">
+                    <table class="preview-table compact-table">
+                        <thead>
+                            <tr>
+                                <th style="padding: 8px;">Name</th>
+                                <th style="padding: 8px;">Status</th>
+                                <th style="padding: 8px;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px;">Item One</td>
+                                <td style="padding: 8px;"><span class="status-badge success">Active</span></td>
+                                <td style="padding: 8px;">2024-01-15</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px;">Item Two</td>
+                                <td style="padding: 8px;"><span class="status-badge warning">Pending</span></td>
+                                <td style="padding: 8px;">2024-01-16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="color: var(--text-secondary); font-size: 16px; margin-bottom: 12px; margin-top: 24px;">Comfortable (Default)</h3>
+                <div class="table-container">
+                    <table class="preview-table comfortable-table">
+                        <thead>
+                            <tr>
+                                <th style="padding: 12px;">Name</th>
+                                <th style="padding: 12px;">Status</th>
+                                <th style="padding: 12px;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px;">Item One</td>
+                                <td style="padding: 12px;"><span class="status-badge success">Active</span></td>
+                                <td style="padding: 12px;">2024-01-15</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px;">Item Two</td>
+                                <td style="padding: 12px;"><span class="status-badge warning">Pending</span></td>
+                                <td style="padding: 12px;">2024-01-16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="color: var(--text-secondary); font-size: 16px; margin-bottom: 12px; margin-top: 24px;">Spacious</h3>
+                <div class="table-container">
+                    <table class="preview-table spacious-table">
+                        <thead>
+                            <tr>
+                                <th style="padding: 20px;">Name</th>
+                                <th style="padding: 20px;">Status</th>
+                                <th style="padding: 20px;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 20px;">Item One</td>
+                                <td style="padding: 20px;"><span class="status-badge success">Active</span></td>
+                                <td style="padding: 20px;">2024-01-15</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px;">Item Two</td>
+                                <td style="padding: 20px;"><span class="status-badge warning">Pending</span></td>
+                                <td style="padding: 20px;">2024-01-16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Responsive Table -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Responsive Table (Horizontal Scroll)</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px;">
+                    This table scrolls horizontally on smaller screens
+                </p>
+                <div class="table-container" id="responsiveTableContainer" style="overflow-x: auto;">
+                    <table class="preview-table" id="responsiveTable" style="min-width: 800px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>Rachel Green</td>
+                                <td>Fashion</td>
+                                <td>Buyer</td>
+                                <td>rachel@example.com</td>
+                                <td>(555) 123-4567</td>
+                                <td>New York</td>
+                                <td><span class="status-badge success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>Ross Geller</td>
+                                <td>Museum</td>
+                                <td>Paleontologist</td>
+                                <td>ross@example.com</td>
+                                <td>(555) 234-5678</td>
+                                <td>New York</td>
+                                <td><span class="status-badge success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>103</td>
+                                <td>Monica Geller</td>
+                                <td>Culinary</td>
+                                <td>Head Chef</td>
+                                <td>monica@example.com</td>
+                                <td>(555) 345-6789</td>
+                                <td>New York</td>
+                                <td><span class="status-badge warning">On Leave</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Table with Footer -->
+            <section class="preview-table-wrapper">
+                <h2 class="preview-header">Table with Footer Totals</h2>
+                <div class="table-container" id="footerTableContainer">
+                    <table class="preview-table" id="footerTable">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Premium Subscription</td>
+                                <td>3</td>
+                                <td>$29.99</td>
+                                <td>$89.97</td>
+                            </tr>
+                            <tr>
+                                <td>Additional Storage</td>
+                                <td>2</td>
+                                <td>$9.99</td>
+                                <td>$19.98</td>
+                            </tr>
+                            <tr>
+                                <td>Support Package</td>
+                                <td>1</td>
+                                <td>$49.99</td>
+                                <td>$49.99</td>
+                            </tr>
+                            <tr>
+                                <td>API Access</td>
+                                <td>1</td>
+                                <td>$99.99</td>
+                                <td>$99.99</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-footer">
+                                <td colspan="3" style="text-align: right;">Subtotal:</td>
+                                <td>$259.93</td>
+                            </tr>
+                            <tr class="table-footer">
+                                <td colspan="3" style="text-align: right;">Tax (10%):</td>
+                                <td>$25.99</td>
+                            </tr>
+                            <tr class="table-footer">
+                                <td colspan="3" style="text-align: right;">Total:</td>
+                                <td>$285.92</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Configuration saved!</span>
+    </div>
+
+    <script>
+        // Default Configuration
+        const defaultConfig = {
+            borderStyle: 'both',
+            borderColor: '#333333',
+            borderWidth: 1,
+            containerRadius: 8,
+            cellPadding: 12,
+            cellAlign: 'left',
+            borderCollapse: 'collapse',
+            headerBg: '#1E1E1E',
+            headerTextColor: '#FFFFFF',
+            headerFontWeight: '600',
+            headerFontSize: 14,
+            headerTextTransform: 'none',
+            headerPadding: 16,
+            rowStriping: 'enabled',
+            stripedRowColor: '#1A1A1A',
+            hoverRowColor: '#253B5F',
+            selectedRowColor: '#2D4A73',
+            rowTextColor: '#FFFFFF',
+            rowFontSize: 14,
+            responsiveMode: 'scroll',
+            minWidth: 600,
+            sortIndicator: 'arrows',
+            sortColor: '#3B85FF',
+            containerBg: '#141414',
+            containerShadow: 'none'
+        };
+
+        // Shadow values
+        const shadowValues = {
+            none: 'none',
+            sm: '0 1px 2px rgba(0, 0, 0, 0.1)',
+            md: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            lg: '0 10px 15px rgba(0, 0, 0, 0.2)'
+        };
+
+        // Sort indicators
+        const sortIndicators = {
+            arrows: { up: '↑', down: '↓', both: '↕' },
+            carets: { up: '▲', down: '▼', both: '▲▼' },
+            unicode: { up: '⬆', down: '⬇', both: '⬆⬇' }
+        };
+
+        // Initialize color pickers sync
+        function setupColorSync(pickerId, textId) {
+            const picker = document.getElementById(pickerId);
+            const text = document.getElementById(textId);
+
+            picker.addEventListener('input', (e) => {
+                text.value = e.target.value;
+                updateTables();
+            });
+
+            text.addEventListener('input', (e) => {
+                if (/^#[0-9A-F]{6}$/i.test(e.target.value)) {
+                    picker.value = e.target.value;
+                    updateTables();
+                }
+            });
+        }
+
+        // Setup all color syncs
+        setupColorSync('borderColor', 'borderColorText');
+        setupColorSync('headerBg', 'headerBgText');
+        setupColorSync('headerTextColor', 'headerTextColorText');
+        setupColorSync('stripedRowColor', 'stripedRowColorText');
+        setupColorSync('hoverRowColor', 'hoverRowColorText');
+        setupColorSync('selectedRowColor', 'selectedRowColorText');
+        setupColorSync('rowTextColor', 'rowTextColorText');
+        setupColorSync('sortColor', 'sortColorText');
+        setupColorSync('containerBg', 'containerBgText');
+
+        // Add event listeners to all controls
+        document.querySelectorAll('.input-field, .select-input, .color-picker').forEach(element => {
+            element.addEventListener('input', updateTables);
+        });
+
+        function updateTables() {
+            const config = {
+                borderStyle: document.getElementById('borderStyle').value,
+                borderColor: document.getElementById('borderColor').value,
+                borderWidth: document.getElementById('borderWidth').value,
+                containerRadius: document.getElementById('containerRadius').value,
+                cellPadding: document.getElementById('cellPadding').value,
+                cellAlign: document.getElementById('cellAlign').value,
+                borderCollapse: document.getElementById('borderCollapse').value,
+                headerBg: document.getElementById('headerBg').value,
+                headerTextColor: document.getElementById('headerTextColor').value,
+                headerFontWeight: document.getElementById('headerFontWeight').value,
+                headerFontSize: document.getElementById('headerFontSize').value,
+                headerTextTransform: document.getElementById('headerTextTransform').value,
+                headerPadding: document.getElementById('headerPadding').value,
+                rowStriping: document.getElementById('rowStriping').value,
+                stripedRowColor: document.getElementById('stripedRowColor').value,
+                hoverRowColor: document.getElementById('hoverRowColor').value,
+                selectedRowColor: document.getElementById('selectedRowColor').value,
+                rowTextColor: document.getElementById('rowTextColor').value,
+                rowFontSize: document.getElementById('rowFontSize').value,
+                responsiveMode: document.getElementById('responsiveMode').value,
+                minWidth: document.getElementById('minWidth').value,
+                sortIndicator: document.getElementById('sortIndicator').value,
+                sortColor: document.getElementById('sortColor').value,
+                containerBg: document.getElementById('containerBg').value,
+                containerShadow: document.getElementById('containerShadow').value
+            };
+
+            // Apply border collapse
+            const tables = document.querySelectorAll('.preview-table');
+            tables.forEach(table => {
+                if (config.borderCollapse === 'separate') {
+                    table.classList.add('separate');
+                    table.style.borderCollapse = 'separate';
+                    table.style.borderSpacing = '0';
+                } else {
+                    table.classList.remove('separate');
+                    table.style.borderCollapse = 'collapse';
+                }
+            });
+
+            // Apply container styles
+            document.querySelectorAll('.table-container').forEach(container => {
+                container.style.backgroundColor = config.containerBg;
+                container.style.borderRadius = `${config.containerRadius}px`;
+                container.style.boxShadow = shadowValues[config.containerShadow];
+                container.style.overflow = 'auto';
+            });
+
+            // Create dynamic styles
+            const style = document.getElementById('dynamicTableStyles') || document.createElement('style');
+            style.id = 'dynamicTableStyles';
+
+            let outerBorder = '';
+            let innerBorder = '';
+
+            if (config.borderStyle === 'outer' || config.borderStyle === 'both') {
+                outerBorder = `
+                    .preview-table {
+                        border: ${config.borderWidth}px solid ${config.borderColor};
+                    }
+                `;
+            }
+
+            if (config.borderStyle === 'inner' || config.borderStyle === 'both') {
+                innerBorder = `
+                    .preview-table thead th,
+                    .preview-table tbody td {
+                        border: ${config.borderWidth}px solid ${config.borderColor};
+                    }
+                `;
+            }
+
+            style.textContent = `
+                ${outerBorder}
+                ${innerBorder}
+
+                .preview-table thead th,
+                .preview-table tbody td,
+                .preview-table tfoot td {
+                    padding: ${config.cellPadding}px;
+                    text-align: ${config.cellAlign};
+                    font-size: ${config.rowFontSize}px;
+                    color: ${config.rowTextColor};
+                }
+
+                .preview-table thead th {
+                    background-color: ${config.headerBg};
+                    color: ${config.headerTextColor};
+                    font-weight: ${config.headerFontWeight};
+                    font-size: ${config.headerFontSize}px;
+                    text-transform: ${config.headerTextTransform};
+                    padding: ${config.headerPadding}px;
+                }
+
+                ${config.rowStriping === 'enabled' ? `
+                .preview-table tbody tr.striped:nth-child(even) {
+                    background-color: ${config.stripedRowColor};
+                }
+                ` : ''}
+
+                .preview-table tbody tr.hoverable:hover {
+                    background-color: ${config.hoverRowColor} !important;
+                    cursor: pointer;
+                }
+
+                .preview-table tbody tr.selected,
+                .preview-table tbody tr.selectable-row.selected {
+                    background-color: ${config.selectedRowColor} !important;
+                }
+
+                .sort-indicator {
+                    color: ${config.sortColor};
+                }
+
+                .sort-indicator.active {
+                    color: ${config.sortColor};
+                }
+
+                .preview-table thead th.sortable:hover {
+                    background-color: ${config.headerBg}dd;
+                }
+            `;
+
+            if (!document.getElementById('dynamicTableStyles')) {
+                document.head.appendChild(style);
+            }
+
+            // Update sort indicators
+            updateSortIndicators(config.sortIndicator);
+        }
+
+        function updateSortIndicators(style) {
+            const indicators = sortIndicators[style];
+            document.querySelectorAll('.sort-indicator').forEach(el => {
+                if (!el.classList.contains('active')) {
+                    el.textContent = indicators.both;
+                }
+            });
+        }
+
+        function applyDensity(density) {
+            // Update button states
+            document.querySelectorAll('.density-preset-btns .toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Apply density
+            const densityValues = {
+                compact: { padding: 8, headerPadding: 10 },
+                comfortable: { padding: 12, headerPadding: 16 },
+                spacious: { padding: 20, headerPadding: 24 }
+            };
+
+            const values = densityValues[density];
+            document.getElementById('cellPadding').value = values.padding;
+            document.getElementById('headerPadding').value = values.headerPadding;
+
+            updateTables();
+            showToast(`Density set to ${density}`);
+        }
+
+        function resetToDefaults() {
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = defaultConfig[key];
+                    // Sync color text inputs
+                    const textElement = document.getElementById(key + 'Text');
+                    if (textElement) {
+                        textElement.value = defaultConfig[key];
+                    }
+                }
+            });
+            updateTables();
+            showToast('Reset to default values');
+        }
+
+        function saveConfig() {
+            const config = {};
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    config[key] = element.value;
+                }
+            });
+            localStorage.setItem('tableConfig', JSON.stringify(config));
+            showToast('Configuration saved!');
+        }
+
+        function loadConfig() {
+            const saved = localStorage.getItem('tableConfig');
+            if (saved) {
+                const config = JSON.parse(saved);
+                Object.keys(config).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = config[key];
+                        // Sync color text inputs
+                        const textElement = document.getElementById(key + 'Text');
+                        if (textElement) {
+                            textElement.value = config[key];
+                        }
+                    }
+                });
+                updateTables();
+                showToast('Configuration loaded!');
+            } else {
+                showToast('No saved configuration found');
+            }
+        }
+
+        function exportCSS() {
+            const config = {};
+            Object.keys(defaultConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    config[key] = element.value;
+                }
+            });
+
+            const outerBorder = (config.borderStyle === 'outer' || config.borderStyle === 'both')
+                ? `border: ${config.borderWidth}px solid ${config.borderColor};`
+                : '';
+
+            const innerBorder = (config.borderStyle === 'inner' || config.borderStyle === 'both')
+                ? `border: ${config.borderWidth}px solid ${config.borderColor};`
+                : '';
+
+            const css = `/* Table Component Styles - Generated by UI Design System v3.0 */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background-color: ${config.containerBg};
+    border-radius: ${config.containerRadius}px;
+    box-shadow: ${shadowValues[config.containerShadow]};
+}
+
+.table {
+    width: 100%;
+    border-collapse: ${config.borderCollapse};
+    ${config.borderCollapse === 'separate' ? 'border-spacing: 0;' : ''}
+    ${outerBorder}
+}
+
+.table thead th {
+    background-color: ${config.headerBg};
+    color: ${config.headerTextColor};
+    font-weight: ${config.headerFontWeight};
+    font-size: ${config.headerFontSize}px;
+    text-transform: ${config.headerTextTransform};
+    padding: ${config.headerPadding}px;
+    text-align: ${config.cellAlign};
+    ${innerBorder}
+}
+
+.table tbody td {
+    padding: ${config.cellPadding}px;
+    text-align: ${config.cellAlign};
+    font-size: ${config.rowFontSize}px;
+    color: ${config.rowTextColor};
+    ${innerBorder}
+}
+
+/* Striped Rows */
+${config.rowStriping === 'enabled' ? `.table tbody tr:nth-child(even) {
+    background-color: ${config.stripedRowColor};
+}` : ''}
+
+/* Hover Effects */
+.table tbody tr:hover {
+    background-color: ${config.hoverRowColor};
+    cursor: pointer;
+}
+
+/* Selected Row */
+.table tbody tr.selected {
+    background-color: ${config.selectedRowColor};
+    border-left: 3px solid ${config.sortColor};
+}
+
+/* Sortable Columns */
+.table thead th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.table thead th.sortable:hover {
+    opacity: 0.8;
+}
+
+.sort-indicator {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 12px;
+    opacity: 0.5;
+    color: ${config.sortColor};
+}
+
+.sort-indicator.active {
+    opacity: 1;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge.success {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+}
+
+.status-badge.warning {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+}
+
+.status-badge.danger {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+}
+
+.status-badge.info {
+    background-color: rgba(6, 182, 212, 0.15);
+    color: #06B6D4;
+}
+
+/* Table Footer */
+.table tfoot td {
+    padding: 16px;
+    background-color: ${config.headerBg};
+    border-top: ${config.borderWidth}px solid ${config.borderColor};
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    ${config.responsiveMode === 'stack' ? `.table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid ${config.borderColor};
+        border-radius: 8px;
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border: none;
+        border-bottom: 1px solid ${config.borderColor};
+    }
+
+    .table tbody td:last-child {
+        border-bottom: none;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        margin-right: 16px;
+    }` : `
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: ${config.minWidth}px;
+    }`}
+}`;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(css).then(() => {
+                showToast('CSS copied to clipboard!');
+            }).catch(() => {
+                // Fallback: show in alert
+                alert('CSS Code:\n\n' + css);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Sortable table functionality
+        function initSortableTable() {
+            const sortableHeaders = document.querySelectorAll('#sortableTable .sortable');
+            let sortDirection = {};
+
+            sortableHeaders.forEach(header => {
+                const column = header.dataset.column;
+                sortDirection[column] = 'none';
+
+                header.addEventListener('click', () => {
+                    const table = document.getElementById('sortableTable');
+                    const tbody = table.querySelector('tbody');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    // Update sort direction
+                    if (sortDirection[column] === 'none' || sortDirection[column] === 'desc') {
+                        sortDirection[column] = 'asc';
+                    } else {
+                        sortDirection[column] = 'desc';
+                    }
+
+                    // Reset all indicators
+                    sortableHeaders.forEach(h => {
+                        const indicator = h.querySelector('.sort-indicator');
+                        indicator.classList.remove('active');
+                        const config = document.getElementById('sortIndicator').value;
+                        indicator.textContent = sortIndicators[config].both;
+                    });
+
+                    // Update active indicator
+                    const indicator = header.querySelector('.sort-indicator');
+                    indicator.classList.add('active');
+                    const config = document.getElementById('sortIndicator').value;
+                    indicator.textContent = sortDirection[column] === 'asc'
+                        ? sortIndicators[config].up
+                        : sortIndicators[config].down;
+
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        const aValue = a.children[column].textContent.trim();
+                        const bValue = b.children[column].textContent.trim();
+
+                        const aNum = parseFloat(aValue.replace(/[$,]/g, ''));
+                        const bNum = parseFloat(bValue.replace(/[$,]/g, ''));
+
+                        let comparison = 0;
+                        if (!isNaN(aNum) && !isNaN(bNum)) {
+                            comparison = aNum - bNum;
+                        } else {
+                            comparison = aValue.localeCompare(bValue);
+                        }
+
+                        return sortDirection[column] === 'asc' ? comparison : -comparison;
+                    });
+
+                    // Reappend sorted rows
+                    rows.forEach(row => tbody.appendChild(row));
+                });
+            });
+        }
+
+        // Selectable rows functionality
+        function initSelectableRows() {
+            const rows = document.querySelectorAll('.selectable-row');
+            rows.forEach(row => {
+                row.addEventListener('click', () => {
+                    row.classList.toggle('selected');
+                });
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                } else if (e.key === 'e') {
+                    e.preventDefault();
+                    exportCSS();
+                }
+            } else if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Initialize on load
+        updateTables();
+        initSortableTable();
+        initSelectableRows();
+
+        // Try to load saved config
+        const saved = localStorage.getItem('tableConfig');
+        if (saved) {
+            loadConfig();
+        }
+
+        console.log('📊 Tables & Data - UI Design System v3.0');
+        console.log('Keyboard Shortcuts:');
+        console.log('  Ctrl/Cmd + S: Save Configuration');
+        console.log('  Ctrl/Cmd + E: Export CSS');
+        console.log('  Escape: Back to Home');
+    </script>
+</body>
+</html>

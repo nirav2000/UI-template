@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- UI Design System Generator v3.0.0 - Typography Module -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography - UI Design System v3.0</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-400: #3B85FF;
+            --primary-600: #0066BB;
+            --accent-400: #8533FF;
+            --accent-600: #6600CC;
+            --success-400: #10B981;
+            --warning-400: #F59E0B;
+            --danger-400: #EF4444;
+            --info-400: #06B6D4;
+            --surface-bg: #0A0A0A;
+            --surface: #141414;
+            --surface-elevated: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #666666;
+            --border: rgba(102, 102, 102, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, rgba(59, 133, 255, 0.1) 0%, rgba(133, 51, 255, 0.1) 100%);
+            background-color: var(--surface-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--primary-400);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .header-btn:hover {
+            border-color: var(--primary-400);
+            background: rgba(59, 133, 255, 0.1);
+        }
+
+        .header-btn.primary {
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            border: none;
+            color: white;
+        }
+
+        .header-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 133, 255, 0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .editor-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-panel::-webkit-scrollbar-track {
+            background: var(--surface-elevated);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .typo-section {
+            margin-bottom: 32px;
+        }
+
+        .typo-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 16px;
+        }
+
+        .control-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .select-input {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-field {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-400);
+            box-shadow: 0 0 0 3px rgba(59, 133, 255, 0.1);
+        }
+
+        .input-with-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .unit-label {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+
+        .range-control {
+            display: grid;
+            gap: 8px;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .range-value {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary-400);
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-400);
+            border-color: var(--primary-400);
+            color: white;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            display: grid;
+            gap: 24px;
+        }
+
+        .preview-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .preview-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Typography Preview Styles */
+        .heading-preview {
+            display: grid;
+            gap: 24px;
+        }
+
+        .heading-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .heading-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .heading-text {
+            color: var(--text-primary);
+        }
+
+        .body-preview {
+            display: grid;
+            gap: 20px;
+        }
+
+        .body-item {
+            display: grid;
+            gap: 8px;
+        }
+
+        .body-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .body-text {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .weight-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .weight-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 16px;
+            align-items: center;
+            padding: 12px;
+            background: var(--surface-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .weight-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .weight-sample {
+            font-size: 20px;
+            color: var(--text-primary);
+        }
+
+        .spacing-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .spacing-item {
+            padding: 16px;
+            background: var(--surface-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .spacing-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .spacing-text {
+            color: var(--text-primary);
+        }
+
+        .transform-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .transform-item {
+            padding: 16px;
+            background: var(--surface-elevated);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .transform-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .transform-text {
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .code-block {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .code-block::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .code-block::-webkit-scrollbar-track {
+            background: var(--surface);
+            border-radius: 3px;
+        }
+
+        .code-block::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--success-400);
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-panel {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+                flex-wrap: wrap;
+            }
+
+            .header-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .main-container {
+                padding: 16px;
+                gap: 16px;
+            }
+
+            .preview-card {
+                padding: 20px;
+            }
+
+            .weight-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .toast {
+                right: 16px;
+                left: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>Back</span>
+                </a>
+                <h1 class="header-title">Typography</h1>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="loadConfig()">Load</button>
+                <button class="header-btn" onclick="saveConfig()">Save</button>
+                <button class="header-btn" onclick="resetTypography()">Reset</button>
+                <button class="header-btn primary" onclick="exportTypography()">Export CSS</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <!-- Font Family -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">Aa</span>
+                    <span>Font Family</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Primary Font</label>
+                        <select id="font-family" class="select-input">
+                            <optgroup label="Sans-serif">
+                                <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif" selected>System (Default)</option>
+                                <option value="'Inter', sans-serif">Inter</option>
+                                <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Poppins', sans-serif">Poppins</option>
+                                <option value="'Open Sans', sans-serif">Open Sans</option>
+                                <option value="'Montserrat', sans-serif">Montserrat</option>
+                            </optgroup>
+                            <optgroup label="Serif">
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="'Merriweather', serif">Merriweather</option>
+                                <option value="'Playfair Display', serif">Playfair Display</option>
+                            </optgroup>
+                            <optgroup label="Monospace">
+                                <option value="'Courier New', Courier, monospace">Courier New</option>
+                                <option value="'Fira Code', monospace">Fira Code</option>
+                                <option value="'Source Code Pro', monospace">Source Code Pro</option>
+                                <option value="Monaco, monospace">Monaco</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Monospace Font (Code)</label>
+                        <select id="font-family-mono" class="select-input">
+                            <option value="'Courier New', Courier, monospace" selected>Courier New</option>
+                            <option value="'Fira Code', monospace">Fira Code</option>
+                            <option value="'Source Code Pro', monospace">Source Code Pro</option>
+                            <option value="Monaco, monospace">Monaco</option>
+                            <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Font Sizes -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">📏</span>
+                    <span>Font Sizes</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">XS (Extra Small)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-xs" class="input-field" value="12" min="8" max="24">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">SM (Small)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-sm" class="input-field" value="14" min="10" max="28">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Base (Body)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-base" class="input-field" value="16" min="12" max="32">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">LG (Large)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-lg" class="input-field" value="18" min="14" max="36">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">XL (Extra Large)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-xl" class="input-field" value="20" min="16" max="40">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">2XL (Heading)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-2xl" class="input-field" value="24" min="20" max="48">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">3XL (Large Heading)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-3xl" class="input-field" value="32" min="24" max="64">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">4XL (Display)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="size-4xl" class="input-field" value="48" min="32" max="96">
+                            <span class="unit-label">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Font Weights -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">💪</span>
+                    <span>Font Weights</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Thin</label>
+                        <select id="weight-thin" class="select-input">
+                            <option value="100" selected>100</option>
+                            <option value="200">200</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Light</label>
+                        <select id="weight-light" class="select-input">
+                            <option value="200">200</option>
+                            <option value="300" selected>300</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Regular</label>
+                        <select id="weight-regular" class="select-input">
+                            <option value="400" selected>400</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Medium</label>
+                        <select id="weight-medium" class="select-input">
+                            <option value="500" selected>500</option>
+                            <option value="600">600</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Semibold</label>
+                        <select id="weight-semibold" class="select-input">
+                            <option value="600" selected>600</option>
+                            <option value="700">700</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Bold</label>
+                        <select id="weight-bold" class="select-input">
+                            <option value="700" selected>700</option>
+                            <option value="bold">Bold</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Black</label>
+                        <select id="weight-black" class="select-input">
+                            <option value="800">800</option>
+                            <option value="900" selected>900</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Line Height -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">📐</span>
+                    <span>Line Height</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Tight</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="line-tight" class="input-field" value="1.25" min="1" max="2" step="0.05">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Normal</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="line-normal" class="input-field" value="1.5" min="1" max="2" step="0.05">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Relaxed</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="line-relaxed" class="input-field" value="1.75" min="1" max="2.5" step="0.05">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Loose</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="line-loose" class="input-field" value="2" min="1" max="3" step="0.05">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Letter Spacing -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">↔️</span>
+                    <span>Letter Spacing</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Tighter</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="spacing-tighter" class="input-field" value="-0.05" min="-0.5" max="0.5" step="0.01">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Normal</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="spacing-normal" class="input-field" value="0" min="-0.5" max="0.5" step="0.01">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Wide</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="spacing-wide" class="input-field" value="0.05" min="-0.5" max="0.5" step="0.01">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label class="control-label">Wider</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="spacing-wider" class="input-field" value="0.1" min="-0.5" max="0.5" step="0.01">
+                            <span class="unit-label">em</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Text Transform -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">🔤</span>
+                    <span>Text Transform</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Default Transform</label>
+                        <div class="button-grid">
+                            <button class="toggle-btn active" data-group="transform" data-value="none">None</button>
+                            <button class="toggle-btn" data-group="transform" data-value="uppercase">UPPER</button>
+                            <button class="toggle-btn" data-group="transform" data-value="lowercase">lower</button>
+                            <button class="toggle-btn" data-group="transform" data-value="capitalize">Title</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Text Alignment -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">⬅️</span>
+                    <span>Text Alignment</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Default Alignment</label>
+                        <div class="button-grid">
+                            <button class="toggle-btn active" data-group="align" data-value="left">Left</button>
+                            <button class="toggle-btn" data-group="align" data-value="center">Center</button>
+                            <button class="toggle-btn" data-group="align" data-value="right">Right</button>
+                            <button class="toggle-btn" data-group="align" data-value="justify">Justify</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Text Decoration -->
+            <div class="typo-section">
+                <div class="section-header">
+                    <span class="section-icon">✏️</span>
+                    <span>Text Decoration</span>
+                </div>
+                <div class="control-group">
+                    <div class="control-item">
+                        <label class="control-label">Default Decoration</label>
+                        <div class="button-grid">
+                            <button class="toggle-btn active" data-group="decoration" data-value="none">None</button>
+                            <button class="toggle-btn" data-group="decoration" data-value="underline">Underline</button>
+                            <button class="toggle-btn" data-group="decoration" data-value="line-through">Strike</button>
+                            <button class="toggle-btn" data-group="decoration" data-value="overline">Overline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <!-- Heading Hierarchy -->
+            <div class="preview-card">
+                <h2 class="preview-header">Heading Hierarchy</h2>
+                <div class="heading-preview" id="heading-preview">
+                    <div class="heading-item">
+                        <div class="heading-label">H1 - Display Heading</div>
+                        <h1 class="heading-text" id="h1-preview" style="font-size: 48px; font-weight: 700; line-height: 1.25;">The Quick Brown Fox Jumps Over</h1>
+                    </div>
+                    <div class="heading-item">
+                        <div class="heading-label">H2 - Section Heading</div>
+                        <h2 class="heading-text" id="h2-preview" style="font-size: 32px; font-weight: 600; line-height: 1.25;">Typography Design System</h2>
+                    </div>
+                    <div class="heading-item">
+                        <div class="heading-label">H3 - Subsection Heading</div>
+                        <h3 class="heading-text" id="h3-preview" style="font-size: 24px; font-weight: 600; line-height: 1.25;">Beautiful and Consistent Typography</h3>
+                    </div>
+                    <div class="heading-item">
+                        <div class="heading-label">H4 - Component Heading</div>
+                        <h4 class="heading-text" id="h4-preview" style="font-size: 20px; font-weight: 600; line-height: 1.25;">Feature Title or Card Heading</h4>
+                    </div>
+                    <div class="heading-item">
+                        <div class="heading-label">H5 - Small Heading</div>
+                        <h5 class="heading-text" id="h5-preview" style="font-size: 18px; font-weight: 500; line-height: 1.25;">Small Section or Widget Title</h5>
+                    </div>
+                    <div class="heading-item">
+                        <div class="heading-label">H6 - Tiny Heading</div>
+                        <h6 class="heading-text" id="h6-preview" style="font-size: 16px; font-weight: 500; line-height: 1.25;">Smallest Heading Style</h6>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body Text Sizes -->
+            <div class="preview-card">
+                <h2 class="preview-header">Body Text Sizes</h2>
+                <div class="body-preview" id="body-preview">
+                    <div class="body-item">
+                        <div class="body-label">4XL - Display Text (48px)</div>
+                        <p class="body-text" id="text-4xl" style="font-size: 48px;">Hero Text</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">3XL - Large Display (32px)</div>
+                        <p class="body-text" id="text-3xl" style="font-size: 32px;">Large Display Text</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">2XL - Subheading (24px)</div>
+                        <p class="body-text" id="text-2xl" style="font-size: 24px;">Subheading or Lead Text</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">XL - Emphasized (20px)</div>
+                        <p class="body-text" id="text-xl" style="font-size: 20px;">Emphasized body text for important content</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">LG - Large Body (18px)</div>
+                        <p class="body-text" id="text-lg" style="font-size: 18px;">Large body text that's easier to read</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">Base - Standard Body (16px)</div>
+                        <p class="body-text" id="text-base" style="font-size: 16px;">The quick brown fox jumps over the lazy dog. This is the standard body text size used throughout your application.</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">SM - Small Text (14px)</div>
+                        <p class="body-text" id="text-sm" style="font-size: 14px;">Small text for secondary information or compact layouts</p>
+                    </div>
+                    <div class="body-item">
+                        <div class="body-label">XS - Extra Small (12px)</div>
+                        <p class="body-text" id="text-xs" style="font-size: 12px;">Extra small text for captions, labels, or helper text</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Font Weight Examples -->
+            <div class="preview-card">
+                <h2 class="preview-header">Font Weight Variations</h2>
+                <div class="weight-grid" id="weight-grid">
+                    <div class="weight-item">
+                        <div class="weight-label">Thin (100)</div>
+                        <div class="weight-sample" id="weight-thin-sample" style="font-weight: 100;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Light (300)</div>
+                        <div class="weight-sample" id="weight-light-sample" style="font-weight: 300;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Regular (400)</div>
+                        <div class="weight-sample" id="weight-regular-sample" style="font-weight: 400;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Medium (500)</div>
+                        <div class="weight-sample" id="weight-medium-sample" style="font-weight: 500;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Semibold (600)</div>
+                        <div class="weight-sample" id="weight-semibold-sample" style="font-weight: 600;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Bold (700)</div>
+                        <div class="weight-sample" id="weight-bold-sample" style="font-weight: 700;">Typography Design</div>
+                    </div>
+                    <div class="weight-item">
+                        <div class="weight-label">Black (900)</div>
+                        <div class="weight-sample" id="weight-black-sample" style="font-weight: 900;">Typography Design</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Line Height & Spacing -->
+            <div class="preview-card">
+                <h2 class="preview-header">Line Height & Letter Spacing</h2>
+                <div class="spacing-grid">
+                    <div class="spacing-item">
+                        <div class="spacing-label">Tight Line Height (1.25)</div>
+                        <p class="spacing-text" id="spacing-tight" style="line-height: 1.25; font-size: 16px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Normal Line Height (1.5)</div>
+                        <p class="spacing-text" id="spacing-normal" style="line-height: 1.5; font-size: 16px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Relaxed Line Height (1.75)</div>
+                        <p class="spacing-text" id="spacing-relaxed" style="line-height: 1.75; font-size: 16px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Loose Line Height (2)</div>
+                        <p class="spacing-text" id="spacing-loose" style="line-height: 2; font-size: 16px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Tighter Letter Spacing (-0.05em)</div>
+                        <p class="spacing-text" id="letter-tighter" style="letter-spacing: -0.05em; font-size: 16px;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Normal Letter Spacing (0em)</div>
+                        <p class="spacing-text" id="letter-normal" style="letter-spacing: 0em; font-size: 16px;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Wide Letter Spacing (0.05em)</div>
+                        <p class="spacing-text" id="letter-wide" style="letter-spacing: 0.05em; font-size: 16px;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-label">Wider Letter Spacing (0.1em)</div>
+                        <p class="spacing-text" id="letter-wider" style="letter-spacing: 0.1em; font-size: 16px;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Transform & Decoration -->
+            <div class="preview-card">
+                <h2 class="preview-header">Text Transform & Decoration</h2>
+                <div class="transform-grid">
+                    <div class="transform-item">
+                        <div class="transform-label">None (Default)</div>
+                        <p class="transform-text" id="transform-none" style="text-transform: none;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Uppercase</div>
+                        <p class="transform-text" id="transform-uppercase" style="text-transform: uppercase;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Lowercase</div>
+                        <p class="transform-text" id="transform-lowercase" style="text-transform: lowercase;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Capitalize</div>
+                        <p class="transform-text" id="transform-capitalize" style="text-transform: capitalize;">the quick brown fox jumps over the lazy dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Text Align Left</div>
+                        <p class="transform-text" id="align-left" style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Text Align Center</div>
+                        <p class="transform-text" id="align-center" style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Text Align Right</div>
+                        <p class="transform-text" id="align-right" style="text-align: right;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Text Align Justify</div>
+                        <p class="transform-text" id="align-justify" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">No Decoration</div>
+                        <p class="transform-text" id="decoration-none" style="text-decoration: none;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Underline</div>
+                        <p class="transform-text" id="decoration-underline" style="text-decoration: underline;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Line-through (Strikethrough)</div>
+                        <p class="transform-text" id="decoration-strike" style="text-decoration: line-through;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                    <div class="transform-item">
+                        <div class="transform-label">Overline</div>
+                        <p class="transform-text" id="decoration-overline" style="text-decoration: overline;">The Quick Brown Fox Jumps Over the Lazy Dog</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Variables Export Preview -->
+            <div class="preview-card">
+                <h2 class="preview-header">CSS Variables Preview</h2>
+                <div class="code-block" id="css-preview">
+                    /* Typography will be shown here */
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toast-message">Action completed</span>
+    </div>
+
+    <script>
+        // Configuration object
+        let config = {
+            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+            fontFamilyMono: "'Courier New', Courier, monospace",
+            transform: "none",
+            align: "left",
+            decoration: "none"
+        };
+
+        // Initialize all inputs
+        function initializeInputs() {
+            // Font family
+            document.getElementById('font-family').addEventListener('change', updatePreview);
+            document.getElementById('font-family-mono').addEventListener('change', updatePreview);
+
+            // Font sizes
+            ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl'].forEach(size => {
+                document.getElementById(`size-${size}`).addEventListener('input', updatePreview);
+            });
+
+            // Font weights
+            ['thin', 'light', 'regular', 'medium', 'semibold', 'bold', 'black'].forEach(weight => {
+                document.getElementById(`weight-${weight}`).addEventListener('change', updatePreview);
+            });
+
+            // Line heights
+            ['tight', 'normal', 'relaxed', 'loose'].forEach(line => {
+                document.getElementById(`line-${line}`).addEventListener('input', updatePreview);
+            });
+
+            // Letter spacing
+            ['tighter', 'normal', 'wide', 'wider'].forEach(spacing => {
+                document.getElementById(`spacing-${spacing}`).addEventListener('input', updatePreview);
+            });
+
+            // Toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const group = this.dataset.group;
+                    const value = this.dataset.value;
+
+                    // Remove active from siblings
+                    document.querySelectorAll(`.toggle-btn[data-group="${group}"]`).forEach(b => {
+                        b.classList.remove('active');
+                    });
+
+                    // Add active to clicked
+                    this.classList.add('active');
+
+                    // Update config
+                    config[group] = value;
+
+                    updatePreview();
+                });
+            });
+        }
+
+        // Update preview
+        function updatePreview() {
+            const fontFamily = document.getElementById('font-family').value;
+            const fontFamilyMono = document.getElementById('font-family-mono').value;
+
+            // Update font family for all text
+            const allTextElements = document.querySelectorAll('.heading-text, .body-text, .weight-sample, .spacing-text, .transform-text');
+            allTextElements.forEach(el => {
+                el.style.fontFamily = fontFamily;
+            });
+
+            // Update heading sizes
+            document.getElementById('h1-preview').style.fontSize = document.getElementById('size-4xl').value + 'px';
+            document.getElementById('h2-preview').style.fontSize = document.getElementById('size-3xl').value + 'px';
+            document.getElementById('h3-preview').style.fontSize = document.getElementById('size-2xl').value + 'px';
+            document.getElementById('h4-preview').style.fontSize = document.getElementById('size-xl').value + 'px';
+            document.getElementById('h5-preview').style.fontSize = document.getElementById('size-lg').value + 'px';
+            document.getElementById('h6-preview').style.fontSize = document.getElementById('size-base').value + 'px';
+
+            // Update body text sizes
+            document.getElementById('text-4xl').style.fontSize = document.getElementById('size-4xl').value + 'px';
+            document.getElementById('text-3xl').style.fontSize = document.getElementById('size-3xl').value + 'px';
+            document.getElementById('text-2xl').style.fontSize = document.getElementById('size-2xl').value + 'px';
+            document.getElementById('text-xl').style.fontSize = document.getElementById('size-xl').value + 'px';
+            document.getElementById('text-lg').style.fontSize = document.getElementById('size-lg').value + 'px';
+            document.getElementById('text-base').style.fontSize = document.getElementById('size-base').value + 'px';
+            document.getElementById('text-sm').style.fontSize = document.getElementById('size-sm').value + 'px';
+            document.getElementById('text-xs').style.fontSize = document.getElementById('size-xs').value + 'px';
+
+            // Update font weights
+            document.getElementById('weight-thin-sample').style.fontWeight = document.getElementById('weight-thin').value;
+            document.getElementById('weight-light-sample').style.fontWeight = document.getElementById('weight-light').value;
+            document.getElementById('weight-regular-sample').style.fontWeight = document.getElementById('weight-regular').value;
+            document.getElementById('weight-medium-sample').style.fontWeight = document.getElementById('weight-medium').value;
+            document.getElementById('weight-semibold-sample').style.fontWeight = document.getElementById('weight-semibold').value;
+            document.getElementById('weight-bold-sample').style.fontWeight = document.getElementById('weight-bold').value;
+            document.getElementById('weight-black-sample').style.fontWeight = document.getElementById('weight-black').value;
+
+            // Update line heights
+            document.getElementById('spacing-tight').style.lineHeight = document.getElementById('line-tight').value;
+            document.getElementById('spacing-normal').style.lineHeight = document.getElementById('line-normal').value;
+            document.getElementById('spacing-relaxed').style.lineHeight = document.getElementById('line-relaxed').value;
+            document.getElementById('spacing-loose').style.lineHeight = document.getElementById('line-loose').value;
+
+            // Update letter spacing
+            document.getElementById('letter-tighter').style.letterSpacing = document.getElementById('spacing-tighter').value + 'em';
+            document.getElementById('letter-normal').style.letterSpacing = document.getElementById('spacing-normal').value + 'em';
+            document.getElementById('letter-wide').style.letterSpacing = document.getElementById('spacing-wide').value + 'em';
+            document.getElementById('letter-wider').style.letterSpacing = document.getElementById('spacing-wider').value + 'em';
+
+            // Update CSS preview
+            updateCSSPreview();
+        }
+
+        // Update CSS preview
+        function updateCSSPreview() {
+            const css = generateCSS();
+            document.getElementById('css-preview').textContent = css;
+        }
+
+        // Generate CSS
+        function generateCSS() {
+            const fontFamily = document.getElementById('font-family').value;
+            const fontFamilyMono = document.getElementById('font-family-mono').value;
+
+            let css = ':root {\n';
+            css += '  /* Font Families */\n';
+            css += `  --font-family: ${fontFamily};\n`;
+            css += `  --font-family-mono: ${fontFamilyMono};\n\n`;
+
+            css += '  /* Font Sizes */\n';
+            css += `  --font-size-xs: ${document.getElementById('size-xs').value}px;\n`;
+            css += `  --font-size-sm: ${document.getElementById('size-sm').value}px;\n`;
+            css += `  --font-size-base: ${document.getElementById('size-base').value}px;\n`;
+            css += `  --font-size-lg: ${document.getElementById('size-lg').value}px;\n`;
+            css += `  --font-size-xl: ${document.getElementById('size-xl').value}px;\n`;
+            css += `  --font-size-2xl: ${document.getElementById('size-2xl').value}px;\n`;
+            css += `  --font-size-3xl: ${document.getElementById('size-3xl').value}px;\n`;
+            css += `  --font-size-4xl: ${document.getElementById('size-4xl').value}px;\n\n`;
+
+            css += '  /* Font Weights */\n';
+            css += `  --font-weight-thin: ${document.getElementById('weight-thin').value};\n`;
+            css += `  --font-weight-light: ${document.getElementById('weight-light').value};\n`;
+            css += `  --font-weight-regular: ${document.getElementById('weight-regular').value};\n`;
+            css += `  --font-weight-medium: ${document.getElementById('weight-medium').value};\n`;
+            css += `  --font-weight-semibold: ${document.getElementById('weight-semibold').value};\n`;
+            css += `  --font-weight-bold: ${document.getElementById('weight-bold').value};\n`;
+            css += `  --font-weight-black: ${document.getElementById('weight-black').value};\n\n`;
+
+            css += '  /* Line Heights */\n';
+            css += `  --line-height-tight: ${document.getElementById('line-tight').value};\n`;
+            css += `  --line-height-normal: ${document.getElementById('line-normal').value};\n`;
+            css += `  --line-height-relaxed: ${document.getElementById('line-relaxed').value};\n`;
+            css += `  --line-height-loose: ${document.getElementById('line-loose').value};\n\n`;
+
+            css += '  /* Letter Spacing */\n';
+            css += `  --letter-spacing-tighter: ${document.getElementById('spacing-tighter').value}em;\n`;
+            css += `  --letter-spacing-normal: ${document.getElementById('spacing-normal').value}em;\n`;
+            css += `  --letter-spacing-wide: ${document.getElementById('spacing-wide').value}em;\n`;
+            css += `  --letter-spacing-wider: ${document.getElementById('spacing-wider').value}em;\n`;
+
+            css += '}\n\n';
+
+            css += '/* Heading Styles */\n';
+            css += `h1 { font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); }\n`;
+            css += `h2 { font-size: var(--font-size-3xl); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); }\n`;
+            css += `h3 { font-size: var(--font-size-2xl); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); }\n`;
+            css += `h4 { font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); }\n`;
+            css += `h5 { font-size: var(--font-size-lg); font-weight: var(--font-weight-medium); line-height: var(--line-height-tight); }\n`;
+            css += `h6 { font-size: var(--font-size-base); font-weight: var(--font-weight-medium); line-height: var(--line-height-tight); }\n\n`;
+
+            css += '/* Body Styles */\n';
+            css += `body { font-family: var(--font-family); font-size: var(--font-size-base); line-height: var(--line-height-normal); }\n`;
+            css += `code, pre { font-family: var(--font-family-mono); }\n`;
+
+            return css;
+        }
+
+        // Export typography
+        function exportTypography() {
+            const css = generateCSS();
+            copyToClipboard(css);
+            showToast('Typography CSS copied to clipboard!');
+        }
+
+        // Save configuration
+        function saveConfig() {
+            const config = {
+                fontFamily: document.getElementById('font-family').value,
+                fontFamilyMono: document.getElementById('font-family-mono').value,
+                sizes: {},
+                weights: {},
+                lineHeights: {},
+                letterSpacing: {},
+                transform: document.querySelector('.toggle-btn[data-group="transform"].active').dataset.value,
+                align: document.querySelector('.toggle-btn[data-group="align"].active').dataset.value,
+                decoration: document.querySelector('.toggle-btn[data-group="decoration"].active').dataset.value
+            };
+
+            ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl'].forEach(size => {
+                config.sizes[size] = document.getElementById(`size-${size}`).value;
+            });
+
+            ['thin', 'light', 'regular', 'medium', 'semibold', 'bold', 'black'].forEach(weight => {
+                config.weights[weight] = document.getElementById(`weight-${weight}`).value;
+            });
+
+            ['tight', 'normal', 'relaxed', 'loose'].forEach(line => {
+                config.lineHeights[line] = document.getElementById(`line-${line}`).value;
+            });
+
+            ['tighter', 'normal', 'wide', 'wider'].forEach(spacing => {
+                config.letterSpacing[spacing] = document.getElementById(`spacing-${spacing}`).value;
+            });
+
+            localStorage.setItem('uiDesignSystem_typography', JSON.stringify(config));
+            showToast('Configuration saved successfully!');
+        }
+
+        // Load configuration
+        function loadConfig() {
+            const saved = localStorage.getItem('uiDesignSystem_typography');
+            if (!saved) {
+                showToast('No saved configuration found');
+                return;
+            }
+
+            const config = JSON.parse(saved);
+
+            if (config.fontFamily) document.getElementById('font-family').value = config.fontFamily;
+            if (config.fontFamilyMono) document.getElementById('font-family-mono').value = config.fontFamilyMono;
+
+            if (config.sizes) {
+                Object.keys(config.sizes).forEach(size => {
+                    document.getElementById(`size-${size}`).value = config.sizes[size];
+                });
+            }
+
+            if (config.weights) {
+                Object.keys(config.weights).forEach(weight => {
+                    document.getElementById(`weight-${weight}`).value = config.weights[weight];
+                });
+            }
+
+            if (config.lineHeights) {
+                Object.keys(config.lineHeights).forEach(line => {
+                    document.getElementById(`line-${line}`).value = config.lineHeights[line];
+                });
+            }
+
+            if (config.letterSpacing) {
+                Object.keys(config.letterSpacing).forEach(spacing => {
+                    document.getElementById(`spacing-${spacing}`).value = config.letterSpacing[spacing];
+                });
+            }
+
+            if (config.transform) {
+                document.querySelectorAll('.toggle-btn[data-group="transform"]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.value === config.transform);
+                });
+            }
+
+            if (config.align) {
+                document.querySelectorAll('.toggle-btn[data-group="align"]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.value === config.align);
+                });
+            }
+
+            if (config.decoration) {
+                document.querySelectorAll('.toggle-btn[data-group="decoration"]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.value === config.decoration);
+                });
+            }
+
+            updatePreview();
+            showToast('Configuration loaded successfully!');
+        }
+
+        // Reset to defaults
+        function resetTypography() {
+            if (!confirm('Reset all typography settings to default values?')) return;
+
+            document.getElementById('font-family').value = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif";
+            document.getElementById('font-family-mono').value = "'Courier New', Courier, monospace";
+
+            document.getElementById('size-xs').value = 12;
+            document.getElementById('size-sm').value = 14;
+            document.getElementById('size-base').value = 16;
+            document.getElementById('size-lg').value = 18;
+            document.getElementById('size-xl').value = 20;
+            document.getElementById('size-2xl').value = 24;
+            document.getElementById('size-3xl').value = 32;
+            document.getElementById('size-4xl').value = 48;
+
+            document.getElementById('weight-thin').value = 100;
+            document.getElementById('weight-light').value = 300;
+            document.getElementById('weight-regular').value = 400;
+            document.getElementById('weight-medium').value = 500;
+            document.getElementById('weight-semibold').value = 600;
+            document.getElementById('weight-bold').value = 700;
+            document.getElementById('weight-black').value = 900;
+
+            document.getElementById('line-tight').value = 1.25;
+            document.getElementById('line-normal').value = 1.5;
+            document.getElementById('line-relaxed').value = 1.75;
+            document.getElementById('line-loose').value = 2;
+
+            document.getElementById('spacing-tighter').value = -0.05;
+            document.getElementById('spacing-normal').value = 0;
+            document.getElementById('spacing-wide').value = 0.05;
+            document.getElementById('spacing-wider').value = 0.1;
+
+            // Reset toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === 'none' || btn.dataset.value === 'left') {
+                    btn.classList.add('active');
+                }
+            });
+
+            updatePreview();
+            showToast('Typography reset to defaults!');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+            messageEl.textContent = message;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveConfig();
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                    exportTypography();
+                }
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeInputs();
+            updatePreview();
+            console.log('Aa Typography Module Loaded');
+            console.log('Shortcuts: Ctrl+S (Save), Ctrl+E (Export), ESC (Back)');
+        });
+    </script>
+</body>
+</html>
